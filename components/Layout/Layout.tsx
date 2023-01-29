@@ -1,9 +1,12 @@
 import React from "react";
 import styles from "./Layout.module.scss";
 import Image from "next/image";
+import { BiArrowFromLeft } from "react-icons/bi";
 
 import Searchbar from "./Searchbar";
 import UserButtons from "./UserButtons";
+import PageNav from "./PageNav";
+import FriendsList from "./FriendsList";
 
 interface LayoutProps {
   children: JSX.Element;
@@ -26,9 +29,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <UserButtons />
         </nav>
       </header>
-      <aside className={styles.sidebar}>
-        <nav className={styles.sidebar__nav}></nav>
-      </aside>
+      <div className={styles.sidebar}>
+        <PageNav />
+        <FriendsList />
+        <button className={styles.sidebar_button}>
+          <BiArrowFromLeft />
+        </button>
+      </div>
       <main className={styles.main}>{children}</main>
     </div>
   );

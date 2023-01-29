@@ -1,0 +1,59 @@
+$smartphone: 460px;
+$smartphone-large: 640px;
+$tablet: 800px;
+$tablet-large: 1024px;
+$desktop-small: 1280px;
+$desktop-medium: 1600px;
+$desktop-large: 1900px;
+
+@mixin media($breakpoint) {
+  $size: map-get($breakpoints, $breakpoint);
+
+  @if ($size) {
+    @media #{$size} {
+      @content;
+    }
+  }
+}
+
+@mixin default-hover {
+  border-radius: 10px;
+  padding: 1rem;
+
+  &:hover {
+    background-color: var(--bg-clr-200);
+    color: var(--secondary-clr-400);
+  }
+}
+
+@mixin default-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem !important;
+  background-color: transparent;
+  border: none;
+  color: var(--secondary-clr-200);
+
+  @include default-hover;
+}
+
+@mixin nav-label {
+  font-size: 1.3rem;
+  padding-left: 1rem;
+}
+
+@mixin list-item-icon {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+  transition: 0.1s;
+  cursor: pointer;
+
+  & > svg {
+    font-size: 2.8rem;
+    transition: 0.1s;
+  }
+}

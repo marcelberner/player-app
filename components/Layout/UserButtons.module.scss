@@ -1,3 +1,5 @@
+@import "../../styles/mixins.scss";
+
 .buttons {
   display: flex;
   align-items: center;
@@ -11,16 +13,7 @@
 
 .button {
   position: relative;
-  padding: 0.8rem;
-  background-color: transparent;
-  border: none;
-  color: var(--secondary-clr-200);
-  border-radius: 10px;
-
-  &:hover {
-    color: var(--secondary-clr-400);
-    background-color: var(--bg-clr-200);
-  }
+  @include default-button;
 }
 
 .user_button {

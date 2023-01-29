@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Searchbar.module.scss";
 
-import { BsSearch } from "react-icons/bs";
+import { FiSearch } from "react-icons/fi";
 
 const Searchbar = () => {
   return (
@@ -12,7 +12,7 @@ const Searchbar = () => {
         placeholder="Wyszukaj ulubiony tytuł"
       />
       <button className={styles.button}>
-        <BsSearch />
+        <FiSearch />
       </button>
     </div>
   );

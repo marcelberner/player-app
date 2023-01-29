@@ -1,11 +1,14 @@
-$header-height: 9rem;
+@import "../../styles/mixins.scss";
+
+$header-height: 8rem;
 $sidebar-width: 25rem;
 
 .page_layout {
-  display: grid;
   grid-template-columns: $sidebar-width 1fr;
   grid-template-rows: $header-height 1fr;
   min-height: 100vh;
+
+  display: grid;
 }
 
 .header {
@@ -20,7 +23,7 @@ $sidebar-width: 25rem;
   box-shadow: var(--shadow-8);
   padding: var(--default-padding);
   z-index: 99;
-  
+
   display: grid;
   grid-template-columns: $sidebar-width 1fr;
   align-items: center;
@@ -37,7 +40,6 @@ $sidebar-width: 25rem;
 
 .sidebar {
   position: fixed;
-  flex-direction: column;
   grid-column: 1/2;
   grid-row: 2/-1;
   top: $header-height;
@@ -45,16 +47,37 @@ $sidebar-width: 25rem;
   bottom: 0;
   width: $sidebar-width;
   border-right: 2px solid var(--bg-clr-400);
+  color: var(--secondary-clr-800);
   background-color: var(--bg-clr-800);
   padding: var(--default-padding);
+  padding-left: 2rem;
+  padding-top: 3rem;
+
   z-index: 98;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.sidebar_button {
+  @include default-button;
+  font-size: 3rem;
+  align-self: end;
+  margin-top: auto;
+  transform: rotate(180deg);
+
+  &--hide {
+    transform: rotate(0deg);
+  }
 }
 
 .main {
-  display: flex;
-  flex-direction: column;
   grid-column: 2/-1;
   grid-row: 2/-1;
   padding: 5rem;
   height: 300vh;
+
+  display: flex;
+  flex-direction: column;
 }

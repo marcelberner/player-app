@@ -5,7 +5,8 @@ $outline-size: 2px;
 .container {
   display: flex;
   align-items: center;
-  margin-left: 5%;
+  // margin-left: 5%;
+  margin: 0 auto;
 }
 
 .searchbar {
@@ -14,19 +15,22 @@ $outline-size: 2px;
   font-size: 1.7rem;
   padding: 1.5rem;
   border-radius: $input-radius 0 0 $input-radius;
-  border: $outline-size solid var(--bg-clr-400);
-  border: none;
+  border: $outline-size solid var(--bg-clr-200);
   background-color: var(--bg-clr-400);
   color: var(--secondary-clr-200);
   outline: none;
   transition: 0.1s;
+
+  &::placeholder {
+  color: var(--secondary-clr-800);
+  }
 
   &:hover {
     background-color: var(--bg-clr-200);
   }
 
   &:focus {
-    border: 2px solid var(--primary-clr-400);
+    border: $outline-size solid var(--primary-clr-400);
     background-color: var(--bg-clr-200);
   }
 }
@@ -35,12 +39,12 @@ $outline-size: 2px;
   width: 5rem;
   height: calc($input-height + $outline-size * 2);
   border-radius: 0 $input-radius $input-radius 0;
-  background-color: var(--primary-clr-400);
+  background-color: var(--bg-clr-200);
   color: var(--secondary-clr-200);
-  font-size: var(--icon-size);
+  font-size: 2rem;
   transition: 0.1s;
 
   &:hover {
-    background-color: var(--primary-clr-200);
+    background-color: var(--primary-clr-400);
   }
 }

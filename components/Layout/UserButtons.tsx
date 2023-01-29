@@ -2,7 +2,6 @@ import React from "react";
 import { TbMessage2, TbGift } from "react-icons/tb";
 import { BiBell } from "react-icons/bi";
 import { FaUserCircle } from "react-icons/fa";
-import Image from "next/image";
 
 import styles from "./UserButtons.module.scss";
 
