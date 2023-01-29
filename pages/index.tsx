@@ -1,7 +1,7 @@
 import Head from "next/head";
 import styles from "@/styles/Home.module.scss";
 
-import Layout from "@/components/Layout";
+import Layout from "@/components/Layout/Layout";
 
 function Home() {
   return (

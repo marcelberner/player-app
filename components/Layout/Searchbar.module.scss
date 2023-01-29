@@ -1,0 +1,46 @@
+$input-height: 4rem;
+$input-radius: 20px;
+$outline-size: 2px;
+
+.container {
+  display: flex;
+  align-items: center;
+  margin-left: 5%;
+}
+
+.searchbar {
+  width: 40rem;
+  height: $input-height;
+  font-size: 1.7rem;
+  padding: 1.5rem;
+  border-radius: $input-radius 0 0 $input-radius;
+  border: $outline-size solid var(--bg-clr-400);
+  border: none;
+  background-color: var(--bg-clr-400);
+  color: var(--secondary-clr-200);
+  outline: none;
+  transition: 0.1s;
+
+  &:hover {
+    background-color: var(--bg-clr-200);
+  }
+
+  &:focus {
+    border: 2px solid var(--primary-clr-400);
+    background-color: var(--bg-clr-200);
+  }
+}
+
+.button {
+  width: 5rem;
+  height: calc($input-height + $outline-size * 2);
+  border-radius: 0 $input-radius $input-radius 0;
+  background-color: var(--primary-clr-400);
+  color: var(--secondary-clr-200);
+  font-size: var(--icon-size);
+  transition: 0.1s;
+
+  &:hover {
+    background-color: var(--primary-clr-200);
+  }
+}

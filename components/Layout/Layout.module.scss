@@ -1,4 +1,4 @@
-$header-height: 10rem;
+$header-height: 9rem;
 $sidebar-width: 25rem;
 
 .page_layout {
@@ -10,7 +10,6 @@ $sidebar-width: 25rem;
 
 .header {
   position: fixed;
-  display: flex;
   grid-column: 1/-1;
   grid-row: 1/2;
   top: 0;
@@ -19,12 +18,25 @@ $sidebar-width: 25rem;
   height: $header-height;
   background-color: var(--bg-clr-900);
   box-shadow: var(--shadow-8);
+  padding: var(--default-padding);
   z-index: 99;
+  
+  display: grid;
+  grid-template-columns: $sidebar-width 1fr;
+  align-items: center;
+
+  & > img {
+    cursor: pointer;
+  }
+}
+
+.header__nav {
+  display: flex;
+  justify-content: space-between;
 }
 
 .sidebar {
   position: fixed;
-  display: flex;
   flex-direction: column;
   grid-column: 1/2;
   grid-row: 2/-1;
@@ -34,6 +46,7 @@ $sidebar-width: 25rem;
   width: $sidebar-width;
   border-right: 2px solid var(--bg-clr-400);
   background-color: var(--bg-clr-800);
+  padding: var(--default-padding);
   z-index: 98;
 }
 
