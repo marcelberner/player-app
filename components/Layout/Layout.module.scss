@@ -50,8 +50,6 @@ $sidebar-width: 25rem;
   color: var(--secondary-clr-800);
   background-color: var(--bg-clr-800);
   padding: var(--default-padding);
-  padding-left: 2rem;
-  padding-top: 3rem;
 
   z-index: 98;
 
@@ -75,7 +73,8 @@ $sidebar-width: 25rem;
 .main {
   grid-column: 2/-1;
   grid-row: 2/-1;
-  padding: 5rem;
+  // padding: var(--default-padding) 10rem;
+  padding: var(--default-padding) clamp(2rem, 5vw, 5rem);;
   height: 300vh;
 
   display: flex;

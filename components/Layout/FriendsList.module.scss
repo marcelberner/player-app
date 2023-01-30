@@ -21,9 +21,7 @@
   }
   &::after {
     content: "";
-    width: .9rem;
-    height: .9rem;
-    border-radius: 50%;
+    @include notification-mark;
     background-color: var(--succes-clr);
   }
 }

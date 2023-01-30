@@ -1,0 +1,21 @@
+.button {
+  display: flex;
+  align-items: center;
+  background-color: var(--primary-clr-400);
+  border: none;
+  color: var(--secondary-clr-200);
+  width: fit-content;
+  height: fit-content;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  font-size: 2rem;
+  transition: .1s;
+
+  &:hover {
+    background-color: var(--primary-clr-200);
+  }
+
+  & > svg {
+    font-size: 3rem;
+  }
+}

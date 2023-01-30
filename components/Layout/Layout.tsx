@@ -9,7 +9,7 @@ import PageNav from "./PageNav";
 import FriendsList from "./FriendsList";
 
 interface LayoutProps {
-  children: JSX.Element;
+  children: JSX.Element | JSX.Element[];
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
