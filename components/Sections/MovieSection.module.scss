@@ -1,0 +1,16 @@
+$gap: 3rem;
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+}
+
+.list {
+  user-select: none;
+  overflow: hidden;
+  & > *:first-child {
+    display: flex;
+    gap: $gap;
+  }
+}

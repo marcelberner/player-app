@@ -74,9 +74,10 @@ $sidebar-width: 25rem;
   grid-column: 2/-1;
   grid-row: 2/-1;
   // padding: var(--default-padding) 10rem;
+  overflow-x: hidden;
   padding: var(--default-padding) clamp(2rem, 5vw, 5rem);;
-  height: 300vh;
 
   display: flex;
   flex-direction: column;
+  gap: 5rem;
 }

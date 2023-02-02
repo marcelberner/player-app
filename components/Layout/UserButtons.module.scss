@@ -18,10 +18,7 @@
 
 .user_button {
   display: flex;
-  padding-left: 2rem;
   height: max-content;
-  gap: 1rem;
-  align-items: center;
 
   & > .button {
     color: var(--primary-clr-400);

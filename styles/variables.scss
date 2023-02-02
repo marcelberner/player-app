@@ -12,11 +12,6 @@
   --bg-clr-400: rgb(14, 14, 14);
   --bg-clr-200: rgb(34, 34, 34);
   
-  // --bg-clr-900: rgb(13, 13, 13);
-  // --bg-clr-800: rgb(14, 14, 14);
-  // --bg-clr-600: rgb(15, 15, 15);
-  // --bg-clr-400: rgb(22, 22, 22);
-  // --bg-clr-200: rgb(42, 42, 42);
 
   --succes-clr: rgb(9, 219, 119);
 
@@ -30,4 +25,6 @@
   --default-padding: 2rem;
 
   --icon-size: 2rem;
+
+  --transition-hover: transform .35s cubic-bezier(.25,.46,.45,.94);
 }

@@ -3,6 +3,7 @@ import Head from "next/head";
 import Layout from "@/components/Layout/Layout";
 
 import FrontCard from "@/components/Cards/FrontCard";
+import MovieSection from "@/components/Sections/MovieSection";
 
 function Home() {
   return (
@@ -18,6 +19,12 @@ function Home() {
       </Head>
       <Layout>
         <FrontCard />
+        <MovieSection title="Najpopularniejsze"/>
+        <MovieSection title="Filmy akcji"/>
+        <MovieSection title="Horrory"/>
+        <MovieSection title="Wojenne"/>
+        <MovieSection title="Komedie"/>
+        <MovieSection title="Dreszczowce"/>
       </Layout>
     </>
   );
