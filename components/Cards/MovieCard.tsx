@@ -4,18 +4,25 @@ import { AiOutlineStar } from "react-icons/ai";
 
 import styles from "./MovieCard.module.scss";
 
-const MovieCard = () => {
+interface movieProps {
+  title: string;
+  year: number;
+  rating: number;
+  poster: string;
+}
+
+const MovieCard: React.FC<movieProps> = ({ title, year, rating, poster }) => {
   return (
     <div className={styles.card}>
       <div className={styles.rate}>
         <AiOutlineStar />
-        <span>7,4</span>
+        <span>{(rating / 10).toFixed(1).toString().replace(".",",")}</span>
       </div>
       <div className={styles.description}>
-        <span className={styles.title}>Avatar: Istota wody</span>
-        <span className={styles.year}>2022</span>
+        <span className={styles.title}>{title}</span>
+        <span className={styles.year}>{year}</span>
       </div>
-      <Image src="/card.jpg" alt="" width={200} height={285} />
+      <img src={poster} alt={title} />
     </div>
   );
 };

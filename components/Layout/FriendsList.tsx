@@ -6,7 +6,7 @@ import styles from "./FriendsList.module.scss";
 const FriendsList = () => {
   return (
     <div className={styles.friendslist}>
-      <h3 className={styles.label}>Znajomi</h3>
+      <h3 className={styles.label}>FRIENDS</h3>
       <ul className={styles.list}>
         <li className={`${styles.friend}`}>
           <FaUserCircle />

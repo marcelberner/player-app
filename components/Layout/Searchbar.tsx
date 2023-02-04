@@ -9,7 +9,7 @@ const Searchbar = () => {
       <input
         type={"search"}
         className={styles.searchbar}
-        placeholder="Wyszukaj ulubiony tytuł"
+        placeholder="Search title..."
       />
       <button className={styles.button}>
         <FiSearch />

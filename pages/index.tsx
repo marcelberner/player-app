@@ -19,12 +19,12 @@ function Home() {
       </Head>
       <Layout>
         <FrontCard />
-        <MovieSection title="Najpopularniejsze"/>
-        <MovieSection title="Filmy akcji"/>
-        <MovieSection title="Horrory"/>
-        <MovieSection title="Wojenne"/>
-        <MovieSection title="Komedie"/>
-        <MovieSection title="Dreszczowce"/>
+        <MovieSection genre="Comedy"/>
+        <MovieSection genre="Action" />
+        <MovieSection genre="Thriller" />
+        <MovieSection genre="Horror" />
+        <MovieSection genre="Animation" />
+        <MovieSection genre="Fantasy" />
       </Layout>
     </>
   );

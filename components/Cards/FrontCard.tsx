@@ -14,15 +14,16 @@ const FrontCard = () => {
         <h1 className={styles.title}>Mortal Kombat</h1>
         <div className={styles.meta}>
           <span className={styles.year}>2021</span> |
-          <span className={styles.rate}>Ocena: 5,8</span>
+          <span className={styles.rate}>Rating: 5,8</span>
         </div>
         <div className={styles.about}>
-          Wojownicy podróżują do świątyni boga Raidena, aby przygotować się do
-          krwawego turnieju zwanego jako Mortal Kombat.
+          MMA fighter Cole Young seeks out Earth&apos;s greatest champions in order
+          to stand against the enemies of Outworld in a high stakes battle for
+          the universe.
         </div>
         <Button>
           <BsPlay />
-          <span>Oglądaj</span>
+          <span>Watch</span>
         </Button>
       </div>
     </div>
