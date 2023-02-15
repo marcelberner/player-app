@@ -4,11 +4,20 @@ $header-height: 8rem;
 $sidebar-width: 25rem;
 
 .page_layout {
-  grid-template-columns: $sidebar-width 1fr;
+  grid-template-columns: var(--sidebar-current) 1fr;
   grid-template-rows: $header-height 1fr;
   min-height: 100vh;
 
   display: grid;
+
+  &.active {
+    grid-template-columns: var(--sidebar-current) 1fr 33rem;
+  }
+}
+
+.logo {
+  min-width: 20rem;
+  min-height: 4rem;
 }
 
 .header {
@@ -25,7 +34,7 @@ $sidebar-width: 25rem;
   z-index: 99;
 
   display: grid;
-  grid-template-columns: $sidebar-width 1fr;
+  grid-template-columns: var(--sidebar-current) 1fr;
   align-items: center;
 
   & > img {
@@ -45,7 +54,7 @@ $sidebar-width: 25rem;
   top: $header-height;
   left: 0;
   bottom: 0;
-  width: $sidebar-width;
+  width: var(--sidebar-current);
   border-right: 2px solid var(--bg-clr-400);
   color: var(--secondary-clr-800);
   background-color: var(--bg-clr-800);
@@ -56,6 +65,20 @@ $sidebar-width: 25rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
+
+  &.active {
+    padding: 2rem 0.5rem;
+    align-items: center;
+  }
+
+  &.active .sidebar_button {
+    transform: rotate(0deg);
+    align-self: center;
+  }
+
+  &.active h3 {
+    display: none;
+  }
 }
 
 .sidebar_button {
@@ -64,18 +87,14 @@ $sidebar-width: 25rem;
   align-self: end;
   margin-top: auto;
   transform: rotate(180deg);
-
-  &--hide {
-    transform: rotate(0deg);
-  }
 }
 
 .main {
-  grid-column: 2/-1;
+  grid-column: 2/-2;
   grid-row: 2/-1;
   // padding: var(--default-padding) 10rem;
   overflow-x: hidden;
-  padding: var(--default-padding) clamp(2rem, 5vw, 5rem);;
+  padding: var(--default-padding) clamp(2rem, 5vw, 5rem);
 
   display: flex;
   flex-direction: column;

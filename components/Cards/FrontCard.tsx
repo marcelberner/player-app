@@ -9,7 +9,7 @@ import Button from "../Buttons/Button";
 const FrontCard = () => {
   return (
     <div className={styles.frontcard}>
-      <Image src="/front.jpg" alt="wdawd" width={1600} height={400} />
+      <Image src="/front.jpg" alt="wdawd" width={1800} height={600} />
       <div className={styles.description}>
         <h1 className={styles.title}>Mortal Kombat</h1>
         <div className={styles.meta}>
