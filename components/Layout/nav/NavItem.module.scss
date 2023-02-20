@@ -1,0 +1,23 @@
+@import "../../../styles/mixins.scss";
+
+.nav_item {
+
+  @include list-item-icon;
+  @include default-hover;
+
+  &:hover {
+    color: var(--secondary-clr-400);
+  }
+
+  &:hover > svg {
+    color: var(--primary-clr-200);
+  }
+}
+
+.active {
+  color: var(--secondary-clr-200);
+
+  & > svg {
+    color: var(--primary-clr-400);
+  }
+}

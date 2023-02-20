@@ -19,18 +19,19 @@ $outline-size: 2px;
   color: var(--secondary-clr-200);
   outline: none;
   transition: 0.1s;
-
+  
   &::placeholder {
-  color: var(--secondary-clr-800);
+    color: var(--secondary-clr-800);
   }
-
+  
   &:hover {
     background-color: var(--bg-clr-200);
   }
-
+  
   &:focus {
     border: $outline-size solid var(--primary-clr-400);
     background-color: var(--bg-clr-200);
+    border-radius: $input-radius 7px 7px $input-radius;
   }
 }
 
@@ -42,8 +43,9 @@ $outline-size: 2px;
   color: var(--secondary-clr-200);
   font-size: 2rem;
   transition: 0.1s;
-
+  
   &:hover {
     background-color: var(--primary-clr-400);
+    border-radius: 7px $input-radius $input-radius 7px;
   }
 }

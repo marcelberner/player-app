@@ -5,7 +5,7 @@ import { RxPaperPlane } from "react-icons/rx";
 import styles from "./Chat.module.scss";
 
 const Chat = () => {
-  const [mounted, setMounted] = useState(false);
+  const [mounted, setMounted] = useState<boolean>(false);
 
   useEffect(() => {
     setMounted(true);
@@ -47,7 +47,7 @@ const Chat = () => {
             </li>
           </ul>
           <form className={styles.text_area}>
-            <input type="text" />
+            <input type="text" placeholder="Send message..." />
             <button type="submit">
               <RxPaperPlane />
             </button>

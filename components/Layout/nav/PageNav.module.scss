@@ -1,0 +1,17 @@
+@import "../../../styles/mixins.scss";
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  & > ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+.label {
+  @include nav-label;
+}

@@ -1,0 +1,56 @@
+.modal {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  width: 33rem;
+  height: 18rem;
+  background-color: var(--bg-clr-400);
+  border-radius: 20px;
+  box-shadow: var(--shadow-6);
+  transform: scale(0);
+  padding: .7rem;
+  animation: modal-show .2s forwards;
+}
+
+.header {
+  display: flex;
+  height: 43%;
+  background-color: var(--bg-clr-600);
+  border-radius: 20px 20px 7px 7px;
+}
+
+.data {
+  display: flex;
+  align-items: center;
+  font-size: 2rem;
+  gap: 1rem;
+  padding: 2rem;
+  transform: translate(0, 22%);
+
+  &.online {
+    color: var(--secondary-clr-800);
+  }
+
+  & > svg {
+    font-size: 6rem;
+  }
+}
+
+.buttons {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+  padding: 2rem;
+  gap: 1rem;
+
+  & > button {
+    font-size: 1.6rem;
+  }
+}
+
+@keyframes modal-show {
+  100% {
+    transform: scale(1);
+  }
+}

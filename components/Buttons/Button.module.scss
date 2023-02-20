@@ -9,10 +9,21 @@
   padding: 1rem 2rem;
   border-radius: 10px;
   font-size: 2rem;
-  transition: .1s;
+  transition: 0.1s;
 
   &:hover {
     background-color: var(--primary-clr-200);
+  }
+
+  &.outline {
+    background-color: transparent;
+    color: var(--primary-clr-400);
+    border: 2px solid var(--primary-clr-400);
+  }
+
+  &.outline:hover {
+    color: var(--secondary-clr-200);
+    background-color: var(--primary-clr-400);
   }
 
   & > svg {

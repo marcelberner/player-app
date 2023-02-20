@@ -1,25 +1,16 @@
-@import "../../styles/mixins.scss";
-
-.friendslist {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.label {
-  @include nav-label;
-}
+@import "../../../styles/mixins.scss";
 
 .friend {
   @include list-item-icon;
   @include default-hover;
+  user-select: none;
 }
 
 .online {
   & > svg {
     color: var(--secondary-clr-200);
   }
-  &::after {
+  &.mark::after {
     content: "";
     @include notification-mark;
     background-color: var(--succes-clr);

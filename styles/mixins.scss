@@ -53,7 +53,8 @@ $desktop-large: 1900px;
   cursor: pointer;
 
   & > svg {
-    font-size: 2.8rem;
+    min-width: 2.8rem;
+    min-height: 2.8rem;
     transition: 0.1s;
   }
 }

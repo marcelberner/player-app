@@ -7,8 +7,8 @@ import Link from "next/link";
 
 import Searchbar from "./Searchbar";
 import UserButtons from "./UserButtons";
-import PageNav from "./PageNav";
-import FriendsList from "./FriendsList";
+import PageNav from "./nav/PageNav";
+import FriendsList from "./friends/FriendsList";
 
 interface LayoutProps {
   children: JSX.Element | JSX.Element[];
