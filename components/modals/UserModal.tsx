@@ -9,15 +9,25 @@ interface modalProps {
   id: string;
   name: string;
   isOnline: boolean;
+  modalRef: any;
   position: {
     x: number;
     y: number;
   };
 }
 
-const UserModal: React.FC<modalProps> = ({ id, name, position, isOnline }) => {
+const UserModal: React.FC<modalProps> = ({
+  id,
+  name,
+  position,
+  isOnline,
+  modalRef,
+}) => {
+  // const modalRef = useRef<HTMLDivElement>(null);
+
   return (
     <div
+      ref={modalRef}
       className={styles.modal}
       style={{ top: position.y, left: position.x + 30 }}
     >

@@ -18,8 +18,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const router = useRouter();
   const currentRoute = router.pathname;
 
-  console.log(currentRoute);
-
   const [sidebarState, setSidebarState] = useState<boolean>(true);
 
   const sidebarHideHandler = () => {
@@ -49,6 +47,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         "var(--sidebar-hide)"
       );
   }, []);
+
   return (
     <div
       id="layout"
