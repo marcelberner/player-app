@@ -1,0 +1,38 @@
+@import "../../styles/mixins.scss";
+
+.modal {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 40rem;
+  min-height: 15rem;
+  border-radius: 20px;
+  background-color: var(--bg-clr-400);
+  padding: 1rem 2rem;
+  box-shadow: var(--shadow-6);
+  @include appear-animation;
+}
+
+.header {
+  font-size: 1.4rem;
+  padding-bottom: .5rem;
+  border-bottom: 1px solid var(--bg-clr-200);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.empty_text {
+  font-size: 1.6rem;
+  color: var(--secondary-clr-800);
+  font-weight: 600;
+  align-self: center;
+  margin: auto;
+}
+
+@include appear-keyframes;

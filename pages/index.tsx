@@ -19,12 +19,12 @@ function Home() {
       </Head>
       <Layout>
         <FrontCard />
-        {/* <MovieSection genre="Comedy"/>
+        <MovieSection genre="Comedy"/>
         <MovieSection genre="Action" />
         <MovieSection genre="Thriller" />
         <MovieSection genre="Horror" />
         <MovieSection genre="Animation" />
-        <MovieSection genre="Fantasy" /> */}
+        <MovieSection genre="Fantasy" />
       </Layout>
     </>
   );

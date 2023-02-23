@@ -6,7 +6,7 @@ import { BiArrowFromLeft } from "react-icons/bi";
 import Link from "next/link";
 
 import Searchbar from "./Searchbar";
-import UserButtons from "./UserButtons";
+import UserButtons from "./userButtons/UserButtons";
 import PageNav from "./nav/PageNav";
 import FriendsList from "./friends/FriendsList";
 

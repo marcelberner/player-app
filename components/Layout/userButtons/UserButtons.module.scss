@@ -1,0 +1,17 @@
+.buttons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  & svg {
+    font-size: 3rem;
+    transition: 0.1s;
+  }
+}
+
+// .user_button {
+//   display: flex;
+//   height: max-content;
+
+//   &
+// }

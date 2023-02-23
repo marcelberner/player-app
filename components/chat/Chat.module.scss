@@ -25,9 +25,9 @@
 .text_area {
   display: flex;
   align-items: center;
-  border-top: 2px solid var(--bg-clr-400);
+  border-top: 1px solid var(--bg-clr-200);
   padding-top: 2rem;
-  gap: .5rem;
+  gap: .3rem;
 
   & > input {
     border-radius: 10px;
@@ -37,8 +37,8 @@
     outline: none;
     transition: 0.1s;
     flex-grow: 1;
-    height: 4.5rem;
-    font-size: 1.6rem;
+    height: 4rem;
+    font-size: 1.4rem;
     padding: 1.5rem;
 
 
@@ -57,12 +57,15 @@
   }
 
   & > button {
-    width: 4.5rem;
-    height: 4.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    height: 4rem;
     border-radius: 10px;
     background-color: var(--bg-clr-200);
     color: var(--secondary-clr-200);
-    font-size: 2rem;
+    font-size: 1.8rem;
     transition: 0.1s;
 
     &:hover {

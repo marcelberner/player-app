@@ -1,3 +1,5 @@
+@import "../../styles/mixins.scss";
+
 .modal {
   position: fixed;
   display: flex;
@@ -8,9 +10,8 @@
   background-color: var(--bg-clr-400);
   border-radius: 20px;
   box-shadow: var(--shadow-6);
-  transform: scale(0);
-  padding: .7rem;
-  animation: modal-show .2s forwards;
+  padding: 0.7rem;
+  @include appear-animation;
 }
 
 .header {
@@ -49,8 +50,4 @@
   }
 }
 
-@keyframes modal-show {
-  100% {
-    transform: scale(1);
-  }
-}
+@include appear-keyframes;

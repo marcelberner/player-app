@@ -64,3 +64,16 @@ $desktop-large: 1900px;
   height: 0.7rem;
   border-radius: 50%;
 }
+
+@mixin appear-animation {
+  transform: scale(0);
+  animation: modal-show 0.2s forwards;
+}
+
+@mixin appear-keyframes {
+  @keyframes modal-show {
+    100% {
+      transform: scale(1);
+    }
+  }
+}
