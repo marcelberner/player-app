@@ -5,6 +5,9 @@ import { useRouter } from "next/router";
 import { BiArrowFromLeft } from "react-icons/bi";
 import Link from "next/link";
 
+import { useAppSelector, useAppDispatch } from "@/hooks/redux";
+import { setSidebarState } from "@/store/sidebar";
+
 import Searchbar from "./Searchbar";
 import UserButtons from "./userButtons/UserButtons";
 import PageNav from "./nav/PageNav";
@@ -18,18 +21,20 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const router = useRouter();
   const currentRoute = router.pathname;
 
-  const [sidebarState, setSidebarState] = useState<boolean>(true);
+  // const [sidebarState, setSidebarState] = useState<boolean>(true);
+  const sidebarState = useAppSelector((state) => state.sidebarData.isHidden);
+  const dispatch = useAppDispatch();
 
   const sidebarHideHandler = () => {
     if (sidebarState) {
-      setSidebarState(false);
+      dispatch(setSidebarState(false));
       document.documentElement.style.setProperty(
         "--sidebar-current",
         "var(--sidebar-hide)"
       );
       localStorage.setItem("sidebar-state", "false");
     } else {
-      setSidebarState(true);
+      dispatch(setSidebarState(true));
       document.documentElement.style.setProperty(
         "--sidebar-current",
         "var(--sidebar-show)"
@@ -40,7 +45,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   useEffect(() => {
     const state = localStorage.getItem("sidebar-state") === "true";
-    setSidebarState(state);
+    dispatch(setSidebarState(state));
     if (!state)
       document.documentElement.style.setProperty(
         "--sidebar-current",

@@ -19,7 +19,7 @@ const NotificationModal: React.FC<modalProps> = ({
   modalRef,
 }) => {
   return (
-    <div ref={modalRef} className={styles.modal}>
+    <div ref={modalRef} className={`modal ${styles.modal}`}>
       <h3 className={styles.header}>{header}</h3>
       <ul className={styles.list}>
         {<span className={styles.empty_text}>{emptyText}</span>}

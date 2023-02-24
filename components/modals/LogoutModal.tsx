@@ -11,7 +11,7 @@ interface modalProps {
 
 const LogoutModal: React.FC<modalProps> = ({ modalRef }) => {
   return (
-    <div ref={modalRef} className={styles.modal}>
+    <div ref={modalRef} className={`modal ${styles.modal}`}>
       <div className={styles.header}>
         <FaUserCircle />
         <span className={styles.username}>Marcel Berner</span>

@@ -1,7 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 
+import messageDataReducer from "./message";
+import sidebarDataReducer from "./sidebar";
+
 const store = configureStore({
-  reducer: {},
+  reducer: {
+    messageData: messageDataReducer,
+    sidebarData: sidebarDataReducer,
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;

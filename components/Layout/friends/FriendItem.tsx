@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { createPortal } from "react-dom";
 
+import { useAppSelector } from "@/hooks/redux";
+
 import useModal from "@/hooks/useModal";
 
 import styles from "./FriendItem.module.scss";
@@ -25,9 +27,11 @@ const FriendItem: React.FC<friendProps> = ({ id, name, isOnline, state }) => {
     y: number;
   }>();
 
+  const sidebarState = useAppSelector((state) => state.sidebarData.isHidden);
+
   const showModalHandler = (event: React.MouseEvent) => {
-    let positionX = 230;
-    let positionY = event.clientY;
+    let positionX = sidebarState ? 240 : 50;
+    let positionY = event.clientY - 20;
 
     if (positionY + 180 > window.innerHeight) {
       positionY = window.innerHeight - 200;

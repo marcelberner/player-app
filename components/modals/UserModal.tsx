@@ -1,6 +1,9 @@
 import React from "react";
 import { FaUserCircle } from "react-icons/fa";
 
+import { useAppDispatch } from "@/hooks/redux";
+import { setUser } from "@/store/message";
+
 import styles from "./UserModal.module.scss";
 
 import Button from "../Buttons/Button";
@@ -23,12 +26,16 @@ const UserModal: React.FC<modalProps> = ({
   isOnline,
   modalRef,
 }) => {
-  // const modalRef = useRef<HTMLDivElement>(null);
+  const dispatch = useAppDispatch();
+
+  const showMessageHandler = () => {
+    dispatch(setUser({ id, name, isOnline }));
+  };
 
   return (
     <div
       ref={modalRef}
-      className={styles.modal}
+      className={`modal ${styles.modal}`}
       style={{ top: position.y, left: position.x + 30 }}
     >
       <div className={styles.header}>
@@ -38,7 +45,7 @@ const UserModal: React.FC<modalProps> = ({
         </div>
       </div>
       <div className={styles.buttons}>
-        <Button>Send message</Button>
+        <Button action={showMessageHandler}>Send message</Button>
         <Button outline>Remove</Button>
       </div>
     </div>
