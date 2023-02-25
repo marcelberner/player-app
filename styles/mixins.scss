@@ -66,14 +66,14 @@ $desktop-large: 1900px;
 }
 
 @mixin appear-animation($transforms: "") {
-  transform: $transforms scale(0);
+  transform: unquote($transforms) scale(0);
   animation: modal-show 0.2s forwards;
 }
 
-@mixin appear-keyframes($transforms: "") {
+@mixin appear-keyframes($transforms:"") {
   @keyframes modal-show {
     100% {
-      transform: $transforms scale(1);
+      transform: unquote($transforms) scale(1);
     }
   }
 }
