@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useCallback } from "react";
 
 const useModal = () => {
   const modalRef = useRef<HTMLDivElement>(null);
@@ -9,15 +9,21 @@ const useModal = () => {
     setModalState(true);
   };
 
-  const handleOutsideClick = (event: any) => {
-    if (!modalRef.current!.contains(event.target)) {
-      document.removeEventListener("click", handleOutsideClick, true);
-      setModalState(false);
-    }
+  const closeModal = () => {
+    document.removeEventListener("click", handleOutsideClick, true);
+    setModalState(false);
   };
+
+  const handleOutsideClick = useCallback((event: any) => {
+    if (!modalRef.current!.contains(event.target)) {
+      closeModal();
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return {
     showModal,
+    closeModal,
     modalState,
     modalRef,
   };

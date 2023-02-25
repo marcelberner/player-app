@@ -33,8 +33,7 @@ $sidebar-width: 25rem;
   padding: var(--default-padding);
   z-index: 99;
 
-  display: grid;
-  grid-template-columns: var(--sidebar-current) 1fr;
+  display: flex;
   align-items: center;
 
   & > img {
@@ -45,6 +44,7 @@ $sidebar-width: 25rem;
 .header__nav {
   display: flex;
   justify-content: space-between;
+  flex-grow: 1;
 }
 
 .sidebar {

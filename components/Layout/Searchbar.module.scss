@@ -5,11 +5,13 @@ $outline-size: 2px;
 .container {
   display: flex;
   align-items: center;
-  margin: 0 auto;
+  justify-content: center;
+  flex-grow: 1;
 }
 
 .searchbar {
-  width: 50rem;
+  width: 100%;
+  max-width: 50rem;
   height: $input-height;
   font-size: 1.7rem;
   padding: 1.5rem;

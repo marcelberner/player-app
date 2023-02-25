@@ -21,7 +21,6 @@ const MovieSection: React.FC<SectionProps> = ({ genre }) => {
       try {
         const response = await axios.get(`/api/genres/${genre}`);
         genreId = response.data.id;
-        console.log(response.data.id);
       } catch (error) {
         console.log(error);
       }
@@ -36,6 +35,7 @@ const MovieSection: React.FC<SectionProps> = ({ genre }) => {
     };
 
     getMovies();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -57,6 +57,10 @@ const MovieSection: React.FC<SectionProps> = ({ genre }) => {
                 year={movie.year}
                 rating={movie.imdbRating}
                 poster={movie.posterURLs.original}
+                genres={movie.genres}
+                description={movie.overview}
+                language={movie.originalLanguage}
+                runtime={movie.runtime}
               />
             </SwiperSlide>
           ))}
@@ -69,6 +73,10 @@ const MovieSection: React.FC<SectionProps> = ({ genre }) => {
                 year={movie.year}
                 rating={movie.imdbRating}
                 poster={movie.posterURLs.original}
+                genres={movie.genres}
+                description={movie.overview}
+                language={movie.originalLanguage}
+                runtime={movie.runtime}
               />
             </SwiperSlide>
           ))}

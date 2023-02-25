@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { createPortal } from "react-dom";
 
 import { useAppSelector } from "@/hooks/redux";
 
 import useModal from "@/hooks/useModal";
+import useMounted from "@/hooks/useMounted";
 
 import styles from "./FriendItem.module.scss";
 
@@ -18,9 +19,8 @@ interface friendProps {
 }
 
 const FriendItem: React.FC<friendProps> = ({ id, name, isOnline, state }) => {
-  const { modalRef, modalState, showModal } = useModal();
-
-  const [mounted, setMounted] = useState<boolean>(false);
+  const { modalRef, modalState, showModal, closeModal } = useModal();
+  const mounted = useMounted();
 
   const [cursorPosition, setCursorPosition] = useState<{
     x: number;
@@ -30,11 +30,11 @@ const FriendItem: React.FC<friendProps> = ({ id, name, isOnline, state }) => {
   const sidebarState = useAppSelector((state) => state.sidebarData.isHidden);
 
   const showModalHandler = (event: React.MouseEvent) => {
-    let positionX = sidebarState ? 240 : 50;
+    let positionX = sidebarState ? 230 : 50;
     let positionY = event.clientY - 20;
 
     if (positionY + 180 > window.innerHeight) {
-      positionY = window.innerHeight - 200;
+      positionY = window.innerHeight - 190;
     }
 
     const cursorPosition = {
@@ -45,11 +45,6 @@ const FriendItem: React.FC<friendProps> = ({ id, name, isOnline, state }) => {
     showModal();
     setCursorPosition(cursorPosition);
   };
-
-  useEffect(() => {
-    setMounted(true);
-    return () => setMounted(false);
-  }, []);
 
   return (
     <>
@@ -71,6 +66,7 @@ const FriendItem: React.FC<friendProps> = ({ id, name, isOnline, state }) => {
             name={name}
             position={cursorPosition!}
             isOnline={isOnline}
+            closeModal={closeModal}
           />,
           document.getElementById("modal")!
         )}

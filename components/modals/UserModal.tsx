@@ -17,6 +17,7 @@ interface modalProps {
     x: number;
     y: number;
   };
+  closeModal: (event?: any) => void;
 }
 
 const UserModal: React.FC<modalProps> = ({
@@ -25,11 +26,13 @@ const UserModal: React.FC<modalProps> = ({
   position,
   isOnline,
   modalRef,
+  closeModal,
 }) => {
   const dispatch = useAppDispatch();
 
   const showMessageHandler = () => {
     dispatch(setUser({ id, name, isOnline }));
+    closeModal();
   };
 
   return (
