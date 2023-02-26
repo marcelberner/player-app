@@ -18,6 +18,8 @@ interface movieProps {
   language?: string;
   description?: string;
   runtime?: number;
+  video: string;
+  imdbID: string;
 }
 
 const MovieCard: React.FC<movieProps> = ({
@@ -29,6 +31,8 @@ const MovieCard: React.FC<movieProps> = ({
   description,
   language,
   runtime,
+  imdbID,
+  video
 }) => {
   const mounted = useMounted();
   const { modalRef, modalState, showModal, closeModal } = useModal();
@@ -57,6 +61,8 @@ const MovieCard: React.FC<movieProps> = ({
             description={description}
             language={language}
             runtime={runtime}
+            video={video}
+            imdbID={imdbID}
             modalRef={modalRef}
             closeModal={closeModal}
           />,

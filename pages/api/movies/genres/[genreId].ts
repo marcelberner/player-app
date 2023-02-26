@@ -11,6 +11,7 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
       params: {
         country: "us",
         service: "hbo",
+        // service: "netflix",
         type: "movie",
         page: "3",
         output_language: "en",

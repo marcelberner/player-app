@@ -24,6 +24,8 @@ interface modalProps {
   description?: string;
   runtime?: number;
   modalRef: any;
+  video: string;
+  imdbID: string;
   closeModal?: () => void;
 }
 
@@ -37,6 +39,8 @@ const MovieModal: React.FC<modalProps> = ({
   language,
   runtime,
   modalRef,
+  video,
+  imdbID,
   closeModal,
 }) => {
   return (
@@ -44,9 +48,11 @@ const MovieModal: React.FC<modalProps> = ({
       <div className={styles.closebar}>
         <AiOutlineClose onClick={closeModal} />
       </div>
-      <Player />
+      <Player video={video} />
       <div className={styles.header}>
-        <h1 className={styles.title}>{title}</h1>
+        <a href={`https://www.imdb.com/title/${imdbID}`} target={"_blank"} rel="noreferrer">
+          <h1 className={styles.title}>{title}</h1>
+        </a>
         <div className={styles.movie_data}>
           <span className={styles.rating}>
             <AiOutlineStar />{" "}
@@ -55,7 +61,7 @@ const MovieModal: React.FC<modalProps> = ({
           <span>
             <AiOutlineCalendar /> {year}
           </span>
-          <span>
+          <span className={styles.upper}>
             <HiOutlineGlobeAlt /> {language}
           </span>
           <span>

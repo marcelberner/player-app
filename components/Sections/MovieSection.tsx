@@ -61,6 +61,8 @@ const MovieSection: React.FC<SectionProps> = ({ genre }) => {
                 description={movie.overview}
                 language={movie.originalLanguage}
                 runtime={movie.runtime}
+                imdbID={movie.imdbID}
+                video={"https://www.youtube.com/d3a8eb5d-d645-49f5-986d-07b180fe533e"}
               />
             </SwiperSlide>
           ))}
@@ -77,6 +79,8 @@ const MovieSection: React.FC<SectionProps> = ({ genre }) => {
                 description={movie.overview}
                 language={movie.originalLanguage}
                 runtime={movie.runtime}
+                imdbID={movie.imdbID}
+                video={"https://www.youtube.com/d3a8eb5d-d645-49f5-986d-07b180fe533e"}
               />
             </SwiperSlide>
           ))}

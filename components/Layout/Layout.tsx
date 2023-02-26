@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import styles from "./Layout.module.scss";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -7,6 +7,7 @@ import Link from "next/link";
 
 import { useAppSelector, useAppDispatch } from "@/hooks/redux";
 import { setSidebarState } from "@/store/sidebar";
+import useMounted from "@/hooks/useMounted";
 
 import Searchbar from "./Searchbar";
 import UserButtons from "./userButtons/UserButtons";
@@ -21,7 +22,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const router = useRouter();
   const currentRoute = router.pathname;
 
-  // const [sidebarState, setSidebarState] = useState<boolean>(true);
+  const mounted = useMounted();
+
   const sidebarState = useAppSelector((state) => state.sidebarData.isHidden);
   const dispatch = useAppDispatch();
 
@@ -76,15 +78,20 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <UserButtons />
         </nav>
       </header>
-      <div
-        className={`${styles.sidebar} ${!sidebarState ? styles.active : ""}`}
-      >
-        <PageNav state={sidebarState} />
-        <FriendsList state={sidebarState} />
-        <button className={styles.sidebar_button} onClick={sidebarHideHandler}>
-          <BiArrowFromLeft />
-        </button>
-      </div>
+      {mounted && (
+        <div
+          className={`${styles.sidebar} ${!sidebarState ? styles.active : ""}`}
+        >
+          <PageNav state={sidebarState} />
+          <FriendsList state={sidebarState} />
+          <button
+            className={styles.sidebar_button}
+            onClick={sidebarHideHandler}
+          >
+            <BiArrowFromLeft />
+          </button>
+        </div>
+      )}
       <main className={styles.main}>{children}</main>
     </div>
   );

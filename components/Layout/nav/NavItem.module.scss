@@ -5,6 +5,8 @@
   @include list-item-icon;
   @include default-hover;
 
+  width: 100% !important;
+
   &:hover {
     color: var(--secondary-clr-400);
   }
