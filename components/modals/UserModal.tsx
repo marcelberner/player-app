@@ -1,5 +1,4 @@
 import React from "react";
-import { FaUserCircle } from "react-icons/fa";
 
 import { useAppDispatch } from "@/hooks/redux";
 import { setUser } from "@/store/message";
@@ -7,6 +6,7 @@ import { setUser } from "@/store/message";
 import styles from "./UserModal.module.scss";
 
 import Button from "../Buttons/Button";
+import Icon from "../UI/Icon";
 
 interface modalProps {
   id: string;
@@ -43,7 +43,7 @@ const UserModal: React.FC<modalProps> = ({
     >
       <div className={styles.header}>
         <div className={`${styles.data} ${!isOnline ? styles.online : ""}`}>
-          <FaUserCircle />
+          <Icon icon="userAvatar" />
           <span>{name}</span>
         </div>
       </div>

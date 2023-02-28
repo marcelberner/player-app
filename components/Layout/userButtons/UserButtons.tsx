@@ -1,33 +1,34 @@
 import React from "react";
-import { TbMessage2, TbGift } from "react-icons/tb";
-import { BiBell } from "react-icons/bi";
-import { FaUserCircle } from "react-icons/fa";
-
-import UserButton from "./UserButton";
 
 import styles from "./UserButtons.module.scss";
 
+import UserButton from "./UserButton";
+import Icon from "@/components/UI/Icon";
+
 const USER_BUTTONS = [
   {
-    icon: <TbGift />,
+    icon: <Icon icon="giftOutline" />,
     isMarked: false,
     user: false,
     modalData: { header: "Gifts", emptyText: "You don't have any gifts" },
   },
   {
-    icon: <TbMessage2 />,
+    icon: <Icon icon="messageOutline" />,
     isMarked: false,
     user: false,
     modalData: { header: "Messages", emptyText: "You don't have any messages" },
   },
   {
-    icon: <BiBell />,
+    icon: <Icon icon="bellOutline" />,
     isMarked: true,
     user: false,
-    modalData: { header: "Notifications", emptyText: "You don't have any notifications" },
+    modalData: {
+      header: "Notifications",
+      emptyText: "You don't have any notifications",
+    },
   },
   {
-    icon: <FaUserCircle />,
+    icon: <Icon icon="userAvatar" />,
     isMarked: false,
     user: true,
     modalData: { header: "Placeholder", emptyText: "You don't have any gifts" },

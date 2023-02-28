@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { FaUserCircle } from "react-icons/fa";
 import { createPortal } from "react-dom";
 
 import { useAppSelector } from "@/hooks/redux";
@@ -10,6 +9,7 @@ import useMounted from "@/hooks/useMounted";
 import styles from "./FriendItem.module.scss";
 
 import UserModal from "@/components/modals/UserModal";
+import Icon from "@/components/UI/Icon";
 
 interface friendProps {
   id: string;
@@ -54,7 +54,7 @@ const FriendItem: React.FC<friendProps> = ({ id, name, isOnline, state }) => {
           state ? styles.mark : ""
         }`}
       >
-        <FaUserCircle />
+        <Icon icon="userAvatar" />
         {state && <span className={styles.name}>{name}</span>}
       </li>
       {mounted &&

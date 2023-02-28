@@ -1,18 +1,10 @@
 import React from "react";
-import { HiOutlineGlobeAlt } from "react-icons/hi";
-import {
-  AiOutlineCalendar,
-  AiOutlineClockCircle,
-  AiOutlineStar,
-  AiOutlineClose,
-} from "react-icons/ai";
-import { FaUserCircle } from "react-icons/fa";
-
 import styles from "./MovieModal.module.scss";
 
 import Player from "../Players/Player";
 import CategoryLabel from "../Labels/CategoryLabel";
 import Button from "../Buttons/Button";
+import Icon from "../UI/Icon";
 
 interface modalProps {
   title: string;
@@ -46,26 +38,32 @@ const MovieModal: React.FC<modalProps> = ({
   return (
     <div ref={modalRef} className={`modal ${styles.movie_modal}`}>
       <div className={styles.closebar}>
-        <AiOutlineClose onClick={closeModal} />
+        <div onClick={closeModal}>
+          <Icon icon="closeOutline" />
+        </div>
       </div>
       <Player video={video} />
       <div className={styles.header}>
-        <a href={`https://www.imdb.com/title/${imdbID}`} target={"_blank"} rel="noreferrer">
+        <a
+          href={`https://www.imdb.com/title/${imdbID}`}
+          target={"_blank"}
+          rel="noreferrer"
+        >
           <h1 className={styles.title}>{title}</h1>
         </a>
         <div className={styles.movie_data}>
           <span className={styles.rating}>
-            <AiOutlineStar />{" "}
+            <Icon icon="starOutline" />{" "}
             {(rating / 10).toFixed(1).toString().replace(".", ",")}
           </span>
           <span>
-            <AiOutlineCalendar /> {year}
+            <Icon icon="calendarOutline" /> {year}
           </span>
           <span className={styles.upper}>
-            <HiOutlineGlobeAlt /> {language}
+            <Icon icon="globeOutline" /> {language}
           </span>
           <span>
-            <AiOutlineClockCircle /> {runtime} min
+            <Icon icon="clockOutline" /> {runtime} min
           </span>
         </div>
       </div>
@@ -85,7 +83,7 @@ const MovieModal: React.FC<modalProps> = ({
       <div className={styles.opinions}>
         <CategoryLabel>Opinions</CategoryLabel>
         <form className={styles.form}>
-          <FaUserCircle />
+          <Icon icon="userAvatar" />
           <textarea placeholder="Share your opinion about movie..." />
           <Button>Share</Button>
         </form>

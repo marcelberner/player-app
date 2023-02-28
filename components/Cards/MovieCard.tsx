@@ -1,5 +1,4 @@
 import React from "react";
-import { AiOutlineStar } from "react-icons/ai";
 import { createPortal } from "react-dom";
 
 import useMounted from "@/hooks/useMounted";
@@ -8,6 +7,7 @@ import useModal from "@/hooks/useModal";
 import styles from "./MovieCard.module.scss";
 
 import MovieModal from "../modals/MovieModal";
+import Icon from "../UI/Icon";
 
 interface movieProps {
   title: string;
@@ -40,7 +40,7 @@ const MovieCard: React.FC<movieProps> = ({
     <>
       <div onClick={showModal} className={styles.card}>
         <div className={styles.rate}>
-          <AiOutlineStar />
+          <Icon icon="starOutline"/>
           <span>{(rating / 10).toFixed(1).toString().replace(".", ",")}</span>
         </div>
         <div className={styles.description}>

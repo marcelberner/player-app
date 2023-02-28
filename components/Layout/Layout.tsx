@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import styles from "./Layout.module.scss";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { BiArrowFromLeft } from "react-icons/bi";
 import Link from "next/link";
 
 import { useAppSelector, useAppDispatch } from "@/hooks/redux";
@@ -13,6 +12,7 @@ import Searchbar from "./Searchbar";
 import UserButtons from "./userButtons/UserButtons";
 import PageNav from "./nav/PageNav";
 import FriendsList from "./friends/FriendsList";
+import Icon from "../UI/Icon";
 
 interface LayoutProps {
   children: JSX.Element | JSX.Element[];
@@ -88,7 +88,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             className={styles.sidebar_button}
             onClick={sidebarHideHandler}
           >
-            <BiArrowFromLeft />
+            <Icon icon="hideArrow" />
           </button>
         </div>
       )}

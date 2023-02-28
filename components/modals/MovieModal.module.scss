@@ -5,24 +5,24 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 60rem;
-  max-height: 90%;
+  max-width: 55rem;
+  max-height: 80%;
   border-radius: 20px;
   box-shadow: var(--shadow-2);
   background-color: var(--bg-clr-400);
   top: 50%;
   left: 50%;
   overflow: hidden;
-  overflow-y: overlay;
+  overflow-y: scroll;
   @include appear-animation(translate(-50%, -50%));
 
   &::-webkit-scrollbar {
-    width: 0px;
-  }
-
-  &:hover::-webkit-scrollbar {
     width: 10px;
   }
+
+  // &:hover::-webkit-scrollbar {
+  //   width: 10px;
+  // }
 
   & > *:not(video) {
     padding: 2rem;
@@ -40,7 +40,7 @@
   padding: .5rem 1rem !important;
   transition: 0.2s;
 
-  & > svg {
+  & svg {
     font-size: 3rem;
     color: var(--secondary-clr-800);
 

@@ -1,10 +1,10 @@
 import React from "react";
 import Image from "next/image";
-import { BsPlay } from "react-icons/bs";
 
 import styles from "./FrontCard.module.scss";
 
 import Button from "../Buttons/Button";
+import Icon from "../UI/Icon";
 
 const FrontCard = () => {
   return (
@@ -17,12 +17,12 @@ const FrontCard = () => {
           <span className={styles.rate}>Rating: 5,8</span>
         </div>
         <div className={styles.about}>
-          MMA fighter Cole Young seeks out Earth&apos;s greatest champions in order
-          to stand against the enemies of Outworld in a high stakes battle for
-          the universe.
+          MMA fighter Cole Young seeks out Earth&apos;s greatest champions in
+          order to stand against the enemies of Outworld in a high stakes battle
+          for the universe.
         </div>
         <Button>
-          <BsPlay />
+          <Icon icon="playOutline" />
           <span>Watch</span>
         </Button>
       </div>

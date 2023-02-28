@@ -1,11 +1,9 @@
 import React from "react";
-import { HiOutlineHome, HiOutlineUserGroup } from "react-icons/hi";
-import { BiCompass } from "react-icons/bi";
-import { RiLiveLine } from "react-icons/ri";
 
 import styles from "./PageNav.module.scss";
 
 import NavItem from "./NavItem";
+import Icon from "@/components/UI/Icon";
 
 interface navProps {
   state: boolean;
@@ -14,22 +12,22 @@ interface navProps {
 const NAV_ITEMS = [
   {
     link: "/",
-    icon: <HiOutlineHome />,
+    icon: <Icon icon="homeOutline" />,
     text: "Home",
   },
   {
     link: "/discovery",
-    icon: <BiCompass />,
+    icon: <Icon icon="compassOutline" />,
     text: "Discovery",
   },
   {
     link: "/community",
-    icon: <HiOutlineUserGroup />,
+    icon: <Icon icon="communityOutline" />,
     text: "Community",
   },
   {
     link: "/cinema",
-    icon: <RiLiveLine />,
+    icon: <Icon icon="liveOutline" />,
     text: "Live cinema",
   },
 ];

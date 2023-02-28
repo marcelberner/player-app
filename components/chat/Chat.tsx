@@ -1,10 +1,11 @@
 import React from "react";
 import { createPortal } from "react-dom";
-import { RxPaperPlane } from "react-icons/rx";
 
 import useMounted from "@/hooks/useMounted";
 
 import styles from "./Chat.module.scss";
+
+import Icon from "../UI/Icon";
 
 const Chat = () => {
   const mounted = useMounted();
@@ -46,7 +47,7 @@ const Chat = () => {
         <form className={styles.text_area}>
           <input type="text" placeholder="Send message..." />
           <button type="submit">
-            <RxPaperPlane />
+            <Icon icon="paperPlane" />
           </button>
         </form>
       </div>,

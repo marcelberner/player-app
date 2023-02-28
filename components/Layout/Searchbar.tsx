@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Searchbar.module.scss";
 
-import { FiSearch } from "react-icons/fi";
+import Icon from "../UI/Icon";
 
 const Searchbar = () => {
   return (
@@ -12,7 +12,7 @@ const Searchbar = () => {
         placeholder="Search title..."
       />
       <button className={styles.button}>
-        <FiSearch />
+        <Icon icon="searchLoupe" />
       </button>
     </div>
   );
