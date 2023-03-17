@@ -14,7 +14,6 @@ interface movieProps {
   year: number;
   rating: number;
   poster: string;
-  genres?: number[];
   language?: string;
   description?: string;
   runtime?: number;
@@ -27,7 +26,6 @@ const MovieCard: React.FC<movieProps> = ({
   year,
   rating,
   poster,
-  genres,
   description,
   language,
   runtime,
@@ -57,7 +55,6 @@ const MovieCard: React.FC<movieProps> = ({
             year={year}
             rating={rating}
             poster={poster}
-            genres={genres}
             description={description}
             language={language}
             runtime={runtime}

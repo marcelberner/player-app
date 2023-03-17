@@ -1,5 +1,7 @@
 import React from "react";
 import styles from "./MovieModal.module.scss";
+import { useQuery } from "react-query";
+import axios from "axios";
 
 import Player from "../Players/Player";
 import CategoryLabel from "../Labels/CategoryLabel";
@@ -11,7 +13,6 @@ interface modalProps {
   year: number;
   rating: number;
   poster: string;
-  genres?: number[];
   language?: string;
   description?: string;
   runtime?: number;
@@ -27,7 +28,6 @@ const MovieModal: React.FC<modalProps> = ({
   poster,
   rating,
   description,
-  genres,
   language,
   runtime,
   modalRef,
@@ -35,6 +35,11 @@ const MovieModal: React.FC<modalProps> = ({
   imdbID,
   closeModal,
 }) => {
+  const { data, isLoading } = useQuery({
+    queryKey: ["movie-details", { movieID: imdbID }],
+    queryFn: () => axios.get(`/api/movies/${imdbID}/genres`),
+  });
+
   return (
     <div ref={modalRef} className={`modal ${styles.movie_modal}`}>
       <div className={styles.closebar}>
@@ -75,9 +80,9 @@ const MovieModal: React.FC<modalProps> = ({
       <div className={styles.categories}>
         <CategoryLabel>Categories</CategoryLabel>
         <ul className={styles.category_list}>
-          <li>Horror</li>
-          <li>Comedy</li>
-          <li>Drama</li>
+          {data?.data.genres.rows.map((genre: any) => (
+            <li key={genre.id}>{genre.genre}</li>
+          ))}
         </ul>
       </div>
       <div className={styles.opinions}>

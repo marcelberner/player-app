@@ -13,10 +13,10 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
         service: "hbo",
         // service: "netflix",
         type: "movie",
-        page: "3",
+        page: "178",
         output_language: "en",
         language: "en",
-        genre: genre
+        // genre: genre
       },
       headers: {
         "X-RapidAPI-Key": "fa63805bfcmsh671c6467dc9f606p14ed5ajsn65862dd931c8",
