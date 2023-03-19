@@ -22,10 +22,15 @@ function Home() {
         <FrontCard />
         <MovieSection genre="Comedy"/>
         <MovieSection genre="Action" />
-        <MovieSection genre="Thriller" />
         <MovieSection genre="Horror" />
         <MovieSection genre="Animation" />
         <MovieSection genre="Fantasy" />
+        <MovieSection genre="Thriller" />
+        <MovieSection genre="Romance" />
+        <MovieSection genre="Science Fiction" />
+        <MovieSection genre="Documentary" />
+        <MovieSection genre="History" />
+        <MovieSection genre="War" />
       </Layout>
       <MessageModal />
     </>

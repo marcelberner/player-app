@@ -13,8 +13,6 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
   } catch {
     res.status(500).json({ message: "Couldn't get movies by genre." });
   }
-
-  client.end();
 };
 
 export default Handler;

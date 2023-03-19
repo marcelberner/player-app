@@ -45,7 +45,10 @@ const MovieSection: React.FC<SectionProps> = ({ genre }) => {
   const { data, isLoading } = useQuery({
     queryKey: ["movies-home", { genre: genre }],
     queryFn: () => axios.get(`/api/movies/genre/${genre}`),
+    refetchOnWindowFocus: false
   });
+
+  console.log("first")
 
   return (
     <section className={styles.section}>
@@ -59,8 +62,8 @@ const MovieSection: React.FC<SectionProps> = ({ genre }) => {
       >
         {!isLoading &&
           (data! as any).data.movies.rows.length > 0 &&
-          (data! as any).data.movies.rows.map((movie: any) => (
-            <SwiperSlide key={movie.imdbID}>
+          (data! as any).data.movies.rows.map((movie: any, index : number) => (
+            <SwiperSlide key={index}>
               <MovieCard
                 title={movie.title}
                 year={movie.year}
@@ -76,6 +79,25 @@ const MovieSection: React.FC<SectionProps> = ({ genre }) => {
               />
             </SwiperSlide>
           ))}
+        {/* {movies &&
+          movies.length > 0 &&
+          movies!.map((movie) => (
+            <SwiperSlide key={movie.imdbID}>
+              <MovieCard
+                title={movie.title}
+                year={movie.year}
+                rating={movie.imdbRating}
+                poster={movie.posterURLs.original}
+                description={movie.overview}
+                language={movie.originalLanguage}
+                runtime={movie.runtime}
+                imdbID={movie.imdbID}
+                video={
+                  "https://www.youtube.com/d3a8eb5d-d645-49f5-986d-07b180fe533e"
+                }
+              />
+            </SwiperSlide>
+          ))} */}
       </Swiper>
     </section>
   );

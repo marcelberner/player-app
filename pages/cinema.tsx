@@ -1,7 +1,7 @@
 import React from "react";
 
 import Layout from "@/components/Layout/Layout";
-import Cinema from "@/components/Cinema";
+import Cinema from "@/components/pages/Cinema";
 import MessageModal from "@/components/modals/MessageModal";
 
 const LiveCinema = () => {

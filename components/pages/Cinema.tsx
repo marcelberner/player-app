@@ -2,9 +2,9 @@ import React from "react";
 
 import styles from "./Cinema.module.scss";
 
-import Chat from "./chat/Chat";
-import Player from "./Players/Player";
-import Icon from "./UI/Icon";
+import Chat from "../chat/Chat";
+import Player from "../Players/Player";
+import Icon from "../UI/Icon";
 
 const Cinema = () => {
   return (

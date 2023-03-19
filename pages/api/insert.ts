@@ -66,7 +66,7 @@ const Handler = async (req: NextApiRequest, response: NextApiResponse) => {
     }
   }
 
-  client.end();
+  // client.end();
 };
 
 export default Handler;

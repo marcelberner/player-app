@@ -11,12 +11,11 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
     join genres on movie_genre.genre_id = genres.id 
     where genres.genre = '${genre}'
     limit 30`);
+
     res.status(200).json({ movies: movies_by_genre });
   } catch {
     res.status(500).json({ message: "Couldn't get movies by genre." });
   }
-
-  client.end();
 };
 
 export default Handler;

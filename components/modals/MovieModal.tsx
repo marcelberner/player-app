@@ -38,6 +38,7 @@ const MovieModal: React.FC<modalProps> = ({
   const { data, isLoading } = useQuery({
     queryKey: ["movie-details", { movieID: imdbID }],
     queryFn: () => axios.get(`/api/movies/${imdbID}/genres`),
+    refetchOnWindowFocus: false
   });
 
   return (
