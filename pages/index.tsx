@@ -20,7 +20,7 @@ function Home() {
       </Head>
       <Layout>
         <FrontCard />
-        <MovieSection genre="Comedy"/>
+        <MovieSection genre="Comedy" />
         <MovieSection genre="Action" />
         <MovieSection genre="Horror" />
         <MovieSection genre="Animation" />

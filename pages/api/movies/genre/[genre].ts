@@ -3,7 +3,7 @@ import { client } from "../../database";
 
 const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const genre = req.query.genre;
-  client.connect();
+  // client.connect();
 
   try {
     const movies_by_genre = await client.query(`SELECT * from movies 

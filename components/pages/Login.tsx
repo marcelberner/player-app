@@ -45,13 +45,13 @@ const Login: React.FC<loginProps> = ({ signup }) => {
           <p>
             By creating an account, you agree to the
             <span> Terms of Service</span>. For more information about,
-            PlayerApp's privacy practices, see the
+            PlayerApp&apos;s privacy practices, see the
             <span> PlayerApp Privacy Statement</span>. (placeholder)
           </p>
         )}
       </div>
       <Image
-        src="/login-bg.png"
+        src="/login-bg.webp"
         alt=""
         width={1920}
         height={1080}

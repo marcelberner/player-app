@@ -1,17 +1,12 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { Client } from "pg";
-
-const client = new Client({
-  connectionString: process.env.DATABASE_URL,
-  ssl: true,
-});
+import { client } from "./database";
 
 const Handler = async (req: NextApiRequest, response: NextApiResponse) => {
   const movies = req.body.movies;
 
   if (!movies || movies.length == 0) return;
 
-  client.connect();
+  // client.connect();
 
   for (const movie of movies) {
     // console.log(movie);

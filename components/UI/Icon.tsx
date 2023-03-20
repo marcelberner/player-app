@@ -6,6 +6,7 @@ import {
   AiOutlineClose,
   AiOutlineCalendar,
   AiOutlineClockCircle,
+  AiOutlineArrowLeft
 } from "react-icons/ai";
 import { RxPaperPlane } from "react-icons/rx";
 import { BiArrowFromLeft, BiCompass, BiBell } from "react-icons/bi";
@@ -32,6 +33,7 @@ interface iconProps {
     | "starOutline"
     | "paperPlane"
     | "hideArrow"
+    | "arrow"
     | "searchLoupe"
     | "userAvatar"
     | "homeOutline"
@@ -82,6 +84,7 @@ const ICONS = {
   volumeMute: <HiVolumeOff />,
   pause: <IoPause />,
   pauseCircle: <FaPauseCircle />,
+  arrow: <AiOutlineArrowLeft />,
 };
 
 const Icon: React.FC<iconProps> = ({ icon }) => {

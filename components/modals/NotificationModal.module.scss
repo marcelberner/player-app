@@ -9,16 +9,22 @@
   width: 40rem;
   min-height: 15rem;
   border-radius: 20px;
-  background-color: var(--bg-clr-400);
-  padding: 1rem 2rem;
+  background-color: var(--bg-clr-400-glass);
+  backdrop-filter: blur(6px);
   box-shadow: var(--shadow-6);
   @include appear-animation;
+  overflow: hidden;
+
+  & > * {
+    padding: 1rem 2rem;
+  }
 }
 
 .header {
   font-size: 1.4rem;
   padding-bottom: 0.5rem;
   border-bottom: 1px solid var(--bg-clr-200);
+  background-color: var(--bg-clr-400);
 }
 
 .list {
