@@ -7,20 +7,18 @@
   z-index: 100;
   width: 33rem;
   height: 18rem;
-  // background-color: var(--bg-clr-400);
-  background-color: var(--bg-clr-400-glass);
-  backdrop-filter: blur(6px);
   border-radius: 20px;
   box-shadow: var(--shadow-6);
-  // padding: 0.7rem;
   @include appear-animation;
+  overflow: hidden;
 }
 
 .header {
   display: flex;
   height: 43%;
-  background-color: var(--bg-clr-600);
-  border-radius: 20px 20px 7px 7px;
+  background-color: var(--bg-clr-400-glass);
+  backdrop-filter: blur(6px);
+  border-radius: 20px 20px 0px 0px;
 }
 
 .data {
@@ -44,6 +42,7 @@
   display: flex;
   flex-grow: 1;
   align-items: center;
+  background-color: var(--bg-clr-400);
   padding: 2rem;
   gap: 1rem;
 

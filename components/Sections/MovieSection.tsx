@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useQuery } from "react-query";
 import axios from "axios";
 import { Swiper, SwiperSlide } from "swiper/react";

@@ -34,7 +34,7 @@ const SLIDES = [
 ];
 
 const FrontCard = () => {
-  const [currentSlide, setCurrentSlide] = useState(1);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   const slideBackwardHandler = () => {
     setCurrentSlide((prev) => {
@@ -54,7 +54,7 @@ const FrontCard = () => {
     const sliderInterval = setInterval(() => slideForwardHandler(), 10000);
 
     return () => clearInterval(sliderInterval);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentSlide, SLIDES.length]);
 
   return (
