@@ -14,7 +14,7 @@ const Searchbar = () => {
 
   const searchTitleHandler = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (title.length == 0) return;
 
     router.push(`/search/${title}`);

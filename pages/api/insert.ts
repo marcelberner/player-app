@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { client } from "./database";
+import { client } from "../../lib/database";
 
 const Handler = async (req: NextApiRequest, response: NextApiResponse) => {
   const movies = req.body.movies;

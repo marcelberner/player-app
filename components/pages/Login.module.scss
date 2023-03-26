@@ -12,7 +12,7 @@
   transform: translate(-50%, -50%);
   width: 100%;
   max-width: 45rem;
-  height: 70rem;
+  min-height: 70rem;
   background-color: var(--bg-clr-900-glass);
   backdrop-filter: blur(6px);
   z-index: 10;
@@ -63,6 +63,11 @@
   flex-direction: column;
   margin: auto 0;
   gap: 1rem;
+
+  & > label {
+    font-size: 1.4rem;
+    color: var(--primary-clr-400);
+  }
 
   & > input {
     border-radius: 10px;

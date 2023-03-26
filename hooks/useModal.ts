@@ -18,7 +18,7 @@ const useModal = () => {
     if (!modalRef.current!.contains(event.target)) {
       closeModal();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return {

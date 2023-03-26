@@ -57,6 +57,12 @@ $outline-size: 2px;
       min-width: 2rem !important;
       min-height: 2rem !important;
     }
+
+    & > span {
+      text-overflow: ellipsis;
+      overflow: hidden; 
+      white-space: nowrap;
+    }
   }
 }
 

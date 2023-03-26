@@ -21,7 +21,7 @@ const Search = () => {
       <h1>
         {data && (data as any).data.movies.rows.length == 0
           ? `No results for „${router.query.query}”`
-          : `Results for „${router.query.query}”`}
+          : `Search results for „${router.query.query}”`}
       </h1>
       <ul>
         {data &&
