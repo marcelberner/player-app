@@ -1,26 +1,35 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { client } from "@/lib/database";
+import { verifyPassword } from "@/lib/hash";
 
 export default NextAuth({
-  // Configure one or more authentication providers
+  session: {
+    strategy: "jwt",
+  },
   providers: [
     Credentials({
       type: "credentials",
       credentials: {},
-      authorize(credentials, req) {
-        const { email, password } = credentials as {
-          email: string;
-          password: string;
+
+      async authorize(credentials): Promise<any> {
+        const user = await client.query(
+          `SELECT * FROM users WHERE email = '${(credentials as any).email}'`
+        );
+
+        if (user.rows.length == 0) throw new Error("User does not exist.");
+
+        const isPasswordValid = await verifyPassword(
+          (credentials as any)!.password,
+          user.rows[0].password
+        );
+
+        if (!isPasswordValid) throw new Error("Invalid user password.");
+
+        return {
+          email: user.rows[0].email,
         };
-        // validate here your username and password
-        if (email !== "alex@email.com" && password !== "qqqqq") {
-          throw new Error("invalid credentials");
-        }
-        // confirmed users
-        return { id: 1, name: "Alex", email: "alex@email.com" };
       },
     }),
-    // ...add more providers here
   ],
 });

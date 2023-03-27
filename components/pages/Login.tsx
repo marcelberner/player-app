@@ -1,7 +1,10 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/dist/client/link";
 import axios from "axios";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/router";
+
 import useValidate from "@/hooks/useValidate";
 
 import styles from "./Login.module.scss";
@@ -18,6 +21,11 @@ const Login: React.FC<loginProps> = ({ signup }) => {
   const usernameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const checkboxRef = useRef<HTMLInputElement>(null);
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<null | string>(null);
+
+  const router = useRouter();
 
   const [isPasswordValid, validatePassword, clearPassword] = useValidate({
     inputRef: passwordRef,
@@ -63,8 +71,11 @@ const Login: React.FC<loginProps> = ({ signup }) => {
     const currentPassword = passwordRef.current?.value;
     const currentCfnPassword = cfnPasswordRef.current?.value;
 
+    setIsLoading(true);
+    setError(null);
+
     if (signup) {
-      const res = await axios.post("/api/auth/signup", {
+      const result = await axios.post("/api/auth/signup", {
         userData: {
           username: currentUsername,
           email: currentEmail,
@@ -73,7 +84,21 @@ const Login: React.FC<loginProps> = ({ signup }) => {
         },
       });
 
-      console.log(res);
+      if (!result!.data.ok) setError(result!.data.error);
+
+      setIsLoading(false);
+      router.replace("/");
+    } else {
+      const result = await signIn("credentials", {
+        redirect: false,
+        email: currentEmail,
+        password: currentPassword,
+      });
+
+      if (!result!.ok) setError(result!.error!);
+
+      setIsLoading(false);
+      router.replace("/");
     }
   };
 
@@ -92,6 +117,7 @@ const Login: React.FC<loginProps> = ({ signup }) => {
         </div>
         <h2>{signup ? "Sign up" : "Sign in"}</h2>
         <form className={styles.login_form} onSubmit={submitHandler}>
+          {error && <h3>{error}</h3>}
           {!isUsernameValid && (
             <label htmlFor="username">Incorrect username</label>
           )}
@@ -113,7 +139,9 @@ const Login: React.FC<loginProps> = ({ signup }) => {
             onChange={clearEmail}
           />
           {!isPasswordValid && (
-            <label htmlFor="password">Password, should contain: (a-Z | !@#$%^&* | 0-9)</label>
+            <label htmlFor="password">
+              Password, should contain: (a-Z | !@#$%^&* | 0-9)
+            </label>
           )}
           <input
             ref={passwordRef as any}
@@ -123,7 +151,7 @@ const Login: React.FC<loginProps> = ({ signup }) => {
             onChange={clearPassword}
           />
           {!isCfnPasswordValid && (
-            <label htmlFor="cfn-password">Incorrect password</label>
+            <label htmlFor="cfn-password">Incorrect user password</label>
           )}
           {signup && (
             <input
@@ -138,7 +166,9 @@ const Login: React.FC<loginProps> = ({ signup }) => {
             <input ref={checkboxRef} type="checkbox" />
             <span>Remember me</span>
           </div>
-          <Button>{signup ? "Sign up" : "Sign in"}</Button>
+          <Button isLoading={isLoading}>
+            {signup ? "Sign up" : "Sign in"}
+          </Button>
           {!signup && (
             <p>
               New to PlayerApp? <Link href="/signup">Create an account.</Link>

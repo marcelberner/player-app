@@ -31,7 +31,6 @@ const USER_BUTTONS = [
     icon: <Icon icon="userAvatar" />,
     isMarked: false,
     user: true,
-    modalData: { header: "Placeholder", emptyText: "You don't have any gifts" },
   },
 ];
 

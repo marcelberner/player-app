@@ -1,4 +1,5 @@
 import React from "react";
+import { signOut } from "next-auth/react";
 
 import Button from "../Buttons/Button";
 import Icon from "../UI/Icon";
@@ -10,6 +11,10 @@ interface modalProps {
 }
 
 const LogoutModal: React.FC<modalProps> = ({ modalRef }) => {
+  const logoutHandler = () => {
+    signOut();
+  };
+
   return (
     <div ref={modalRef} className={`modal ${styles.modal}`}>
       <div className={styles.header}>
@@ -18,7 +23,9 @@ const LogoutModal: React.FC<modalProps> = ({ modalRef }) => {
         <span className={styles.email}>marcel.berner@op.pl</span>
       </div>
       <div className={styles.buttons}>
-        <Button outline>Logout</Button>
+        <Button outline action={logoutHandler}>
+          Logout
+        </Button>
       </div>
     </div>
   );
