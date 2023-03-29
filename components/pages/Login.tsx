@@ -86,6 +86,12 @@ const Login: React.FC<loginProps> = ({ signup }) => {
 
       if (!result!.data.ok) setError(result!.data.error);
 
+      const login = await signIn("credentials", {
+        redirect: false,
+        email: currentEmail,
+        password: currentPassword,
+      });
+
       setIsLoading(false);
       router.replace("/");
     } else {

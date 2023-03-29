@@ -1,12 +1,13 @@
 import React from "react";
 import { FiUsers, FiSearch } from "react-icons/fi";
 import { BsPlay } from "react-icons/bs";
+import { MdTableRows } from "react-icons/md";
 import {
   AiOutlineStar,
   AiOutlineClose,
   AiOutlineCalendar,
   AiOutlineClockCircle,
-  AiOutlineArrowLeft
+  AiOutlineArrowLeft,
 } from "react-icons/ai";
 import { RxPaperPlane } from "react-icons/rx";
 import { BiArrowFromLeft, BiCompass, BiBell } from "react-icons/bi";
@@ -22,6 +23,7 @@ import {
   RiLiveLine,
   RiFullscreenFill,
   RiFullscreenExitLine,
+  RiLayoutGridFill
 } from "react-icons/ri";
 import { TbMessage2, TbGift } from "react-icons/tb";
 import { IoPlay, IoPause } from "react-icons/io5";
@@ -54,6 +56,8 @@ interface iconProps {
     | "fullscreenOut"
     | "volumeUp"
     | "volumeMute"
+    | "displayGrid"
+    | "displayRow"
     | "giftOutline";
 }
 
@@ -85,6 +89,8 @@ const ICONS = {
   pause: <IoPause />,
   pauseCircle: <FaPauseCircle />,
   arrow: <AiOutlineArrowLeft />,
+  displayGrid: <RiLayoutGridFill />,
+  displayRow: <MdTableRows />,
 };
 
 const Icon: React.FC<iconProps> = ({ icon }) => {

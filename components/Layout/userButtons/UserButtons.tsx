@@ -8,29 +8,28 @@ import Icon from "@/components/UI/Icon";
 const USER_BUTTONS = [
   {
     icon: <Icon icon="giftOutline" />,
-    isMarked: false,
-    user: false,
+    id: "gifts-btn",
     modalData: { header: "Gifts", emptyText: "You don't have any gifts" },
+    allert: false,
   },
   {
     icon: <Icon icon="messageOutline" />,
-    isMarked: false,
-    user: false,
+    id: "messages-btn",
     modalData: { header: "Messages", emptyText: "You don't have any messages" },
+    allert: false,
   },
   {
     icon: <Icon icon="bellOutline" />,
-    isMarked: true,
-    user: false,
+    id: "notifications-btn",
     modalData: {
       header: "Notifications",
       emptyText: "You don't have any notifications",
     },
+    allert: false,
   },
   {
     icon: <Icon icon="userAvatar" />,
-    isMarked: false,
-    user: true,
+    id: "user-avatar",
   },
 ];
 
@@ -40,10 +39,10 @@ const UserButtons = () => {
       {USER_BUTTONS.map((button, index) => (
         <UserButton
           key={index}
+          id={button.id}
           icon={button.icon}
-          isMarked={button.isMarked}
-          user={button.user}
           modal={button.modalData!}
+          allert={button.allert}
         />
       ))}
     </div>

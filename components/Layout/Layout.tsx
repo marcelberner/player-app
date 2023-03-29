@@ -13,6 +13,8 @@ import UserButtons from "./userButtons/UserButtons";
 import PageNav from "./nav/PageNav";
 import FriendsList from "./friends/FriendsList";
 import Icon from "../UI/Icon";
+import IconButton from "../Buttons/IconButton";
+import MessageModal from "../modals/MessageModal";
 
 interface LayoutProps {
   children: JSX.Element | JSX.Element[];
@@ -84,15 +86,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         >
           <PageNav state={sidebarState} />
           <FriendsList state={sidebarState} />
-          <button
-            className={styles.sidebar_button}
-            onClick={sidebarHideHandler}
-          >
+          <IconButton action={sidebarHideHandler}>
             <Icon icon="hideArrow" />
-          </button>
+          </IconButton>
         </div>
       )}
       <main className={styles.main}>{children}</main>
+      <MessageModal />
     </div>
   );
 };

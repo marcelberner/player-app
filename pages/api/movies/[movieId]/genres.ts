@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { client } from "../../../../../lib/database";
+import { client } from "../../../../lib/database";
 
 const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const movieID = req.query.movieId;

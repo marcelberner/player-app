@@ -1,8 +1,9 @@
 import React from "react";
+import { GetServerSideProps } from "next";
+import { getSession } from "next-auth/react";
 
 import Layout from "@/components/Layout/Layout";
 import Cinema from "@/components/pages/Cinema";
-import MessageModal from "@/components/modals/MessageModal";
 
 const LiveCinema = () => {
   return (
@@ -10,9 +11,26 @@ const LiveCinema = () => {
       <Layout>
         <Cinema />
       </Layout>
-      <MessageModal />
     </>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const session = await getSession({ req: context.req });
+
+  if (!session)
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+
+  return {
+    props: {
+      session: session,
+    },
+  };
 };
 
 export default LiveCinema;

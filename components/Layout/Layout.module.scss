@@ -71,30 +71,26 @@ $sidebar-width: 25rem;
     align-items: center;
   }
 
-  &.active .sidebar_button {
-    transform: rotate(0deg);
-    align-self: center;
-  }
-
   &.active h3 {
     display: none;
   }
-}
 
-.sidebar_button {
-  @include default-button;
-  font-size: 3rem;
-  align-self: end;
-  margin-top: auto;
-  transform: rotate(180deg);
+  & > button {
+    align-self: flex-end;
+    transform: rotate(180deg);
+  }
+
+  &.active > button {
+    transform: rotate(0deg);
+    align-self: center;
+  }
 }
 
 .main {
   grid-column: 2/-2;
   grid-row: 2/-1;
-  // padding: var(--default-padding) 10rem;
   overflow-x: hidden;
-  padding: var(--default-padding) clamp(.5rem, 5vw, 2rem);
+  padding: var(--default-padding) clamp(0.5rem, 5vw, 2rem);
 
   display: flex;
   flex-direction: column;

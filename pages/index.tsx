@@ -7,7 +7,6 @@ import Layout from "@/components/Layout/Layout";
 
 import FrontCard from "@/components/Cards/FrontCard";
 import MovieSection from "@/components/Sections/MovieSection";
-import MessageModal from "@/components/modals/MessageModal";
 
 function Home() {
   return (
@@ -35,7 +34,6 @@ function Home() {
         <MovieSection genre="History" />
         <MovieSection genre="War" />
       </Layout>
-      <MessageModal />
     </>
   );
 }
