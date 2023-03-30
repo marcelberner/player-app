@@ -1,5 +1,6 @@
 import React from "react";
 import { createPortal } from "react-dom";
+import Image from "next/dist/client/image";
 
 import useMounted from "@/hooks/useMounted";
 import useModal from "@/hooks/useModal";
@@ -46,7 +47,7 @@ const MovieCardWide: React.FC<movieProps> = ({
           </div>
         </div>
         <p className={styles.description}>{description}</p>
-        <img src={poster} alt={title} />
+        <Image src={poster} width={200} height={285} alt={title} />
       </div>
       {mounted &&
         modalState &&

@@ -1,14 +1,14 @@
 import React from "react";
 import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
-
 import Layout from "@/components/Layout/Layout";
-import CommunityComponent from "@/components/pages/Community";
 
-const Community = () => {
+import DiscussComponent from "@/components/pages/Discuss";
+
+const Discuss = () => {
   return (
     <Layout>
-      <CommunityComponent />
+      <DiscussComponent />
     </Layout>
   );
 };
@@ -16,10 +16,10 @@ const Community = () => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession({ req: context.req });
 
-  if (!session)
+  if (session)
     return {
       redirect: {
-        destination: "/login",
+        destination: "/",
         permanent: false,
       },
     };
@@ -31,4 +31,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-export default Community;
+export default Discuss;

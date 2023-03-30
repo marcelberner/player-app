@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./MovieModal.module.scss";
 import { useQuery } from "react-query";
 import axios from "axios";
+import Image from "next/dist/client/image";
 
 import Player from "../Players/Player";
 import CategoryLabel from "../Labels/CategoryLabel";
@@ -75,7 +76,12 @@ const MovieModal: React.FC<modalProps> = ({
       </div>
       <div className={styles.description}>
         <CategoryLabel>Description</CategoryLabel>
-        <img src={poster} alt={`${title} movie poster`} />
+        <Image
+          src={poster}
+          width={200}
+          height={285}
+          alt={`${title} movie poster`}
+        />
         <p>{description}</p>
       </div>
       <div className={styles.categories}>

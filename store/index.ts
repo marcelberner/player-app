@@ -2,11 +2,13 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import messageDataReducer from "./message";
 import sidebarDataReducer from "./sidebar";
+import userDataReducer from "./user";
 
 const store = configureStore({
   reducer: {
     messageData: messageDataReducer,
     sidebarData: sidebarDataReducer,
+    userData: userDataReducer,
   },
 });
 

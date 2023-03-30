@@ -3,6 +3,8 @@ import { FiUsers, FiSearch } from "react-icons/fi";
 import { BsPlay } from "react-icons/bs";
 import { MdTableRows } from "react-icons/md";
 import {
+  AiOutlineCompass,
+  AiFillCompass,
   AiOutlineStar,
   AiOutlineClose,
   AiOutlineCalendar,
@@ -10,22 +12,25 @@ import {
   AiOutlineArrowLeft,
 } from "react-icons/ai";
 import { RxPaperPlane } from "react-icons/rx";
-import { BiArrowFromLeft, BiCompass, BiBell } from "react-icons/bi";
+import { BiArrowFromLeft, BiBell, BiGroup, BiMessageAltDetail } from "react-icons/bi";
 import { FaUserCircle, FaPlayCircle, FaPauseCircle } from "react-icons/fa";
 import {
   HiOutlineHome,
+  HiHome,
   HiOutlineUserGroup,
+  HiUserGroup,
   HiOutlineGlobeAlt,
   HiVolumeUp,
   HiVolumeOff,
 } from "react-icons/hi";
 import {
   RiLiveLine,
+  RiLiveFill,
   RiFullscreenFill,
   RiFullscreenExitLine,
-  RiLayoutGridFill
+  RiLayoutGridFill,
 } from "react-icons/ri";
-import { TbMessage2, TbGift } from "react-icons/tb";
+import { TbMessageCircle2, TbGift } from "react-icons/tb";
 import { IoPlay, IoPause } from "react-icons/io5";
 
 interface iconProps {
@@ -39,9 +44,13 @@ interface iconProps {
     | "searchLoupe"
     | "userAvatar"
     | "homeOutline"
+    | "homeFill"
     | "compassOutline"
+    | "compassFill"
     | "liveOutline"
+    | "liveFill"
     | "communityOutline"
+    | "communityFill"
     | "messageOutline"
     | "bellOutline"
     | "closeOutline"
@@ -58,7 +67,9 @@ interface iconProps {
     | "volumeMute"
     | "displayGrid"
     | "displayRow"
-    | "giftOutline";
+    | "giftOutline"
+    | "discussOutline"
+    | "membersOutline";
 }
 
 const ICONS = {
@@ -70,10 +81,10 @@ const ICONS = {
   searchLoupe: <FiSearch />,
   userAvatar: <FaUserCircle />,
   homeOutline: <HiOutlineHome />,
-  compassOutline: <BiCompass />,
+  compassOutline: <AiOutlineCompass />,
   communityOutline: <HiOutlineUserGroup />,
   liveOutline: <RiLiveLine />,
-  messageOutline: <TbMessage2 />,
+  messageOutline: <BiMessageAltDetail />,
   bellOutline: <BiBell />,
   giftOutline: <TbGift />,
   closeOutline: <AiOutlineClose />,
@@ -91,6 +102,12 @@ const ICONS = {
   arrow: <AiOutlineArrowLeft />,
   displayGrid: <RiLayoutGridFill />,
   displayRow: <MdTableRows />,
+  homeFill: <HiHome />,
+  compassFill: <AiFillCompass />,
+  liveFill: <RiLiveFill />,
+  communityFill: <HiUserGroup />,
+  discussOutline: <TbMessageCircle2 />,
+  membersOutline: <BiGroup />,
 };
 
 const Icon: React.FC<iconProps> = ({ icon }) => {

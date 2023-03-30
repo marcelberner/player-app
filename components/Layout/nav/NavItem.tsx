@@ -6,12 +6,19 @@ import styles from "./NavItem.module.scss";
 
 interface navProps {
   link: string;
-  icon: any;
+  icon: JSX.Element;
+  iconActive: JSX.Element;
   text: string;
   state: boolean;
 }
 
-const NavItem: React.FC<navProps> = ({ icon, link, text, state }) => {
+const NavItem: React.FC<navProps> = ({
+  icon,
+  link,
+  text,
+  state,
+  iconActive,
+}) => {
   const router = useRouter();
   const currentRoute = router.pathname;
 
@@ -23,7 +30,7 @@ const NavItem: React.FC<navProps> = ({ icon, link, text, state }) => {
           currentRoute === link ? styles.active : ""
         } `}
       >
-        {icon}
+        {currentRoute === link ? iconActive : icon}
         {state && <span>{text}</span>}
       </Link>
     </li>

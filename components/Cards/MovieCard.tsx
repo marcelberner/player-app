@@ -1,5 +1,6 @@
 import React from "react";
 import { createPortal } from "react-dom";
+import Image from "next/image";
 
 import useMounted from "@/hooks/useMounted";
 import useModal from "@/hooks/useModal";
@@ -30,7 +31,7 @@ const MovieCard: React.FC<movieProps> = ({
   language,
   runtime,
   imdbID,
-  video
+  video,
 }) => {
   const mounted = useMounted();
   const { modalRef, modalState, showModal, closeModal } = useModal();
@@ -38,14 +39,14 @@ const MovieCard: React.FC<movieProps> = ({
     <>
       <div onClick={showModal} className={styles.card}>
         <div className={styles.rate}>
-          <Icon icon="starOutline"/>
+          <Icon icon="starOutline" />
           <span>{(rating / 10).toFixed(1).toString().replace(".", ",")}</span>
         </div>
         <div className={styles.description}>
           <span className={styles.title}>{title}</span>
           <span className={styles.year}>{year}</span>
         </div>
-        <img src={poster} alt={title} />
+        <Image src={poster} width={200} height={285} alt={title} />
       </div>
       {mounted &&
         modalState &&

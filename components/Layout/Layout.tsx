@@ -2,11 +2,14 @@ import React, { useEffect } from "react";
 import styles from "./Layout.module.scss";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { useQuery } from "react-query";
+import axios from "axios";
 import Link from "next/link";
 
 import { useAppSelector, useAppDispatch } from "@/hooks/redux";
 import { setSidebarState } from "@/store/sidebar";
 import useMounted from "@/hooks/useMounted";
+import { setUser } from "@/store/user";
 
 import Searchbar from "./Searchbar";
 import UserButtons from "./userButtons/UserButtons";
@@ -28,6 +31,20 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   const sidebarState = useAppSelector((state) => state.sidebarData.isHidden);
   const dispatch = useAppDispatch();
+
+  const { data } = useQuery({
+    queryKey: "userData",
+    queryFn: () =>
+      axios.get("/api/user/data").then((res) => {
+        dispatch(
+          setUser({
+            username: res.data.userData.rows[0].username,
+            email: res.data.userData.rows[0].email,
+          })
+        );
+      }),
+    refetchOnWindowFocus: false,
+  });
 
   const sidebarHideHandler = () => {
     if (sidebarState) {
@@ -55,6 +72,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         "--sidebar-current",
         "var(--sidebar-hide)"
       );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

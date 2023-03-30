@@ -1,7 +1,6 @@
 import React from "react";
 import { signOut } from "next-auth/react";
-import { useQuery } from "react-query";
-import axios from "axios";
+import { useAppSelector } from "@/hooks/redux";
 
 import Button from "../Buttons/Button";
 import Icon from "../UI/Icon";
@@ -13,11 +12,7 @@ interface modalProps {
 }
 
 const LogoutModal: React.FC<modalProps> = ({ modalRef }) => {
-  const { data, isLoading } = useQuery({
-    queryKey: "userData",
-    queryFn: () => axios.get("/api/user/data"),
-    refetchOnWindowFocus: false,
-  });
+  const userData = useAppSelector((state) => state.userData);
 
   const logoutHandler = () => {
     signOut();
@@ -28,10 +23,10 @@ const LogoutModal: React.FC<modalProps> = ({ modalRef }) => {
       <div className={styles.header}>
         <Icon icon="userAvatar" />
         <span className={styles.username}>
-          {data?.data.userData.rows[0].username}
+          {userData.username}
         </span>
         <span className={styles.email}>
-          {data?.data.userData.rows[0].email}
+          {userData.email}
         </span>
       </div>
       <div className={styles.buttons}>

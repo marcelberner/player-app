@@ -13,21 +13,25 @@ const NAV_ITEMS = [
   {
     link: "/",
     icon: <Icon icon="homeOutline" />,
+    iconActive: <Icon icon="homeFill" />,
     text: "Home",
   },
   {
     link: "/discovery",
     icon: <Icon icon="compassOutline" />,
+    iconActive: <Icon icon="compassFill" />,
     text: "Discovery",
   },
   {
     link: "/community",
     icon: <Icon icon="communityOutline" />,
+    iconActive: <Icon icon="communityFill" />,
     text: "Community",
   },
   {
     link: "/cinema",
     icon: <Icon icon="liveOutline" />,
+    iconActive: <Icon icon="liveFill" />,
     text: "Live cinema",
   },
 ];
@@ -43,6 +47,7 @@ const PageNav: React.FC<navProps> = ({ state }) => {
             text={item.text}
             link={item.link}
             icon={item.icon}
+            iconActive={item.iconActive}
             state={state}
           />
         ))}
