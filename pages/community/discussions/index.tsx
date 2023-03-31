@@ -3,12 +3,12 @@ import { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
 import Layout from "@/components/Layout/Layout";
 
-import DiscussComponent from "@/components/pages/Discuss";
+import DiscussionsComponent from "@/components/pages/Discussions";
 
 const Discuss = () => {
   return (
     <Layout>
-      <DiscussComponent />
+      <DiscussionsComponent />
     </Layout>
   );
 };
@@ -16,7 +16,7 @@ const Discuss = () => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getSession({ req: context.req });
 
-  if (session)
+  if (!session)
     return {
       redirect: {
         destination: "/",

@@ -1,0 +1,20 @@
+.pinned_button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s;
+  background-color: var(--primary-clr-400);
+  color: var(--secondary-clr-200);
+  width: 7rem;
+  height: 7rem;
+  border-radius: 50%;
+  box-shadow: var(--shadow-8);
+
+  &:hover {
+    background-color: var(--primary-clr-200);
+  }
+
+  & > svg {
+    font-size: 3rem;
+  }
+}

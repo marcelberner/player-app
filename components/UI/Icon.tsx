@@ -1,7 +1,7 @@
 import React from "react";
 import { FiUsers, FiSearch } from "react-icons/fi";
 import { BsPlay } from "react-icons/bs";
-import { MdTableRows } from "react-icons/md";
+import { MdTableRows, MdOutlineHowToVote } from "react-icons/md";
 import {
   AiOutlineCompass,
   AiFillCompass,
@@ -12,7 +12,13 @@ import {
   AiOutlineArrowLeft,
 } from "react-icons/ai";
 import { RxPaperPlane } from "react-icons/rx";
-import { BiArrowFromLeft, BiBell, BiGroup, BiMessageAltDetail } from "react-icons/bi";
+import {
+  BiArrowFromLeft,
+  BiBell,
+  BiGroup,
+  BiMessageAltDetail,
+  BiPencil,
+} from "react-icons/bi";
 import { FaUserCircle, FaPlayCircle, FaPauseCircle } from "react-icons/fa";
 import {
   HiOutlineHome,
@@ -69,7 +75,9 @@ interface iconProps {
     | "displayRow"
     | "giftOutline"
     | "discussOutline"
-    | "membersOutline";
+    | "membersOutline"
+    | "pencilOutline"
+    | "voteOutline";
 }
 
 const ICONS = {
@@ -108,6 +116,8 @@ const ICONS = {
   communityFill: <HiUserGroup />,
   discussOutline: <TbMessageCircle2 />,
   membersOutline: <BiGroup />,
+  voteOutline: <MdOutlineHowToVote />,
+  pencilOutline: <BiPencil />,
 };
 
 const Icon: React.FC<iconProps> = ({ icon }) => {

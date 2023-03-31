@@ -20,17 +20,18 @@ const NavItem: React.FC<navProps> = ({
   iconActive,
 }) => {
   const router = useRouter();
-  const currentRoute = router.pathname;
+  const currentRoute = router.pathname.split("/")[1];
+  const currentLink = link.split("/")[1];
 
   return (
     <li>
       <Link
         href={link}
         className={`${styles.nav_item} ${
-          currentRoute === link ? styles.active : ""
+          currentRoute === currentLink ? styles.active : ""
         } `}
       >
-        {currentRoute === link ? iconActive : icon}
+        {currentRoute === currentLink ? iconActive : icon}
         {state && <span>{text}</span>}
       </Link>
     </li>
