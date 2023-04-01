@@ -7,16 +7,12 @@
   width: 25rem;
   height: 25rem;
   gap: 2rem;
-  background: linear-gradient(to bottom, var(--bg-clr-400), var(--bg-clr-200));
+  background: radial-gradient(var(--bg-clr-200), var(--bg-clr-400));
   color: var(--secondary-clr-200);
   transition: 0.2s;
 
   &:hover {
-    background: linear-gradient(
-      to bottom,
-      var(--primary-clr-400),
-      var(--primary-clr-200)
-    );
+    background: radial-gradient(var(--primary-clr-200), var(--primary-clr-400));
     color: var(--secondary-clr-400);
     box-shadow: var(--shadow-8);
 
