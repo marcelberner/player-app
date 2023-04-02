@@ -9,6 +9,7 @@ import styles from "./MovieCardWide.module.scss";
 
 import MovieModal from "../modals/MovieModal";
 import Icon from "../UI/Icon";
+import PosterPlaceholder from "../UI/placeholders/PosterPlaceholder";
 
 interface movieProps {
   title: string;
@@ -47,7 +48,13 @@ const MovieCardWide: React.FC<movieProps> = ({
           </div>
         </div>
         <p className={styles.description}>{description}</p>
-        <Image src={poster} width={200} height={285} alt={title} />
+        <div className={styles.img_container}>
+          {poster != "undefined" ? (
+            <Image src={poster} width={200} height={285} alt={title} />
+          ) : (
+            <PosterPlaceholder />
+          )}
+        </div>
       </div>
       {mounted &&
         modalState &&

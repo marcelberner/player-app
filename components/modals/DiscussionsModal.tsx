@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import axios from "axios";
+import { useQueryClient, useMutation } from "react-query";
 
 import Button from "../Buttons/Button";
 
@@ -7,20 +8,39 @@ import styles from "./DiscussionsModal.module.scss";
 
 interface modalProps {
   modalRef: any;
+  closeModal: () => void;
 }
 
-const DiscussionsModal: React.FC<modalProps> = ({ modalRef }) => {
+const DiscussionsModal: React.FC<modalProps> = ({ modalRef, closeModal }) => {
   const subjectRef = useRef<HTMLInputElement>();
   const descriptionRef = useRef<HTMLInputElement>();
+
+  const queryClient = useQueryClient();
+
+  const requestHandler = (data: { subject: string; description: string }) => {
+    return axios.post(`/api/discussions/add`, {
+      subject: data.subject,
+      description: data.description,
+    });
+  };
+
+  const discussionMutation = useMutation({
+    mutationFn: requestHandler,
+    onSuccess: () => {
+      queryClient.invalidateQueries("discussions");
+      closeModal();
+    },
+  });
 
   const submitHandler = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const response = axios.post(`/api/discussions/add`, {
+    discussionMutation.mutate({
       subject: subjectRef.current!.value,
       description: descriptionRef.current!.value,
     });
   };
+  
   return (
     <div ref={modalRef} className={`modal ${styles.modal}`}>
       <h2>New discussion</h2>

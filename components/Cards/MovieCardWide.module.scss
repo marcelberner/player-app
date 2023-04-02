@@ -8,25 +8,26 @@
   transition: 0.3s;
   cursor: pointer;
 
-  & > *:not(img) {
+  & > *:not(.img_container) {
     padding-top: 1rem;
   }
 
-  & > img {
+  & > .img_container {
     grid-column: 1/2;
     grid-row: 1/-1;
     width: 18rem;
     height: 26.5rem;
     border-radius: 20px;
     transition: var(--transition-hover);
+    overflow: hidden;
   }
 
-  &:hover > img {
+  &:hover > .img_container {
     transform: scale(1.05);
   }
 
   &:hover {
-    background-color: var(--bg-clr-400);
+    background-color: var(--bg-clr-200);
     box-shadow: var(--shadow-2);
   }
 

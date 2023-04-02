@@ -10,6 +10,7 @@ import {
   AiOutlineCalendar,
   AiOutlineClockCircle,
   AiOutlineArrowLeft,
+  AiFillPicture,
 } from "react-icons/ai";
 import { RxPaperPlane } from "react-icons/rx";
 import {
@@ -77,6 +78,7 @@ interface iconProps {
     | "discussOutline"
     | "membersOutline"
     | "pencilOutline"
+    | "picturePlaceholder"
     | "voteOutline";
 }
 
@@ -118,6 +120,7 @@ const ICONS = {
   membersOutline: <BiGroup />,
   voteOutline: <MdOutlineHowToVote />,
   pencilOutline: <BiPencil />,
+  picturePlaceholder: <AiFillPicture />,
 };
 
 const Icon: React.FC<iconProps> = ({ icon }) => {

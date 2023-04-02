@@ -8,6 +8,7 @@ import useModal from "@/hooks/useModal";
 import styles from "./MovieCard.module.scss";
 
 import MovieModal from "../modals/MovieModal";
+import PosterPlaceholder from "../UI/placeholders/PosterPlaceholder";
 import Icon from "../UI/Icon";
 
 interface movieProps {
@@ -46,7 +47,11 @@ const MovieCard: React.FC<movieProps> = ({
           <span className={styles.title}>{title}</span>
           <span className={styles.year}>{year}</span>
         </div>
-        <Image src={poster} width={200} height={285} alt={title} />
+        {poster != "undefined" ? (
+          <Image src={poster} width={200} height={285} alt={title} />
+        ) : (
+          <PosterPlaceholder />
+        )}
       </div>
       {mounted &&
         modalState &&

@@ -8,6 +8,7 @@ import Player from "../Players/Player";
 import CategoryLabel from "../Labels/CategoryLabel";
 import Button from "../Buttons/Button";
 import Icon from "../UI/Icon";
+import PosterPlaceholder from "../UI/placeholders/PosterPlaceholder";
 
 interface modalProps {
   title: string;
@@ -76,12 +77,16 @@ const MovieModal: React.FC<modalProps> = ({
       </div>
       <div className={styles.description}>
         <CategoryLabel>Description</CategoryLabel>
-        <Image
-          src={poster}
-          width={200}
-          height={285}
-          alt={`${title} movie poster`}
-        />
+        {poster != "undefined" ? (
+          <Image
+            src={poster}
+            width={200}
+            height={285}
+            alt={`${title} movie poster`}
+          />
+        ) : (
+          <PosterPlaceholder />
+        )}
         <p>{description}</p>
       </div>
       <div className={styles.categories}>

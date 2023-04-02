@@ -14,6 +14,7 @@
     content: "";
     @include notification-mark;
     background-color: var(--succes-clr);
+    box-shadow: 0px 0px 8px 2px var(--succes-clr);
   }
 }
 
