@@ -2,32 +2,167 @@
   display: flex;
   flex-direction: column;
   max-width: 100rem;
-  background-color: var(--bg-clr-400);
   align-self: center;
   flex-grow: 1;
-  border-radius: 20px;
   padding: 2rem;
-  box-shadow: var(--shadow-2);
 }
 
 .header {
-  display: flex;
-  flex-direction: column;
-  min-height: 30rem;
-  gap: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 25rem;
+  grid-template-rows: auto auto 1fr;
   border-bottom: 1px solid var(--bg-clr-200);
-  
-  & > * {
-    padding: 1rem 0;
+  padding-bottom: 2rem;
+
+  & > .post_date {
+    grid-column: 1/2;
+    grid-row: 1/2;
+    padding: 0 2rem !important;
+    font-size: 1.6rem;
+    color: var(--succes-clr);
   }
-  
+
+  & > * {
+    padding: 2rem;
+  }
+
   & > h1 {
     font-size: 3rem;
-    border-bottom: 1px solid var(--bg-clr-200);
+    // border-bottom: 1px solid var(--bg-clr-200);
+    grid-column: 1/2;
+    grid-row: 2/3;
   }
 
   & > p {
     font-size: 1.8rem;
-    width: 100%;
+    align-self: flex-start;
+    color: var(--secondary-clr-400);
+    background-color: var(--bg-clr-400);
+    border-radius: 20px;
+    grid-column: 1/2;
+    grid-row: -2/-1;
+  }
+}
+
+.author_bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  grid-column: -1/-2;
+  grid-row: 1/-1;
+  gap: 1.5rem;
+
+  & > svg {
+    font-size: 12rem;
+    color: var(--secondary-clr-800);
+  }
+
+  & > span {
+    color: var(--secondary-clr-200);
+    font-size: 2.2rem;
+    font-weight: 600;
+  }
+
+  & > span:first-child {
+    color: var(--secondary-clr-400);
+    font-size: 1.4rem;
+  }
+}
+
+.comments {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  flex-grow: 1;
+
+  & > h2 {
+    font-size: 2.6rem;
+    color: var(--secondary-clr-400);
+    padding: 2rem;
+  }
+}
+
+.comment_form {
+  display: grid;
+  grid-template-columns: 20rem 1fr;
+  grid-template-rows: 1fr auto;
+  gap: 1rem;
+  margin-top: auto;
+  padding-top: 3rem;
+  border-top: 1px solid var(--bg-clr-200);
+
+  & > textarea {
+    border-radius: 10px;
+    border: 2px solid var(--bg-clr-200);
+    background-color: var(--bg-clr-400);
+    color: var(--secondary-clr-200);
+    outline: none;
+    transition: 0.1s;
+    flex-grow: 1;
+    font-size: 1.6rem;
+    padding: 1.5rem;
+    grid-row: 1/2;
+    grid-column: -1/-2;
+    resize: none;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+      sans-serif;
+
+    &::placeholder {
+      color: var(--secondary-clr-800);
+    }
+
+    &:hover {
+      background-color: var(--bg-clr-200);
+    }
+
+    &:focus {
+      background-color: var(--bg-clr-200);
+    }
+  }
+
+  & > button {
+    font-size: 1.8rem !important;
+    grid-row: -1/-2;
+    grid-column: -1/-2;
+  }
+
+  & > .author_bar {
+    grid-row: 1/-1;
+    grid-column: 1/2;
+
+    & > svg {
+      color: var(--secondary-clr-400);
+    }
+  }
+}
+
+.comments_list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  & > li {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-clr-400);
+    border-radius: 20px;
+    padding: 1rem 2rem;
+    gap: .5rem;
+
+    & > span {
+      font-size: 1.6rem;
+      color: var(--secondary-clr-400);
+      font-weight: 600;
+
+      &:first-child {
+        font-size: 1.2rem;
+        color: var(--secondary-clr-800);
+      }
+    }
+
+    & > p {
+      font-size: 1.4rem;
+    }
   }
 }

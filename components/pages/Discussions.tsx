@@ -57,7 +57,7 @@ const Discussions = () => {
                   .split("T")[0]
                   .split("-")
                   .reverse()
-                  .join("-");
+                  .join(".");
 
                 return (
                   <li
