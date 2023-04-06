@@ -20,7 +20,12 @@ import {
   BiMessageAltDetail,
   BiPencil,
 } from "react-icons/bi";
-import { FaUserCircle, FaPlayCircle, FaPauseCircle } from "react-icons/fa";
+import {
+  FaUserCircle,
+  FaPlayCircle,
+  FaPauseCircle,
+  FaUserPlus,
+} from "react-icons/fa";
 import {
   HiOutlineHome,
   HiHome,
@@ -79,6 +84,7 @@ interface iconProps {
     | "membersOutline"
     | "pencilOutline"
     | "picturePlaceholder"
+    | "friendAdd"
     | "voteOutline";
 }
 
@@ -121,6 +127,7 @@ const ICONS = {
   voteOutline: <MdOutlineHowToVote />,
   pencilOutline: <BiPencil />,
   picturePlaceholder: <AiFillPicture />,
+  friendAdd: <FaUserPlus />,
 };
 
 const Icon: React.FC<iconProps> = ({ icon }) => {

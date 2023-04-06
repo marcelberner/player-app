@@ -11,6 +11,7 @@ import PinnedButton from "../Buttons/PinnedButton";
 import DiscussionsModal from "../modals/DiscussionsModal";
 import Icon from "../UI/Icon";
 import Button from "../Buttons/Button";
+import NavLabel from "../Labels/NavLabel";
 
 import styles from "./Discuss.module.scss";
 
@@ -41,6 +42,9 @@ const Discussions = () => {
   return (
     <>
       <section className={styles.discussions}>
+        <NavLabel>
+          <Icon icon="communityFill" />
+        </NavLabel>
         <div className={styles.template}>
           <span>Subject</span>
           <span>Overviev</span>

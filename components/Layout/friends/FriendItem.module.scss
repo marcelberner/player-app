@@ -20,4 +20,5 @@
 
 .name {
   flex-grow: 1;
+  @include text-overflow-inline;
 }

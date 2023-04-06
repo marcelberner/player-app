@@ -8,12 +8,13 @@
   right: 0;
   width: 40rem;
   min-height: 15rem;
+
   border-radius: 20px;
   background-color: var(--bg-clr-400-glass);
   backdrop-filter: blur(6px);
   box-shadow: var(--shadow-6);
   @include appear-animation;
-  overflow: hidden;
+  overflow-y: overlay;
 
   & > * {
     padding: 1rem 2rem;
@@ -39,6 +40,58 @@
   font-weight: 600;
   align-self: center;
   margin: auto;
+}
+
+.notification {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: 1fr auto;
+  column-gap: 2rem;
+  padding: 2rem;
+  border-radius: 8px;
+  transition: 0.2s;
+
+  & > svg {
+    font-size: 6rem;
+  }
+
+  & > p {
+    font-size: 1.4rem;
+
+    & > span {
+      font-weight: 800;
+    }
+  }
+
+  &:hover {
+    background-color: var(--bg-clr-200-glass);
+
+    &>.buttons {
+      opacity: 1;
+      transform: translate(0);
+    }
+  }
+}
+
+.buttons {
+  position: absolute;
+  display: flex;
+  right: 1rem;
+  bottom: 1rem;
+  gap: 1rem;
+  opacity: 0;
+  transform: translateX(10px);
+  transition: .2s;
+
+  & > button {
+    width: 3.5rem;
+    height: 3.5rem;
+
+    & > svg {
+      font-size: 2rem;
+    }
+  }
 }
 
 @include appear-keyframes;

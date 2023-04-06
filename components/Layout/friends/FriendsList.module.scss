@@ -6,18 +6,38 @@
   flex-grow: 1;
   overflow: hidden;
   gap: 2rem;
+
+  & > .not_found {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30%;
+    gap: 2rem;
+
+    & > h4 {
+      font-size: 1.8rem;
+    }
+
+    & button {
+      font-size: 1.8rem !important;
+    }
+
+    &.hide {
+      display: none;
+    }
+  }
 }
 
 .list {
   display: flex;
   flex-direction: column;
-  gap: .5rem;
+  gap: 0.5rem;
   overflow-y: scroll;
 
   &::-webkit-scrollbar {
     width: 0px;
   }
-  
+
   &:hover::-webkit-scrollbar {
     width: 10px;
   }

@@ -9,7 +9,7 @@ import Icon from "../UI/Icon";
 const Cinema = () => {
   return (
     <section className={styles.cinema}>
-      <Chat />
+      {/* <Chat /> */}
       <Player video="https://vcze603.cda.pl/-2Rtu40F9gbNTvO1TydxoA/1677576715/lq62f5ca2539107881d6a752103098ccdd.mp4" />
       <div className={styles.container}>
         <h1 className={styles.title}>

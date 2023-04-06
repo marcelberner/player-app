@@ -43,7 +43,7 @@ const Searchbar = () => {
     addEventListener("click", clearResultsHandler as any);
 
     axios
-      .get(`/api/search/${title}`)
+      .get(`/api/search/movies/${title}`)
       .then((response) => setResults(response.data.results.rows));
 
     return () => removeEventListener("click", clearResultsHandler as any);
@@ -70,7 +70,7 @@ const Searchbar = () => {
           {results.map((result, index) => (
             <li
               key={index}
-              onClick={() => router.push(`/search/${result.title}`)}
+              onClick={() => router.push(`/search/movies/${result.title}`)}
             >
               <Icon icon="searchLoupe" />
               <span>{result.title}</span>

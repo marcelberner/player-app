@@ -9,26 +9,26 @@ import IconButton from "@/components/Buttons/IconButton";
 import styles from "./UserButton.module.scss";
 
 interface buttonProps {
-  icon: JSX.Element;
+  children: JSX.Element;
   id?: string;
-  allert?: boolean;
-  modal: {
+  data?: any[];
+  modal?: {
     header: string;
     emptyText: string;
   };
 }
 
-const UserButton: React.FC<buttonProps> = ({ icon, id, modal, allert }) => {
+const UserButton: React.FC<buttonProps> = ({ children, id, modal, data }) => {
   const { modalRef, modalState, showModal } = useModal();
 
   return (
     <div
-      className={`${styles.container} ${allert ? styles.marked : ""} ${
-        id == "user-avatar" ? styles.avatar : ""
-      }`}
+      className={`${styles.container} ${
+        data && data!.length > 0 ? styles.marked : ""
+      } ${id == "user-avatar" ? styles.avatar : ""}`}
     >
       <IconButton id={id} action={showModal}>
-        {icon}
+        {children}
       </IconButton>
       {modalState &&
         (id == "user-avatar" ? (
@@ -36,8 +36,9 @@ const UserButton: React.FC<buttonProps> = ({ icon, id, modal, allert }) => {
         ) : (
           <NotificationModal
             modalRef={modalRef}
-            header={modal.header}
-            emptyText={modal.emptyText}
+            header={modal!.header}
+            emptyText={modal!.emptyText}
+            data={data}
           />
         ))}
     </div>
