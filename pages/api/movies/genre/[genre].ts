@@ -3,19 +3,19 @@ import { client } from "../../../../lib/database";
 
 const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const genre = req.query.genre;
-  // client.connect();
 
+  let movies;
   try {
-    const movies_by_genre = await client.query(`SELECT * from movies 
-    join movie_genre on movies.id = movie_genre.movie_id 
-    join genres on movie_genre.genre_id = genres.id 
-    where genres.genre = '${genre}'
+    movies = await client.query(`
+    SELECT * FROM movies 
+    JOIN movie_genre ON movies.id = movie_genre.movie_id 
+    JOIN genres ON movie_genre.genre_id = genres.id 
+    WHERE genres.genre = '${genre}'
     limit 30`);
-
-    res.status(200).json({ movies: movies_by_genre });
   } catch {
     res.status(500).json({ message: "Couldn't get movies by genre." });
   }
+  res.status(200).json({ movies: movies });
 };
 
 export default Handler;

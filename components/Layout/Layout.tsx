@@ -23,6 +23,8 @@ interface LayoutProps {
   children: JSX.Element | JSX.Element[];
 }
 
+const STATIC_PAGES = ["/discovery"];
+
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const router = useRouter();
   const currentRoute = router.pathname;
@@ -80,7 +82,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       id="layout"
       className={`${styles.page_layout} ${
         currentRoute === "/cinema" ? styles.active : ""
-      }`}
+      } ${STATIC_PAGES.includes(currentRoute) ? styles.static : ""}`}
     >
       <header className={styles.header}>
         <Link href={"/"}>
@@ -109,7 +111,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           </IconButton>
         </div>
       )}
-      <main className={styles.main}>{children}</main>
+      <main
+        className={`${styles.main} ${
+          STATIC_PAGES.includes(currentRoute) ? styles.static : ""
+        }`}
+      >
+        {children}
+      </main>
       <MessageModal />
     </div>
   );

@@ -13,6 +13,10 @@ $sidebar-width: 25rem;
   &.active {
     grid-template-columns: var(--sidebar-current) 1fr 33rem;
   }
+
+  &.static {
+    max-height: 100vh;
+  }
 }
 
 .logo {
@@ -96,4 +100,10 @@ $sidebar-width: 25rem;
   display: flex;
   flex-direction: column;
   gap: 5rem;
+
+  &.static {
+    overflow: hidden;
+    padding: 0;
+    max-height: 100%;
+  }
 }

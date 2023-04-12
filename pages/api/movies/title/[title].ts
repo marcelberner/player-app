@@ -5,7 +5,8 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const title = req.query.title;
 
   try {
-    const movies_by_title = await client.query(`SELECT * FROM movies 
+    const movies_by_title = await client.query(`
+    SELECT * FROM movies 
     WHERE LOWER(title) LIKE LOWER('%${title}%')
     LIMIT 35`);
 

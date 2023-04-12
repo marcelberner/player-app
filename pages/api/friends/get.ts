@@ -23,9 +23,8 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
     OR users.email = friends.request_to 
     AND users.email != '${email}'
 
-    WHERE request_from = '${email}' 
-    OR request_to = '${email}' 
-    AND status = 'accepted'
+    WHERE status = 'accepted' AND
+    (request_from = '${email}' OR request_to = '${email}')  
     `);
   } catch {
     res.status(500).json({ message: "Could not add friend." });
