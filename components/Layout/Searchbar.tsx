@@ -70,7 +70,7 @@ const Searchbar = () => {
           {results.map((result, index) => (
             <li
               key={index}
-              onClick={() => router.push(`/search/movies/${result.title}`)}
+              onClick={() => router.push(`/search/${result.title}`)}
             >
               <Icon icon="searchLoupe" />
               <span>{result.title}</span>
