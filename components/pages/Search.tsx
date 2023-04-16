@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
-import { useQuery } from "react-query";
+import { useInfiniteQuery } from "react-query";
+import useInfiniteScroll from "@/hooks/useInfiniteScroll.";
 import axios from "axios";
 
 import MovieCard from "../Cards/MovieCard";
@@ -15,17 +16,29 @@ const Search = () => {
 
   const [display, setDisplay] = useState(false);
 
-  const { data } = useQuery({
-    queryKey: ["search", { query: router.query.query }],
-    queryFn: () => axios.get(`/api/movies/title/${router.query.query}`),
-    refetchOnWindowFocus: false,
+  const { data, hasNextPage, isFetchingNextPage, fetchNextPage } =
+    useInfiniteQuery({
+      queryKey: ["search", { query: router.query.query }],
+      getNextPageParam: (prevData: any) => prevData.data.next,
+      queryFn: ({ pageParam = 1 }) =>
+        axios.get(`/api/movies/title/${router.query.query}`, {
+          params: { page: pageParam },
+        }),
+      refetchOnWindowFocus: false,
+    });
+
+  const { observerRef } = useInfiniteScroll({
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
   });
 
   return (
     <section className={styles.search_results}>
       <div className={styles.header}>
         <h1>
-          {data && (data as any).data.movies.rows.length == 0
+          {data &&
+          data.pages.flatMap((data: any) => data.data.movies).length == 0
             ? `No results for „${router.query.query}”`
             : `Search results for „${router.query.query}”`}
         </h1>
@@ -52,40 +65,43 @@ const Search = () => {
       </div>
       <ul className={display ? styles.grid : styles.row}>
         {data &&
-          (data as any).data.movies.rows.map((movie: any, index: number) =>
-            display ? (
-              <MovieCard
-                key={index}
-                title={movie.title}
-                year={movie.year}
-                rating={movie.rating}
-                poster={movie.poster}
-                description={movie.description}
-                language={movie.language}
-                runtime={movie.runtime}
-                imdbID={movie.id}
-                video={
-                  "https://www.youtube.com/d3a8eb5d-d645-49f5-986d-07b180fe533e"
-                }
-              />
-            ) : (
-              <MovieCardWide
-                key={index}
-                title={movie.title}
-                year={movie.year}
-                rating={movie.rating}
-                poster={movie.poster}
-                description={movie.description}
-                language={movie.language}
-                runtime={movie.runtime}
-                imdbID={movie.id}
-                video={
-                  "https://www.youtube.com/d3a8eb5d-d645-49f5-986d-07b180fe533e"
-                }
-              />
-            )
-          )}
+          data.pages
+            .flatMap((data: any) => data.data.movies)
+            .map((movie, index: number) =>
+              display ? (
+                <MovieCard
+                  key={index}
+                  title={movie.title}
+                  year={movie.year}
+                  rating={movie.rating}
+                  poster={movie.poster}
+                  description={movie.description}
+                  language={movie.language}
+                  runtime={movie.runtime}
+                  imdbID={movie.id}
+                  video={
+                    "https://www.youtube.com/d3a8eb5d-d645-49f5-986d-07b180fe533e"
+                  }
+                />
+              ) : (
+                <MovieCardWide
+                  key={index}
+                  title={movie.title}
+                  year={movie.year}
+                  rating={movie.rating}
+                  poster={movie.poster}
+                  description={movie.description}
+                  language={movie.language}
+                  runtime={movie.runtime}
+                  imdbID={movie.id}
+                  video={
+                    "https://www.youtube.com/d3a8eb5d-d645-49f5-986d-07b180fe533e"
+                  }
+                />
+              )
+            )}
       </ul>
+      <div ref={observerRef}></div>
     </section>
   );
 };

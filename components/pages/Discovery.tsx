@@ -1,6 +1,7 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useRef } from "react";
 import axios from "axios";
-import { useQuery } from "react-query";
+import { useQuery, useInfiniteQuery, useQueryClient } from "react-query";
+import useInfiniteScroll from "@/hooks/useInfiniteScroll.";
 import qs from "qs";
 
 import MovieCard from "../Cards/MovieCard";
@@ -9,11 +10,12 @@ import CategoryLabel from "../Labels/CategoryLabel";
 import styles from "./Discovery.module.scss";
 
 const Discovery = () => {
-  const [movieData, setMovieData] = useState<any>(null);
-
   const inputRef = useRef<HTMLInputElement>(null);
   const yearStartRef = useRef<HTMLInputElement>(null);
   const yearEndRef = useRef<HTMLInputElement>(null);
+  const listRef = useRef<HTMLUListElement>(null);
+
+  const queryClient = useQueryClient();
 
   const { data } = useQuery({
     queryKey: "genres",
@@ -21,11 +23,7 @@ const Discovery = () => {
     refetchOnWindowFocus: false,
   });
 
-  const fetchData = async () => {
-    const keyword = inputRef.current!.value;
-    const yearStart = yearStartRef.current!.value;
-    const yearEnd = yearEndRef.current!.value;
-
+  const getGenres = () => {
     const options = Array.prototype.slice.call(
       document.querySelectorAll(`.genre_option:checked`)
     );
@@ -34,31 +32,51 @@ const Discovery = () => {
       (option: any) => `'${option.dataset.genre}'`
     );
 
-    const res = await axios.get("/api/movies", {
-      params: {
-        keyword: keyword,
-        genres: genres,
-        yearStart: yearStart,
-        yearEnd: yearEnd,
-      },
-      paramsSerializer: {
-        serialize: (params) => {
-          return qs.stringify(params, { arrayFormat: "repeat" });
-        },
-      },
-    });
-
-    setMovieData(res.data.movies);
+    return genres;
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const {
+    data: movieData,
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
+  } = useInfiniteQuery({
+    queryKey: ["discovery"],
+    getNextPageParam: (prevData: any) => prevData.data.next,
+    queryFn: ({ pageParam = 1 }) => {
+      const keyword = inputRef.current!.value;
+      const yearStart = yearStartRef.current!.value;
+      const yearEnd = yearEndRef.current!.value;
+      const genres = getGenres();
+
+      return axios.get(`/api/movies`, {
+        params: {
+          page: pageParam,
+          keyword: keyword,
+          genres: genres,
+          yearStart: yearStart,
+          yearEnd: yearEnd,
+        },
+        paramsSerializer: {
+          serialize: (params) => {
+            return qs.stringify(params, { arrayFormat: "repeat" });
+          },
+        },
+      });
+    },
+    refetchOnWindowFocus: false,
+  });
+
+  const { observerRef } = useInfiniteScroll({
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
+  });
 
   return (
     <section className={styles.discovery}>
       <div className={styles.filters}>
-        <form onChange={fetchData}>
+        <form onChange={() => queryClient.invalidateQueries("discovery")}>
           <input
             ref={inputRef}
             type="text"
@@ -97,23 +115,26 @@ const Discovery = () => {
           </div>
         </form>
       </div>
-      <ul className={styles.list}>
+      <ul ref={listRef} className={styles.list}>
         {movieData &&
-          movieData.map((movie: any) => (
-            <li key={movie.movie_id}>
-              <MovieCard
-                title={movie.title}
-                year={movie.year}
-                rating={movie.rating}
-                poster={movie.poster}
-                description={movie.description}
-                language={movie.language}
-                runtime={movie.runtime}
-                imdbID={movie.movie_id}
-                video={movie.video}
-              />
-            </li>
-          ))}
+          movieData.pages
+            .flatMap((data: any) => data.data.movies)
+            .map((movie: any) => (
+              <li key={movie.movie_id}>
+                <MovieCard
+                  title={movie.title}
+                  year={movie.year}
+                  rating={movie.rating}
+                  poster={movie.poster}
+                  description={movie.description}
+                  language={movie.language}
+                  runtime={movie.runtime}
+                  imdbID={movie.movie_id}
+                  video={movie.video}
+                />
+              </li>
+            ))}
+        <li ref={observerRef}></li>
       </ul>
     </section>
   );
