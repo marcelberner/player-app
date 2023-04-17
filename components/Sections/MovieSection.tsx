@@ -9,6 +9,10 @@ import styles from "./MovieSection.module.scss";
 import CategoryLabel from "../Labels/CategoryLabel";
 import MovieCard from "../Cards/MovieCard";
 
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/thumbs";
+
 interface SectionProps {
   genre: string;
 }

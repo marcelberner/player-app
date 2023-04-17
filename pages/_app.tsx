@@ -7,16 +7,23 @@ import { SessionProvider } from "next-auth/react";
 import store from "../store/index";
 import { QueryClient, QueryClientProvider } from "react-query";
 
+import Head from "next/head";
+
 const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <StoreProvider store={store}>
-      <SessionProvider session={pageProps.session}>
-        <QueryClientProvider client={queryClient}>
-          <Component {...pageProps} />
-        </QueryClientProvider>
-      </SessionProvider>
-    </StoreProvider>
+    <>
+      <Head>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <StoreProvider store={store}>
+        <SessionProvider session={pageProps.session}>
+          <QueryClientProvider client={queryClient}>
+            <Component {...pageProps} />
+          </QueryClientProvider>
+        </SessionProvider>
+      </StoreProvider>
+    </>
   );
 }

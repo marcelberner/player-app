@@ -14,7 +14,7 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const status = req.body.status;
   const email = session.user?.email;
   
-  if (status !== "accepted" && status !== "decline") {
+  if (status !== "accepted" && status !== "declined") {
     res.status(400).json({ message: "Could not add friend." });
     return;
   }

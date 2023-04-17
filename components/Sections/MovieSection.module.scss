@@ -8,9 +8,19 @@ $gap: 3rem;
 
 .list {
   user-select: none;
-  overflow: hidden;
+  width: 100%;
+  overflow-x: scroll;
+
   & > *:first-child {
     display: flex;
     gap: $gap;
+  }
+
+  & > div > div {
+    width: min-content !important;
+  }
+  
+  &::-webkit-scrollbar {
+    height: 0rem;
   }
 }

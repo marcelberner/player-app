@@ -78,7 +78,7 @@
   align-items: center;
   gap: 0.5rem;
   margin: auto 0;
-  
+
   & > h3 {
     font-size: 2rem;
     color: var(--secondary-clr-800);
@@ -91,5 +91,35 @@
 
   & > button {
     margin-top: 2rem;
+  }
+}
+
+.pagination {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  margin-top: auto;
+  align-self: center;
+  align-items: center;
+  gap: 2rem;
+
+  & > button {
+    padding: 0;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+
+    & > svg {
+      font-size: 1.6rem !important;
+    }
+    &:last-child {
+      & > svg {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  & > span {
+    font-size: 2rem;
+    grid-column: 2/3;
   }
 }

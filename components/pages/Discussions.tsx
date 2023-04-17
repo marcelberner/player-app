@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import axios from "axios";
 import { useRouter } from "next/router";
 
@@ -21,23 +21,38 @@ interface postProps {
   description: string;
   username: string;
   create_date: string;
+  num_comments: number;
 }
 
 const Discussions = () => {
   const { modalRef, showModal, modalState, closeModal } = useModal();
-  const mounted = useMounted();
 
   const router = useRouter();
+  const pageQuery = router.query.page ? parseInt(router.query.page as any) : 1;
+
+  const [page, setPage] = useState(pageQuery);
+  const mounted = useMounted();
 
   const { data, isLoading } = useQuery({
-    queryKey: "discussions",
-    queryFn: () => axios.get("/api/discussions/get"),
+    queryKey: ["discussions", { page: page }],
+    queryFn: () => {
+      return axios.get("/api/discussions/get", {
+        params: { page: page },
+      });
+    },
     refetchOnWindowFocus: false,
   });
 
   const navigateHandler = (path: string) => {
     router.push(`/community/discussions/${path}`);
   };
+
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    queryClient.invalidateQueries(["discussions", { page: page }]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page]);
 
   return (
     <>
@@ -71,7 +86,7 @@ const Discussions = () => {
                   >
                     <span>{post.subject}</span>
                     <span>{post.description}</span>
-                    <span>3</span>
+                    <span>{post.num_comments ? post.num_comments : "0"}</span>
                     <span>{post.username}</span>
                     <span>{date}</span>
                   </li>
@@ -85,6 +100,31 @@ const Discussions = () => {
               </div>
             ))}
         </ul>
+        <div className={styles.pagination}>
+          {data?.data.prev && (
+            <Button
+              outline
+              action={() => {
+                router.push(`/community/discussions?page=${page - 1}`);
+                setPage((prev) => prev - 1);
+              }}
+            >
+              <Icon icon="arrow" />
+            </Button>
+          )}
+          <span>{page}</span>
+          {data?.data.next && (
+            <Button
+              outline
+              action={() => {
+                router.push(`/community/discussions?page=${page + 1}`);
+                setPage((prev) => prev + 1);
+              }}
+            >
+              <Icon icon="arrow" />
+            </Button>
+          )}
+        </div>
         <PinnedButton action={showModal}>
           <Icon icon="pencilOutline" />
         </PinnedButton>

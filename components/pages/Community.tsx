@@ -28,11 +28,11 @@ const Community = () => {
               Members
             </SquareButton>
           </Link>
-          <Link href="/community/votes">
+          {/* <Link href="/community/votes">
             <SquareButton icon={<Icon icon="voteOutline" />}>
               Weekly votes
             </SquareButton>
-          </Link>
+          </Link> */}
         </div>
       </div>
     </section>
