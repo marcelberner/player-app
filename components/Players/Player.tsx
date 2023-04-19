@@ -1,159 +1,67 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
-
-import styles from "./Player.module.scss";
-
-import Icon from "../UI/Icon";
+import React, { useEffect } from "react";
+import Plyr from "plyr";
 
 interface playerProps {
-  video: string;
+  youtubeID?: string;
+  src?: string;
 }
-
-const Player: React.FC<playerProps> = ({ video }) => {
-  const [playerState, setPlayerState] = useState<boolean>(false);
-  const [videoProgress, setVideoProgress] = useState<number>(0);
-  const [videoTime, setVideoTime] = useState<string>("00:00");
-  const [videoDuration, setVideoDuration] = useState<string>();
-
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const timelineRef = useRef<HTMLDivElement>(null);
-
-  const playPauseHandler = () => {
-    const videoElement = videoRef.current!;
-
-    if (videoElement.paused) videoElement!.play();
-    else videoElement!.pause();
-    setPlayerState((prev) => !prev);
+const VideoPlayer: React.FC<playerProps> = ({ src, youtubeID }) => {
+  const hideControlsHandler = () => {
+    (document.querySelector(".plyr__controls") as any)!.style.display = "none";
   };
-
-  const updateProgressHandler = () => {
-    const videoElement = videoRef.current!;
-
-    setVideoTime(convertTimeHandler(videoElement.currentTime));
-    setVideoProgress(
-      (videoElement!.currentTime / videoElement!.duration) * 100
-    );
-  };
-
-  const goFullscreenHandler = () => {
-    const videoElement = videoRef.current!;
-    videoElement.requestFullscreen();
-  };
-
-  const jumpTimelineHandler = (event: any) => {
-    const videoElement = videoRef.current!;
-    const timelineElement = timelineRef.current!;
-    const timelineWidth = timelineElement.clientWidth;
-
-    videoElement.currentTime =
-      ((event.nativeEvent.offsetX + 9) / timelineWidth) * videoElement.duration;
-  };
-
-  const drag = useCallback((event: any) => {
-    const videoElement = videoRef.current!;
-    const timelineElement = timelineRef.current!;
-    const timelineWidth = timelineElement.clientWidth;
-
-    videoElement.currentTime =
-      ((event.offsetX + 9) / timelineWidth) * videoElement.duration;
-  }, []);
-
-  const dragTimelineHandler = (event: any) => {
-    window.addEventListener("mousemove", drag);
-    window.addEventListener("mouseup", stopDagTimelineHandler, true);
-  };
-
-  const stopDagTimelineHandler = (event: any) => {
-    const videoElement = videoRef.current!;
-
-    window.removeEventListener("mousemove", drag, false);
-  };
-
-  const convertTimeHandler = (time: number) => {
-    const minutes = Math.floor(time / 60);
-    const seconds = Math.floor(time % 60);
-    const hours = Math.floor(minutes / 60);
-    const totalMinutes = minutes % 60;
-
-    const arr = [
-      hours,
-      totalMinutes < 10 ? `0${totalMinutes}` : totalMinutes,
-      seconds < 10 ? `0${seconds}` : seconds,
-    ];
-
-    if (!hours) arr.splice(0, 1);
-
-    return arr.join(":");
+  const shoWControlsHandler = () => {
+    (document.querySelector(".plyr__controls") as any)!.style.display = "flex";
   };
 
   useEffect(() => {
-    const videoElement = videoRef.current!;
+    const player = new Plyr("#my-video", {
+      controls: [
+        "play-large",
+        "play",
+        "progress",
+        "current-time",
+        "mute",
+        "volume",
+        "fullscreen",
+      ],
+      volume: 0.5,
+      ratio: "16:9",
+    });
 
-    const time = convertTimeHandler(videoElement.duration);
-    setVideoDuration(time);
-  }, [videoRef]);
+    player.once("play", shoWControlsHandler);
+    player.on("ready", hideControlsHandler);
+    player.once("play", () => player.fullscreen.enter());
+
+    return () => {
+      if (player) {
+        player.destroy();
+      }
+    };
+  }, []);
 
   return (
-    <div className={styles.container}>
-      {videoRef && (
-        <>
-          <div
-            onClick={playPauseHandler}
-            className={`${styles.backdrop} ${playerState ? "" : styles.active}`}
-          ></div>
-          <video
-            onTimeUpdate={updateProgressHandler}
-            ref={videoRef}
-            className={styles.player}
-            src={video}
-          ></video>
-          <button
-            onClick={playPauseHandler}
-            className={`${styles.button_main} ${
-              playerState ? styles.paused : ""
-            }`}
-          >
-            {playerState ? (
-              <Icon icon="pauseCircle" />
-            ) : (
-              <Icon icon="playCircle" />
-            )}
-          </button>
-          <div className={styles.controls}>
-            <button onClick={playPauseHandler} className={styles.button}>
-              {playerState ? <Icon icon="pause" /> : <Icon icon="play" />}
-            </button>
-            <span className={styles.duration}>{videoTime}</span>
-            <div
-              ref={timelineRef}
-              onClick={jumpTimelineHandler}
-              onMouseDown={dragTimelineHandler}
-              // onMouseUp={stopDagTimelineHandler}
-              className={styles.progressbar}
-            >
-              <div
-                style={{ width: `${videoProgress}%` }}
-                className={styles.progress}
-              ></div>
-            </div>
-            <span className={styles.duration}>{videoDuration}</span>
-            <div className={styles.buttons}>
-              <div className={styles.volume}>
-                <button className={styles.button}>
-                  <Icon icon="volumeUp" />
-                </button>
-                <div className={styles.progressbar}>
-                  <div className={styles.progress}></div>
-                </div>
-              </div>
-              <button onClick={goFullscreenHandler} className={styles.button}>
-                <Icon icon="fullscreenIn" />
-              </button>
-            </div>
-          </div>
-        </>
+    <>
+      {youtubeID ? (
+        <div
+          className="plyr__video-embed"
+          id="my-video"
+          style={{ padding: "0" }}
+        >
+          <iframe
+            src={`https://www.youtube.com/embed/${youtubeID}?&modestbranding=1&playsinline=1&showsearch=0&rel=0&iv_load_policy=3&showinfo=0&rel=0&enablejsapi=1&autoplay=0`}
+            allowFullScreen
+            // allowTransparency
+          />
+        </div>
+      ) : (
+        <div className="plyr__video-embed" style={{ padding: "0" }}>
+          <video id="my-video" controls>
+            <source src={src} type="video/mp4" />
+          </video>
+        </div>
       )}
-    </div>
+    </>
   );
 };
 
-export default Player;
+export default VideoPlayer;

@@ -19,7 +19,6 @@
   --bg-clr-600-glass: rgb(10, 10, 10, 0.8);
   --bg-clr-400-glass: rgb(15, 15, 15, 0.8);
   --bg-clr-200-glass: rgb(34, 34, 34, 0.8);
-  
 
   --succes-clr: rgb(9, 219, 119);
 
@@ -34,9 +33,12 @@
 
   --icon-size: 2rem;
 
-  --transition-hover: transform .35s cubic-bezier(.25,.46,.45,.94);
+  --transition-hover: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
   --sidebar-show: 25rem;
   --sidebar-hide: 7rem;
   --sidebar-current: 25rem;
+
+  // PLAYER STYLES
+  --plyr-color-main: var(--primary-clr-400);
 }

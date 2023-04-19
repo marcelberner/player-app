@@ -79,9 +79,7 @@ const Search = () => {
                   language={movie.language}
                   runtime={movie.runtime}
                   imdbID={movie.id}
-                  video={
-                    "https://www.youtube.com/d3a8eb5d-d645-49f5-986d-07b180fe533e"
-                  }
+                  video={movie.video}
                 />
               ) : (
                 <MovieCardWide
@@ -94,9 +92,7 @@ const Search = () => {
                   language={movie.language}
                   runtime={movie.runtime}
                   imdbID={movie.id}
-                  video={
-                    "https://www.youtube.com/d3a8eb5d-d645-49f5-986d-07b180fe533e"
-                  }
+                  video={movie.video}
                 />
               )
             )}

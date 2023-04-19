@@ -12,7 +12,6 @@
   background-color: var(--bg-clr-400);
   top: 50%;
   left: 50%;
-  overflow: hidden;
   overflow-y: scroll;
   @include appear-animation(translate(-50%, -50%));
 
@@ -20,11 +19,7 @@
     width: 0px;
   }
 
-  // &:hover::-webkit-scrollbar {
-  //   width: 10px;
-  // }
-
-  & > *:not(video) {
+  & > *:not(.player) {
     padding: 2rem;
     border-bottom: 1px solid var(--bg-clr-200);
   }
@@ -37,7 +32,7 @@
 .closebar {
   display: flex;
   justify-content: flex-end;
-  padding: .5rem 1rem !important;
+  padding: 0.5rem 1rem !important;
   transition: 0.2s;
 
   & svg {
@@ -56,7 +51,7 @@
   gap: 1rem;
 
   & > a {
-    transition: .2s;
+    transition: 0.2s;
   }
 
   & > a:hover {

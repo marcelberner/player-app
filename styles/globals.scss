@@ -58,3 +58,7 @@ button {
   z-index: 110;
   border: 1px solid var(--bg-clr-200);
 }
+
+.plyr__poster {
+  background-size: cover !important;
+}

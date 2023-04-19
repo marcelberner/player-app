@@ -50,7 +50,9 @@ const MovieModal: React.FC<modalProps> = ({
           <Icon icon="closeOutline" />
         </div>
       </div>
-      <Player video={video} />
+      <div className={styles.player}>
+        <Player youtubeID={video} />
+      </div>
       <div className={styles.header}>
         <a
           href={`https://www.imdb.com/title/${imdbID}`}

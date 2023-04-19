@@ -10,7 +10,10 @@ const Cinema = () => {
   return (
     <section className={styles.cinema}>
       <Chat />
-      <Player video="https://vcze603.cda.pl/-2Rtu40F9gbNTvO1TydxoA/1677576715/lq62f5ca2539107881d6a752103098ccdd.mp4" />
+      <Player
+        youtubeID=""
+        src="https://vcze603.cda.pl/-2Rtu40F9gbNTvO1TydxoA/1677576715/lq62f5ca2539107881d6a752103098ccdd.mp4"
+      />
       <div className={styles.container}>
         <h1 className={styles.title}>
           The Lord of the Rings: The Fellowship of the Ring
