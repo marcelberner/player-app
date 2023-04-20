@@ -1,8 +1,16 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import styles from "./MovieModal.module.scss";
-import { useQuery } from "react-query";
+import {
+  useQuery,
+  useInfiniteQuery,
+  useMutation,
+  useQueryClient,
+} from "react-query";
 import axios from "axios";
 import Image from "next/dist/client/image";
+
+import useInfiniteScroll from "@/hooks/useInfiniteScroll.";
+import useValidate from "@/hooks/useValidate";
 
 import Player from "../Players/Player";
 import CategoryLabel from "../Labels/CategoryLabel";
@@ -37,11 +45,73 @@ const MovieModal: React.FC<modalProps> = ({
   imdbID,
   closeModal,
 }) => {
+  const [userRate, setUserRate] = useState(0);
+  const [focusUserRate, setfocusUserRate] = useState(0);
+
+  const opinionRef = useRef<HTMLTextAreaElement>(null);
+
+  const queryClient = useQueryClient();
+  const [isValid, validate] = useValidate({
+    inputRef: opinionRef,
+    isEmpty: true,
+  });
+
   const { data, isLoading } = useQuery({
-    queryKey: ["movie-details", { movieID: imdbID }],
+    queryKey: ["movie-genres", { movieID: imdbID }],
     queryFn: () => axios.get(`/api/movies/${imdbID}/genres`),
     refetchOnWindowFocus: false,
   });
+
+  const {
+    data: commentsData,
+    isFetchingNextPage,
+    hasNextPage,
+    fetchNextPage,
+  } = useInfiniteQuery({
+    queryKey: ["opinions", { movieID: imdbID }],
+    getNextPageParam: (prevData: any) => prevData.data.next,
+    queryFn: ({ pageParam = 1 }) =>
+      axios.get("api/opinions", {
+        params: {
+          page: pageParam,
+          movieId: imdbID,
+        },
+      }),
+    refetchOnWindowFocus: false,
+  });
+
+  const { observerRef } = useInfiniteScroll({
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
+  });
+
+  const sendOpinion = (data: any) =>
+    axios.post("/api/opinions/add", {
+      ...data,
+    });
+
+  const postOpinion = useMutation({
+    mutationFn: sendOpinion,
+    onSuccess: () => {
+      queryClient.invalidateQueries(["opinions", { movieID: imdbID }]);
+      opinionRef.current!.value = "";
+    },
+  });
+
+  const submitHandler = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    validate();
+
+    if (!isValid || userRate < 1 || userRate > 10) return;
+
+    postOpinion.mutate({
+      movieId: imdbID,
+      rating: userRate,
+      content: opinionRef.current!.value,
+    });
+  };
 
   return (
     <div ref={modalRef} className={`modal ${styles.movie_modal}`}>
@@ -51,7 +121,7 @@ const MovieModal: React.FC<modalProps> = ({
         </div>
       </div>
       <div className={styles.player}>
-        <Player youtubeID={video} />
+        <Player youtubeID={video} genres={data?.data.genres.rows} />
       </div>
       <div className={styles.header}>
         <a
@@ -101,11 +171,67 @@ const MovieModal: React.FC<modalProps> = ({
       </div>
       <div className={styles.opinions}>
         <CategoryLabel>Opinions</CategoryLabel>
-        <form className={styles.form}>
-          <Icon icon="userAvatar" />
-          <textarea placeholder="Share your opinion about movie..." />
+        <form className={styles.form} onSubmit={submitHandler}>
+          <div className={styles.user_bar}>
+            <Icon icon="userAvatar" />
+            {userRate > 0 && <span>{userRate} / 10</span>}
+          </div>
+          <div className={styles.user_rating}>
+            {Array(10)
+              .fill(0)
+              .map((_, index) => (
+                <span
+                  key={index}
+                  onMouseEnter={() => setfocusUserRate(index + 1)}
+                  onMouseLeave={() => setfocusUserRate(0)}
+                  onClick={() => setUserRate(index + 1)}
+                >
+                  <Icon
+                    icon={
+                      focusUserRate > 0
+                        ? focusUserRate < index + 1
+                          ? "starOutline"
+                          : "starFill"
+                        : userRate < index + 1
+                        ? "starOutline"
+                        : "starFill"
+                    }
+                  />
+                </span>
+              ))}
+          </div>
+          <textarea
+            ref={opinionRef}
+            placeholder="Share your opinion about movie..."
+          />
           <Button>Share</Button>
         </form>
+        <ul className={styles.opinions_list}>
+          {commentsData?.pages
+            .flatMap((data: any) => data.data.opinions)
+            .map((opinion: any) => (
+              <li key={opinion.movie_id}>
+                <span className={styles.opinion_date}>
+                  {opinion.create_date
+                    .split("T")[0]
+                    .split("-")
+                    .reverse()
+                    .join(".")}
+                </span>
+                <div>
+                  <span className={styles.opinion_creator}>
+                    {opinion.username}
+                  </span>
+                  <span className={styles.opinion_rating}>
+                    <Icon icon="starOutline" />
+                    <span>{opinion.rating}</span>
+                  </span>
+                </div>
+                <p className={styles.opinion_content}>{opinion.description}</p>
+              </li>
+            ))}
+          <li ref={observerRef}></li>
+        </ul>
       </div>
     </div>
   );

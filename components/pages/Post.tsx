@@ -2,18 +2,16 @@ import React, { useRef } from "react";
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { useAppSelector } from "@/hooks/redux";
 
 import Icon from "../UI/Icon";
 import Button from "../Buttons/Button";
 import NavLabel from "../Labels/NavLabel";
+import PageLoader from "../UI/PageLoader";
 
 import styles from "./Post.module.scss";
 
 const Post = () => {
   const router = useRouter();
-
-  const username = useAppSelector((state) => state.userData.username);
   const commentRef = useRef<HTMLInputElement>();
 
   const queryClient = useQueryClient();
@@ -47,13 +45,15 @@ const Post = () => {
     commentRef.current!.value = "";
   };
 
+  if (isLoading) return <PageLoader />;
+
   return (
     <section className={styles.post}>
       <NavLabel>
         <Icon icon="communityFill" />
       </NavLabel>
       <div className={styles.post_content}>
-        {!isLoading && data?.data.post.length > 0 && (
+        {data?.data.post.length > 0 && (
           <>
             <div className={styles.header}>
               <span className={styles.post_date}>

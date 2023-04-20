@@ -17,6 +17,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <link rel="stylesheet" href="https://cdn.plyr.io/3.6.8/plyr.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <StoreProvider store={store}>
         <SessionProvider session={pageProps.session}>

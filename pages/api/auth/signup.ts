@@ -66,7 +66,7 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
   } catch {
     res.status(500).json({ message: "Could not create user." });
   }
-  res.status(200).json({ message: "User created succesful." });
+  res.status(200).json({ message: "User created successful." });
 };
 
 export default Handler;

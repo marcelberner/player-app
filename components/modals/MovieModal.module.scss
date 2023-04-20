@@ -88,7 +88,7 @@
 
 .rating,
 .rating > svg {
-  color: var(--succes-clr) !important;
+  color: var(--success-clr) !important;
 }
 
 .description {
@@ -143,20 +143,51 @@
 .form {
   display: grid;
   grid-template-columns: auto 1fr;
-  grid-template-rows: 1fr auto;
+  grid-template-rows: auto 1fr auto;
   column-gap: 2rem;
   row-gap: 1rem;
 
-  & > svg {
+  & > .user_bar {
     grid-column: 1/2;
     grid-row: 1/-1;
-    font-size: 12rem;
-    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+
+    & > span {
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--secondary-clr-400);
+    }
+
+    & > svg {
+      font-size: 12rem;
+      margin-top: 2rem;
+    }
+  }
+
+  & > .user_rating {
+    grid-column: 2/-1;
+    grid-row: 1/2;
+    display: flex;
+
+    & > span {
+      flex-grow: 1;
+
+      & > svg {
+        // font-size: 3rem;
+        color: var(--success-clr);
+        width: 100%;
+        height: 100%;
+        aspect-ratio: 1/1;
+      }
+    }
   }
 
   & > textarea {
     grid-column: 2/-1;
-    grid-row: 1/2;
+    grid-row: 2/3;
     min-height: 17rem;
     background-color: var(--bg-clr-600);
     border-radius: 10px;
@@ -171,8 +202,55 @@
 
   & > button {
     grid-column: 2/-1;
-    grid-row: 2/-1;
+    grid-row: -1/-2;
     font-size: 1.6rem;
+  }
+}
+
+.opinions_list {
+  display: flex;
+  flex-direction: column;
+
+  & > li:not(:last-child) {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 0;
+    border-top: 1px solid var(--bg-clr-200);
+
+    & > div {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+
+    & .opinion_date {
+      font-size: 1.4rem;
+      color: var(--secondary-clr-800);
+    }
+
+    & .opinion_creator {
+      font-size: 1.8rem;
+      color: var(--secondary-clr-200);
+      font-weight: 600;
+    }
+
+    & .opinion_rating {
+      display: flex;
+      align-items: center;
+      color: var(--success-clr);
+
+      & > span {
+        font-size: 2rem;
+      }
+      & > svg {
+        font-size: 3rem;
+      }
+    }
+
+    & .opinion_content {
+      font-size: 1.6rem;
+      color: var(--secondary-clr-400);
+    }
   }
 }
 

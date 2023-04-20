@@ -8,6 +8,7 @@ import MovieCard from "../Cards/MovieCard";
 import MovieCardWide from "../Cards/MovieCardWide";
 import IconButton from "../Buttons/IconButton";
 import Icon from "../UI/Icon";
+import PageLoader from "../UI/PageLoader";
 
 import styles from "./Search.module.scss";
 
@@ -16,7 +17,7 @@ const Search = () => {
 
   const [display, setDisplay] = useState(false);
 
-  const { data, hasNextPage, isFetchingNextPage, fetchNextPage } =
+  const { data, hasNextPage, isLoading, isFetchingNextPage, fetchNextPage } =
     useInfiniteQuery({
       queryKey: ["search", { query: router.query.query }],
       getNextPageParam: (prevData: any) => prevData.data.next,
@@ -37,8 +38,8 @@ const Search = () => {
     <section className={styles.search_results}>
       <div className={styles.header}>
         <h1>
-          {data &&
-          data.pages.flatMap((data: any) => data.data.movies).length == 0
+          {!isLoading &&
+          data?.pages.flatMap((data: any) => data.data.movies).length == 0
             ? `No results for „${router.query.query}”`
             : `Search results for „${router.query.query}”`}
         </h1>
@@ -63,9 +64,11 @@ const Search = () => {
           </IconButton>
         </div>
       </div>
-      <ul className={display ? styles.grid : styles.row}>
-        {data &&
-          data.pages
+      {isLoading ? (
+        <PageLoader />
+      ) : (
+        <ul className={display ? styles.grid : styles.row}>
+          {data!.pages
             .flatMap((data: any) => data.data.movies)
             .map((movie, index: number) =>
               display ? (
@@ -96,7 +99,8 @@ const Search = () => {
                 />
               )
             )}
-      </ul>
+        </ul>
+      )}
       <div ref={observerRef}></div>
     </section>
   );

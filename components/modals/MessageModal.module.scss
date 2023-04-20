@@ -38,7 +38,7 @@
   &.online::after {
     content: "";
     @include notification-mark;
-    background-color: var(--succes-clr);
+    background-color: var(--success-clr);
   }
 }
 

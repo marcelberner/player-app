@@ -1,11 +1,10 @@
 import React from "react";
 import { FiUsers, FiSearch } from "react-icons/fi";
-import { BsPlay } from "react-icons/bs";
+import { BsPlay, BsFillPersonCheckFill } from "react-icons/bs";
 import { MdTableRows, MdOutlineHowToVote } from "react-icons/md";
 import {
   AiOutlineCompass,
   AiFillCompass,
-  AiOutlineStar,
   AiOutlineClose,
   AiOutlineCalendar,
   AiOutlineClockCircle,
@@ -19,6 +18,7 @@ import {
   BiGroup,
   BiMessageAltDetail,
   BiPencil,
+  BiMailSend,
 } from "react-icons/bi";
 import {
   FaUserCircle,
@@ -44,12 +44,14 @@ import {
 } from "react-icons/ri";
 import { TbMessageCircle2, TbGift } from "react-icons/tb";
 import { IoPlay, IoPause } from "react-icons/io5";
+import { IoMdStarOutline, IoMdStar } from "react-icons/io";
 
 interface iconProps {
   icon:
     | "usersLive"
     | "playOutline"
     | "starOutline"
+    | "starFill"
     | "paperPlane"
     | "hideArrow"
     | "arrow"
@@ -85,13 +87,16 @@ interface iconProps {
     | "pencilOutline"
     | "picturePlaceholder"
     | "friendAdd"
+    | "friendChecked"
+    | "sendStatus"
     | "voteOutline";
 }
 
 const ICONS = {
   usersLive: <FiUsers />,
   playOutline: <BsPlay />,
-  starOutline: <AiOutlineStar />,
+  starOutline: <IoMdStarOutline />,
+  starFill: <IoMdStar />,
   paperPlane: <RxPaperPlane />,
   hideArrow: <BiArrowFromLeft />,
   searchLoupe: <FiSearch />,
@@ -128,6 +133,8 @@ const ICONS = {
   pencilOutline: <BiPencil />,
   picturePlaceholder: <AiFillPicture />,
   friendAdd: <FaUserPlus />,
+  friendChecked: <BsFillPersonCheckFill />,
+  sendStatus: <BiMailSend />,
 };
 
 const Icon: React.FC<iconProps> = ({ icon }) => {

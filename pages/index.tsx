@@ -12,13 +12,11 @@ function Home() {
   return (
     <>
       <Head>
-        <title>Home | PalyerApp</title>
+        <title>Home - PalyerApp</title>
         <meta
           name="description"
-          content="Oglądaj swoje ulubione filmy i seriale na PlayerApp gdzie tylko chcesz. Pobieraj odkrywaj i dołącz do naszej społeczności. Codziennie nocne wspólne seanse."
+          content="Watch your favorite movies and series on PlayerApp wherever you want. Download, discover and join our community."
         />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        {/* <link rel="icon" href="favicon.ico" /> */}
       </Head>
       <Layout>
         <FrontCard />

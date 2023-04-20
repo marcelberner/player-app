@@ -6,6 +6,7 @@ import qs from "qs";
 
 import MovieCard from "../Cards/MovieCard";
 import CategoryLabel from "../Labels/CategoryLabel";
+import PageLoader from "../UI/PageLoader";
 
 import styles from "./Discovery.module.scss";
 
@@ -17,7 +18,7 @@ const Discovery = () => {
 
   const queryClient = useQueryClient();
 
-  const { data } = useQuery({
+  const { data, isLoading: isLoadingGenres } = useQuery({
     queryKey: "genres",
     queryFn: () => axios.get("/api/genres"),
     refetchOnWindowFocus: false,
@@ -38,6 +39,7 @@ const Discovery = () => {
   const {
     data: movieData,
     hasNextPage,
+    isLoading,
     isFetchingNextPage,
     fetchNextPage,
   } = useInfiniteQuery({
@@ -73,6 +75,8 @@ const Discovery = () => {
     fetchNextPage,
   });
 
+  if (isLoadingGenres) return <PageLoader />;
+
   return (
     <section className={styles.discovery}>
       <div className={styles.filters}>
@@ -85,7 +89,7 @@ const Discovery = () => {
           />
           <CategoryLabel>Genres</CategoryLabel>
           <div className={styles.options}>
-            {data?.data.genres.map((genre: any) => (
+            {data!.data.genres.map((genre: any) => (
               <div key={genre.id}>
                 <input
                   type="checkbox"
@@ -115,9 +119,14 @@ const Discovery = () => {
           </div>
         </form>
       </div>
-      <ul ref={listRef} className={styles.list}>
-        {movieData &&
-          movieData.pages
+      <ul
+        ref={listRef}
+        className={`${styles.list} ${isLoading ? styles.loading : ""}`}
+      >
+        {isLoading ? (
+          <PageLoader />
+        ) : (
+          movieData!.pages
             .flatMap((data: any) => data.data.movies)
             .map((movie: any) => (
               <li key={movie.movie_id}>
@@ -133,7 +142,8 @@ const Discovery = () => {
                   video={movie.video}
                 />
               </li>
-            ))}
+            ))
+        )}
         <li ref={observerRef}></li>
       </ul>
     </section>

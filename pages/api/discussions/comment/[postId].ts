@@ -34,7 +34,7 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(500).json({ message: "Could not create comment." });
     return;
   }
-  res.status(200).json({ message: "Comment create succesful." });
+  res.status(200).json({ message: "Comment create successful." });
 };
 
 export default Handler;

@@ -6,6 +6,7 @@ import NavLabel from "../Labels/NavLabel";
 import Icon from "../UI/Icon";
 import PinnedButton from "../Buttons/PinnedButton";
 import Button from "../Buttons/Button";
+import PageLoader from "../UI/PageLoader";
 
 import styles from "./Members.module.scss";
 
@@ -21,7 +22,7 @@ const Members = () => {
     queryClient.invalidateQueries(["members"]);
   };
 
-  const { data, hasNextPage, fetchNextPage } = useInfiniteQuery({
+  const { data, hasNextPage, isLoading, fetchNextPage } = useInfiniteQuery({
     queryKey: "members",
     getNextPageParam: (prevData: any) => prevData.data.next,
     queryFn: ({ pageParam = 1 }) => {
@@ -47,29 +48,37 @@ const Members = () => {
           placeholder="Search user..."
         />
       </div>
-      {data?.pages ? (
-        data?.pages.flatMap((data: any) => data.data.users).length > 0 ? (
-          <ul className={styles.users_list}>
-            {data?.pages
-              .flatMap((data: any) => data.data.users)
-              .map((user, index) => (
-                <li key={index} className={styles.user_item}>
-                  <Icon icon="userAvatar" />
-                  <span className={styles.username}>{user.username}</span>
-                  <span className={styles.email}>{user.email}</span>
-                  {!user.is_requested && (
+      {isLoading ? (
+        <PageLoader />
+      ) : data!.pages.flatMap((data: any) => data.data.users).length > 0 ? (
+        <ul className={styles.users_list}>
+          {data?.pages
+            .flatMap((data: any) => data.data.users)
+            .map((user, index) => (
+              <li key={index} className={styles.user_item}>
+                <Icon icon="userAvatar" />
+                <span className={styles.username}>{user.username}</span>
+                <span className={styles.email}>{user.email}</span>
+                <div
+                  className={`${styles.status_box} ${
+                    user.is_requested == "accepted" ? styles.accepted : ""
+                  }`}
+                >
+                  {!user.is_requested ? (
                     <PinnedButton action={() => addFriendHandler(user.email)}>
                       <Icon icon="friendAdd" />
                     </PinnedButton>
+                  ) : user.is_requested == "pending" ? (
+                    <Icon icon="sendStatus" />
+                  ) : (
+                    <Icon icon="friendChecked" />
                   )}
-                </li>
-              ))}
-          </ul>
-        ) : (
-          <h2>No users found</h2>
-        )
+                </div>
+              </li>
+            ))}
+        </ul>
       ) : (
-        <h2>Search users</h2>
+        <h2>No users found</h2>
       )}
       {hasNextPage && <Button action={() => fetchNextPage()}>Show more</Button>}
     </section>

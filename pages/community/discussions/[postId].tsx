@@ -4,12 +4,22 @@ import { getSession } from "next-auth/react";
 
 import PostComponent from "@/components/pages/Post";
 import Layout from "@/components/Layout/Layout";
+import Head from "next/head";
 
 const Post = () => {
   return (
-    <Layout>
-      <PostComponent />
-    </Layout>
+    <>
+      <Head>
+        <title>Posts - PalyerApp</title>
+        <meta
+          name="description"
+          content="Watch your favorite movies and series on PlayerApp wherever you want. Download, discover and join our community."
+        />
+      </Head>
+      <Layout>
+        <PostComponent />
+      </Layout>
+    </>
   );
 };
 

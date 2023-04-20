@@ -4,12 +4,22 @@ import { getSession } from "next-auth/react";
 
 import Layout from "@/components/Layout/Layout";
 import CommunityComponent from "@/components/pages/Community";
+import Head from "next/head";
 
 const Community = () => {
   return (
-    <Layout>
-      <CommunityComponent />
-    </Layout>
+    <>
+      <Head>
+        <title>Community - PalyerApp</title>
+        <meta
+          name="description"
+          content="Watch your favorite movies and series on PlayerApp wherever you want. Download, discover and join our community."
+        />
+      </Head>
+      <Layout>
+        <CommunityComponent />
+      </Layout>
+    </>
   );
 };
 

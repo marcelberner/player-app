@@ -91,6 +91,7 @@ $sidebar-width: 25rem;
 }
 
 .main {
+  position: relative;
   grid-column: 2/-2;
   grid-row: 2/-1;
   overflow-x: hidden;

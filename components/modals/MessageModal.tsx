@@ -8,8 +8,6 @@ import styles from "./MessageModal.module.scss";
 
 import Icon from "../UI/Icon";
 
-const MESSAGES = [{}];
-
 const MessageModal = () => {
   const user = useAppSelector((state) => state.messageData.toUser);
   const isMessageVisible = useAppSelector((state) => state.messageData.toUser);

@@ -12,6 +12,7 @@ import DiscussionsModal from "../modals/DiscussionsModal";
 import Icon from "../UI/Icon";
 import Button from "../Buttons/Button";
 import NavLabel from "../Labels/NavLabel";
+import PageLoader from "../UI/PageLoader";
 
 import styles from "./Discuss.module.scss";
 
@@ -54,6 +55,8 @@ const Discussions = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
+  if (isLoading) return <PageLoader />;
+
   return (
     <>
       <section className={styles.discussions}>
@@ -68,37 +71,36 @@ const Discussions = () => {
           <span>Date</span>
         </div>
         <ul className={styles.discussions_content}>
-          {!isLoading &&
-            (data?.data.discussions.length > 0 ? (
-              data?.data.discussions.map((post: postProps) => {
-                const date = new Date(post.create_date)
-                  .toISOString()
-                  .split("T")[0]
-                  .split("-")
-                  .reverse()
-                  .join(".");
+          {data?.data.discussions.length > 0 ? (
+            data?.data.discussions.map((post: postProps) => {
+              const date = new Date(post.create_date)
+                .toISOString()
+                .split("T")[0]
+                .split("-")
+                .reverse()
+                .join(".");
 
-                return (
-                  <li
-                    key={post.id}
-                    className={styles.post_item}
-                    onClick={() => navigateHandler(post.id)}
-                  >
-                    <span>{post.subject}</span>
-                    <span>{post.description}</span>
-                    <span>{post.num_comments ? post.num_comments : "0"}</span>
-                    <span>{post.username}</span>
-                    <span>{date}</span>
-                  </li>
-                );
-              })
-            ) : (
-              <div className={styles.no_content}>
-                <h3>Nothing to discuss?</h3>
-                <h4>Make your first discussion.</h4>
-                <Button action={showModal}>Create discussion</Button>
-              </div>
-            ))}
+              return (
+                <li
+                  key={post.id}
+                  className={styles.post_item}
+                  onClick={() => navigateHandler(post.id)}
+                >
+                  <span>{post.subject}</span>
+                  <span>{post.description}</span>
+                  <span>{post.num_comments ? post.num_comments : "0"}</span>
+                  <span>{post.username}</span>
+                  <span>{date}</span>
+                </li>
+              );
+            })
+          ) : (
+            <div className={styles.no_content}>
+              <h3>Nothing to discuss?</h3>
+              <h4>Make your first discussion.</h4>
+              <Button action={showModal}>Create discussion</Button>
+            </div>
+          )}
         </ul>
         <div className={styles.pagination}>
           {data?.data.prev && (

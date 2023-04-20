@@ -32,7 +32,7 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(500).json({ message: "Could not create discussion." });
     return;
   }
-  res.status(200).json({ message: "Discussion create succesful." });
+  res.status(200).json({ message: "Discussion create successful." });
 };
 
 export default Handler;

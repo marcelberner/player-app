@@ -17,7 +17,7 @@ const SLIDES = [
     img: "/mortal-front.webp",
     title: "Mortal Kombat",
     year: 2021,
-    rating: 6.0,
+    rating: 60,
     language: "en",
     runtime: 110,
     poster:
@@ -26,14 +26,14 @@ const SLIDES = [
       "MMA fighter Cole Young seeks out Earth's greatest champions in order to stand against the enemies of Outworld in a high stakes battle for the universe.",
     description:
       "Washed-up MMA fighter Cole Young, unaware of his heritage, and hunted by Emperor Shang Tsung's best warrior, Sub-Zero, seeks out and trains with Earth's greatest champions as he prepares to stand against the enemies of Outworld in a high stakes battle for the universe.",
-    video: "",
+    video: "-BQPKD7eozY",
   },
   {
     id: "tt1477834",
     img: "/aquaman-front.webp",
     title: "Aquaman",
     year: 2018,
-    rating: 6.8,
+    rating: 68,
     language: "en",
     runtime: 143,
     poster:
@@ -42,14 +42,14 @@ const SLIDES = [
       "Arthur Curry, the human-born heir to the underwater kingdom of Atlantis, goes on a quest to prevent a war between the worlds of ocean and land.",
     description:
       "Once home to the most advanced civilization on Earth, Atlantis is now an underwater kingdom ruled by the power-hungry King Orm. With a vast army at his disposal, Orm plans to conquer the remaining oceanic people and then the surface world. Standing in his way is Arthur Curry, Orm's half-human, half-Atlantean brother and true heir to the throne.",
-    video: "",
+    video: "WDkg3h8PCVU",
   },
   {
     id: "tt1877830",
     img: "/batman-front.webp",
     title: "The Batman",
     year: 2022,
-    rating: 7.8,
+    rating: 78,
     language: "en",
     runtime: 177,
     poster:
@@ -58,7 +58,7 @@ const SLIDES = [
       "When a sadistic serial killer begins murdering key political figures in Gotham, Batman is forced to investigate the city's hidden corruption and question his family's involvement.",
     description:
       "In his second year of fighting crime, Batman uncovers corruption in Gotham City that connects to his own family while facing a serial killer known as the Riddler.",
-    video: "",
+    video: "mqqft2x_Aa4",
   },
 ];
 
@@ -114,9 +114,12 @@ const FrontCard = () => {
             <h1 className={styles.title}>{SLIDES[currentSlide].title}</h1>
             <div className={styles.meta}>
               <span className={styles.year}>{SLIDES[currentSlide].year}</span> |
-              <span
-                className={styles.rate}
-              >{`Rating: ${SLIDES[currentSlide].rating}`}</span>
+              <span className={styles.rate}>{`Rating: ${(
+                SLIDES[currentSlide].rating / 10
+              )
+                .toFixed(1)
+                .toString()
+                .replace(".", ",")}`}</span>
             </div>
             <div className={styles.about}>{SLIDES[currentSlide].ovreview}</div>
           </div>

@@ -4,12 +4,22 @@ import { getSession } from "next-auth/react";
 import Layout from "@/components/Layout/Layout";
 
 import DiscussionsComponent from "@/components/pages/Discussions";
+import Head from "next/head";
 
 const Discuss = () => {
   return (
-    <Layout>
-      <DiscussionsComponent />
-    </Layout>
+    <>
+      <Head>
+        <title>Discussions - PalyerApp</title>
+        <meta
+          name="description"
+          content="Watch your favorite movies and series on PlayerApp wherever you want. Download, discover and join our community."
+        />
+      </Head>
+      <Layout>
+        <DiscussionsComponent />
+      </Layout>
+    </>
   );
 };
 
