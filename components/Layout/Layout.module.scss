@@ -17,11 +17,19 @@ $sidebar-width: 25rem;
   &.static {
     max-height: 100vh;
   }
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 7rem 1fr;
+  }
 }
 
 .logo {
   min-width: 20rem;
   min-height: 4rem;
+
+  @media (max-width: 640px) {
+    display: none;
+  }
 }
 
 .header {

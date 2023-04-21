@@ -38,6 +38,7 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
       (
     SELECT users.username, discussion, description, create_date FROM discussions_comments
     JOIN users ON discussions_comments.creator = users.email
+    ORDER BY create_date DESC
     ) 
     AS comments
     ON comments.discussion = post.id

@@ -26,6 +26,7 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     WHERE movie_id = '${movieId}'
 
+    ORDER BY create_date DESC
     LIMIT ${LIMIT + 1}
     OFFSET ${(page - 1) * LIMIT}
     `);

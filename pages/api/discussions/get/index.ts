@@ -37,6 +37,7 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
     ) as comment_counts ON discussions.id = comment_counts.discussion
 
     JOIN users ON users.email = discussions.creator
+    ORDER BY discussions.create_date DESC
     LIMIT ${LIMIT + 1}
     OFFSET ${(page - 1) * LIMIT}
     `);

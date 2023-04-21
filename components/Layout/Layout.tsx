@@ -68,12 +68,15 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   useEffect(() => {
     const state = localStorage.getItem("sidebar-state") === "true";
-    dispatch(setSidebarState(state));
-    if (!state)
+
+    if (!state || window.innerWidth <= 1024) {
       document.documentElement.style.setProperty(
         "--sidebar-current",
         "var(--sidebar-hide)"
       );
+      dispatch(setSidebarState(false));
+    } 
+    else dispatch(setSidebarState(true));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

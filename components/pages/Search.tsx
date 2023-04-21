@@ -72,31 +72,33 @@ const Search = () => {
             .flatMap((data: any) => data.data.movies)
             .map((movie, index: number) =>
               display ? (
-                <MovieCard
-                  key={index}
-                  title={movie.title}
-                  year={movie.year}
-                  rating={movie.rating}
-                  poster={movie.poster}
-                  description={movie.description}
-                  language={movie.language}
-                  runtime={movie.runtime}
-                  imdbID={movie.id}
-                  video={movie.video}
-                />
+                <li key={index}>
+                  <MovieCard
+                    title={movie.title}
+                    year={movie.year}
+                    rating={movie.rating}
+                    poster={movie.poster}
+                    description={movie.description}
+                    language={movie.language}
+                    runtime={movie.runtime}
+                    imdbID={movie.id}
+                    video={movie.video}
+                  />
+                </li>
               ) : (
-                <MovieCardWide
-                  key={index}
-                  title={movie.title}
-                  year={movie.year}
-                  rating={movie.rating}
-                  poster={movie.poster}
-                  description={movie.description}
-                  language={movie.language}
-                  runtime={movie.runtime}
-                  imdbID={movie.id}
-                  video={movie.video}
-                />
+                <li key={index}>
+                  <MovieCardWide
+                    title={movie.title}
+                    year={movie.year}
+                    rating={movie.rating}
+                    poster={movie.poster}
+                    description={movie.description}
+                    language={movie.language}
+                    runtime={movie.runtime}
+                    imdbID={movie.id}
+                    video={movie.video}
+                  />
+                </li>
               )
             )}
         </ul>

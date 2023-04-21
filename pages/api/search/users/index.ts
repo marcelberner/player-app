@@ -35,6 +35,7 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     WHERE ((users.email != '${email}') 
     AND (${!!username ? `LOWER(username) LIKE LOWER('%${username}%')` : "1=1"}))
+    ORDER BY is_requested.status = 'pending' DESC
     LIMIT ${LIMIT + 1}
     OFFSET ${(page - 1) * LIMIT}
     `);
