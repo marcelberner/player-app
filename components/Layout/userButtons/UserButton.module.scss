@@ -3,6 +3,10 @@
 .container {
   position: relative;
 
+  @media (max-width: 800px) {
+    position: unset;
+  }
+
   &.marked > button::after {
     content: "";
     position: absolute;

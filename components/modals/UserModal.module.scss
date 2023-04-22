@@ -11,6 +11,8 @@
   box-shadow: var(--shadow-6);
   @include appear-animation;
   overflow: hidden;
+
+  @include max-width-modal();
 }
 
 .header {

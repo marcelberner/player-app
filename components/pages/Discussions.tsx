@@ -14,7 +14,7 @@ import Button from "../Buttons/Button";
 import NavLabel from "../Labels/NavLabel";
 import PageLoader from "../UI/PageLoader";
 
-import styles from "./Discuss.module.scss";
+import styles from "./Discussions.module.scss";
 
 interface postProps {
   id: string;
@@ -63,13 +63,6 @@ const Discussions = () => {
         <NavLabel>
           <Icon icon="communityFill" />
         </NavLabel>
-        <div className={styles.template}>
-          <span>Subject</span>
-          <span>Overviev</span>
-          <span>Comments</span>
-          <span>Author</span>
-          <span>Date</span>
-        </div>
         <ul className={styles.discussions_content}>
           {data?.data.discussions.length > 0 ? (
             data?.data.discussions.map((post: postProps) => {
@@ -86,11 +79,16 @@ const Discussions = () => {
                   className={styles.post_item}
                   onClick={() => navigateHandler(post.id)}
                 >
-                  <span>{post.subject}</span>
-                  <span>{post.description}</span>
-                  <span>{post.num_comments ? post.num_comments : "0"}</span>
-                  <span>{post.username}</span>
-                  <span>{date}</span>
+                  <span className={styles.subject}>
+                    {post.subject}
+                    <span className={styles.author}> {post.username}</span>
+                  </span>
+                  <span className={styles.description}>{post.description}</span>
+                  <span className={styles.comments}>
+                    <Icon icon="messageOutline" />
+                    {post.num_comments ? post.num_comments : "0"}
+                  </span>
+                  <span className={styles.date}>{date}</span>
                 </li>
               );
             })

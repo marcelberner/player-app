@@ -4,8 +4,17 @@ import { useRouter } from "next/dist/client/router";
 import axios from "axios";
 
 import Icon from "../UI/Icon";
+import IconButton from "@/components/Buttons/IconButton";
 
-const Searchbar = () => {
+interface searchbarProps {
+  searchbarState: boolean;
+  toggleSearchbar: () => void;
+}
+
+const Searchbar: React.FC<searchbarProps> = ({
+  searchbarState,
+  toggleSearchbar,
+}) => {
   const [title, setTitle] = useState<string>("");
   const [results, setResults] = useState<{ title: string }[] | null>(null);
   const router = useRouter();
@@ -34,6 +43,21 @@ const Searchbar = () => {
     }
   };
 
+  const disappearHandler = (e: React.MouseEvent) => {
+    if (!formRef.current!.contains(e.target as any)) {
+      toggleSearchbar();
+      removeEventListener("click", disappearHandler as any);
+    }
+  };
+
+  useEffect(() => {
+    if (!searchbarState) return;
+    addEventListener("click", disappearHandler as any);
+
+    return () => removeEventListener("click", disappearHandler as any);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchbarState]);
+
   useEffect(() => {
     if (title.length == 0) {
       setResults(null);
@@ -54,7 +78,9 @@ const Searchbar = () => {
     <form
       ref={formRef}
       onSubmit={searchTitleHandler}
-      className={styles.search_form}
+      className={`${styles.search_form} ${
+        searchbarState ? styles.visible : ""
+      }`}
     >
       <input
         type={"search"}
@@ -78,6 +104,9 @@ const Searchbar = () => {
           ))}
         </ul>
       )}
+      <IconButton action={toggleSearchbar}>
+        <Icon icon="searchLoupe" />
+      </IconButton>
     </form>
   );
 };

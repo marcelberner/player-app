@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Layout.module.scss";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -23,9 +23,11 @@ interface LayoutProps {
   children: JSX.Element | JSX.Element[];
 }
 
-const STATIC_PAGES = ["/discovery"];
+const STATIC_PAGES = ["/discovery", "/cinema"];
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
+  const [searchbarState, setSearchbarState] = useState<boolean>(false);
+
   const router = useRouter();
   const currentRoute = router.pathname;
 
@@ -75,17 +77,16 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         "var(--sidebar-hide)"
       );
       dispatch(setSidebarState(false));
-    } 
-    else dispatch(setSidebarState(true));
+    } else dispatch(setSidebarState(true));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div
       id="layout"
-      className={`${styles.page_layout} ${
-        currentRoute === "/cinema" ? styles.active : ""
-      } ${STATIC_PAGES.includes(currentRoute) ? styles.static : ""}`}
+      className={`${styles.page_layout}  ${
+        STATIC_PAGES.includes(currentRoute) ? styles.static : ""
+      }`}
     >
       <header className={styles.header}>
         <Link href={"/"}>
@@ -97,10 +98,21 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             width={200}
             alt="PlayerApp logo"
           />
+          <Image
+            priority
+            src="/logo-compact.svg"
+            className={`${styles.logo} ${styles.mobile}`}
+            height={40}
+            width={52}
+            alt="PlayerApp logo"
+          />
         </Link>
         <nav className={styles.header__nav}>
-          <Searchbar />
-          <UserButtons />
+          <Searchbar
+            searchbarState={searchbarState}
+            toggleSearchbar={() => setSearchbarState((prev) => !prev)}
+          />
+          <UserButtons searchbarState={searchbarState} />
         </nav>
       </header>
       {mounted && (

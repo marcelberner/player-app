@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import axios from "axios";
 import { useQuery, useInfiniteQuery, useQueryClient } from "react-query";
 import useInfiniteScroll from "@/hooks/useInfiniteScroll.";
@@ -7,6 +7,8 @@ import qs from "qs";
 import MovieCard from "../Cards/MovieCard";
 import CategoryLabel from "../Labels/CategoryLabel";
 import PageLoader from "../UI/PageLoader";
+import IconButton from "../Buttons/IconButton";
+import Icon from "../UI/Icon";
 
 import styles from "./Discovery.module.scss";
 
@@ -15,6 +17,8 @@ const Discovery = () => {
   const yearStartRef = useRef<HTMLInputElement>(null);
   const yearEndRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
+
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
   const queryClient = useQueryClient();
 
@@ -75,18 +79,32 @@ const Discovery = () => {
     fetchNextPage,
   });
 
+  const filterExpandHandler = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsExpanded((prev) => !prev);
+  };
+
   if (isLoadingGenres) return <PageLoader />;
 
   return (
     <section className={styles.discovery}>
-      <div className={styles.filters}>
+      <div className={`${styles.filters} ${isExpanded ? styles.expand : ""}`}>
         <form onChange={() => queryClient.invalidateQueries("discovery")}>
-          <input
-            ref={inputRef}
-            type="text"
-            className={styles.input}
-            placeholder="Keyword..."
-          />
+          <div
+            className={`${styles.control_wrapper} ${
+              isExpanded ? styles.expand : ""
+            }`}
+          >
+            <input
+              ref={inputRef}
+              type="text"
+              className={styles.input}
+              placeholder="Keyword..."
+            />
+            <IconButton action={filterExpandHandler}>
+              <Icon icon={isExpanded ? "closeOutline" : "filterOutline"} />
+            </IconButton>
+          </div>
           <CategoryLabel>Genres</CategoryLabel>
           <div className={styles.options}>
             {data!.data.genres.map((genre: any) => (

@@ -7,14 +7,18 @@ import styles from "./UserButtons.module.scss";
 import UserButton from "./UserButton";
 import Icon from "@/components/UI/Icon";
 
-const UserButtons = () => {
+interface buttonsProps {
+  searchbarState: boolean;
+}
+
+const UserButtons: React.FC<buttonsProps> = ({ searchbarState }) => {
   const { data, isLoading } = useQuery({
     queryKey: "friend-requests",
     queryFn: () => axios.get("/api/friends/receive"),
     refetchOnWindowFocus: false,
   });
 
-  return (
+  return !searchbarState ? (
     <div className={styles.buttons}>
       <UserButton
         id="gifts-btn"
@@ -42,7 +46,7 @@ const UserButtons = () => {
         <Icon icon="userAvatar" />
       </UserButton>
     </div>
-  );
+  ) : null;
 };
 
 export default UserButtons;

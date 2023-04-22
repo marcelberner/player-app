@@ -4,7 +4,7 @@ import Plyr from "plyr";
 interface playerProps {
   youtubeID?: string;
   src?: string;
-  genres: string[];
+  // genres: string[];
 }
 
 // const INTRO_LIST = {
@@ -18,7 +18,7 @@ interface playerProps {
 //   ],
 // };
 
-const VideoPlayer: React.FC<playerProps> = ({ src, youtubeID, genres }) => {
+const VideoPlayer: React.FC<playerProps> = ({ src, youtubeID }) => {
   const shoWControlsHandler = () => {
     (document.querySelector(".plyr__controls") as any)!.style.visibility =
       "visible";

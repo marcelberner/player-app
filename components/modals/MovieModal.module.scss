@@ -27,6 +27,10 @@
   & h2 {
     font-size: 1.8rem;
   }
+
+  @media (max-width: 640px) {
+    max-height: 100vh;
+  }
 }
 
 .closebar {
@@ -165,10 +169,18 @@
       font-size: 12rem;
       margin-top: 2rem;
     }
+
+    @media (max-width: 640px) {
+      display: none;
+    }
+  }
+  
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
   }
 
   & > .user_rating {
-    grid-column: 2/-1;
+    grid-column: -2/-1;
     grid-row: 1/2;
     display: flex;
 
@@ -186,7 +198,7 @@
   }
 
   & > textarea {
-    grid-column: 2/-1;
+    grid-column: -2/-1;
     grid-row: 2/3;
     min-height: 17rem;
     background-color: var(--bg-clr-600);
@@ -201,7 +213,7 @@
   }
 
   & > button {
-    grid-column: 2/-1;
+    grid-column: -2/-1;
     grid-row: -1/-2;
     font-size: 1.6rem;
   }
@@ -220,7 +232,7 @@
     & > div {
       display: flex;
       align-items: center;
-      gap: .5rem;
+      gap: 0.5rem;
     }
 
     & .opinion_date {

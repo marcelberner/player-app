@@ -4,7 +4,7 @@ import styles from "./IconButton.module.scss";
 
 interface buttonProps {
   children: JSX.Element;
-  action: () => void;
+  action: (params?: any) => void;
   id?: string;
 }
 

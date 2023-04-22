@@ -19,6 +19,12 @@
   & > * {
     padding: 1rem;
   }
+
+  @include max-width-modal();
+
+  @media (max-width: 800px) {
+    top: 100%;
+  }
 }
 
 .header {
@@ -68,7 +74,7 @@
   &:hover {
     background-color: var(--bg-clr-200-glass);
 
-    &>.buttons {
+    & > .buttons {
       opacity: 1;
       transform: translate(0);
     }
@@ -83,7 +89,7 @@
   gap: 1rem;
   opacity: 0;
   transform: translateX(10px);
-  transition: .2s;
+  transition: 0.2s;
 
   & > button {
     width: 3.5rem;

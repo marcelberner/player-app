@@ -45,6 +45,7 @@ import {
 import { TbMessageCircle2, TbGift } from "react-icons/tb";
 import { IoPlay, IoPause } from "react-icons/io5";
 import { IoMdStarOutline, IoMdStar } from "react-icons/io";
+import { GoSettings } from "react-icons/go";
 
 interface iconProps {
   icon:
@@ -89,6 +90,7 @@ interface iconProps {
     | "friendAdd"
     | "friendChecked"
     | "sendStatus"
+    | "filterOutline"
     | "voteOutline";
 }
 
@@ -135,6 +137,7 @@ const ICONS = {
   friendAdd: <FaUserPlus />,
   friendChecked: <BsFillPersonCheckFill />,
   sendStatus: <BiMailSend />,
+  filterOutline: <GoSettings />,
 };
 
 const Icon: React.FC<iconProps> = ({ icon }) => {

@@ -18,6 +18,8 @@
   & > *:not(ul) {
     padding: 1rem 2rem;
   }
+
+  @include max-width-modal();
 }
 
 .header {
