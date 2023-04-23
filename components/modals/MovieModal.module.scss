@@ -174,7 +174,7 @@
       display: none;
     }
   }
-  
+
   @media (max-width: 640px) {
     grid-template-columns: 1fr;
   }
@@ -224,8 +224,9 @@
   flex-direction: column;
 
   & > li:not(:last-child) {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto auto;
     padding: 2rem 0;
     border-top: 1px solid var(--bg-clr-200);
 
@@ -233,11 +234,15 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
+      grid-column: 1/2;
+      grid-row: 2/3;
     }
 
     & .opinion_date {
       font-size: 1.4rem;
       color: var(--secondary-clr-800);
+      grid-column: 1/2;
+      grid-row: 1/2;
     }
 
     & .opinion_creator {
@@ -262,6 +267,18 @@
     & .opinion_content {
       font-size: 1.6rem;
       color: var(--secondary-clr-400);
+      grid-column: 1/2;
+    }
+
+    & > button {
+      grid-column: -1/-2;
+      grid-row: 1/-1;
+      aspect-ratio: 1/1;
+      padding: 1rem;
+
+      & > svg {
+        font-size: 1.8rem;
+      }
     }
   }
 }

@@ -15,9 +15,10 @@ import "swiper/css/thumbs";
 
 interface SectionProps {
   genre: string;
+  movies: any[];
 }
 
-const MovieSection: React.FC<SectionProps> = ({ genre }) => {
+const MovieSection: React.FC<SectionProps> = ({ genre, movies }) => {
   const { data, isLoading } = useQuery({
     queryKey: ["movies-home", { genre: genre }],
     queryFn: () => axios.get(`/api/movies/genre/${genre}`),
@@ -34,23 +35,22 @@ const MovieSection: React.FC<SectionProps> = ({ genre }) => {
         className={styles.list}
         slidesPerView={"auto"}
       >
-        {!isLoading &&
-          (data! as any).data.movies.rows.length > 0 &&
-          (data! as any).data.movies.rows.map((movie: any, index: number) => (
-            <SwiperSlide key={index}>
-              <MovieCard
-                title={movie.title}
-                year={movie.year}
-                rating={movie.rating}
-                poster={movie.poster}
-                description={movie.description}
-                language={movie.language}
-                runtime={movie.runtime}
-                imdbID={movie.movie_id}
-                video={movie.video}
-              />
-            </SwiperSlide>
-          ))}
+        {movies.map((movie: any) => (
+          <SwiperSlide key={movie.id}>
+            <MovieCard
+              title={movie.title}
+              year={movie.year}
+              rating={movie.rating}
+              poster={movie.poster}
+              description={movie.description}
+              language={movie.language}
+              runtime={movie.runtime}
+              imdbID={movie.id}
+              video={movie.video}
+              genres={movie.genres}
+            />
+          </SwiperSlide>
+        ))}
       </Swiper>
     </section>
   );

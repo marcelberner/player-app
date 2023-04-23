@@ -7,7 +7,6 @@ import Link from "next/link";
 import styles from "./FriendsList.module.scss";
 
 import FriendItem from "./FriendItem";
-import Button from "@/components/Buttons/Button";
 
 interface friendsProps {
   state: boolean;
@@ -37,6 +36,7 @@ const FriendsList: React.FC<friendsProps> = ({ state }) => {
                 key={friend.id}
                 id={friend.id}
                 name={friend.username}
+                email={friend.email}
                 isOnline={true}
                 state={state}
               />
@@ -49,9 +49,7 @@ const FriendsList: React.FC<friendsProps> = ({ state }) => {
             }`}
           >
             <h4>Your friend list is empty</h4>
-            <Link href={"/community/members"}>
-              <Button>Find friends</Button>
-            </Link>
+            <Link href={"/community/members"}>Find friends</Link>
           </div>
         ))}
     </div>

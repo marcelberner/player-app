@@ -11,6 +11,16 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   const { subject, description } = req.body;
+
+  if (
+    !subject ||
+    !description ||
+    subject.length == 0 ||
+    description.length == 0
+  ) {
+    res.status(400).json({ message: "Fill empty fields" });
+  }
+
   const email = session.user?.email;
 
   try {

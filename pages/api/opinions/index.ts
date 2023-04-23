@@ -21,7 +21,7 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   try {
     opinions = await client.query(`
-    SELECT username, description, create_date, rating FROM opinions 
+    SELECT (email = '${email}') AS is_me,  username, description, create_date, rating FROM opinions 
     JOIN users ON users.email = opinions.creator 
 
     WHERE movie_id = '${movieId}'

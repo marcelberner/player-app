@@ -16,9 +16,16 @@ interface friendProps {
   name: string;
   isOnline: boolean;
   state: boolean;
+  email: string;
 }
 
-const FriendItem: React.FC<friendProps> = ({ id, name, isOnline, state }) => {
+const FriendItem: React.FC<friendProps> = ({
+  id,
+  name,
+  isOnline,
+  state,
+  email,
+}) => {
   const { modalRef, modalState, showModal, closeModal } = useModal();
   const mounted = useMounted();
 
@@ -64,6 +71,7 @@ const FriendItem: React.FC<friendProps> = ({ id, name, isOnline, state }) => {
             modalRef={modalRef}
             id={id}
             name={name}
+            email={email}
             position={cursorPosition!}
             isOnline={isOnline}
             closeModal={closeModal}

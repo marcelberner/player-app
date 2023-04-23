@@ -25,6 +25,7 @@ import {
   FaPlayCircle,
   FaPauseCircle,
   FaUserPlus,
+  FaTrashAlt,
 } from "react-icons/fa";
 import {
   HiOutlineHome,
@@ -91,6 +92,7 @@ interface iconProps {
     | "friendChecked"
     | "sendStatus"
     | "filterOutline"
+    | "trashFill"
     | "voteOutline";
 }
 
@@ -137,6 +139,7 @@ const ICONS = {
   friendAdd: <FaUserPlus />,
   friendChecked: <BsFillPersonCheckFill />,
   sendStatus: <BiMailSend />,
+  trashFill: <FaTrashAlt />,
   filterOutline: <GoSettings />,
 };
 

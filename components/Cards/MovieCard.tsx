@@ -21,6 +21,7 @@ interface movieProps {
   runtime?: number;
   video: string;
   imdbID: string;
+  genres?: string[];
 }
 
 const MovieCard: React.FC<movieProps> = ({
@@ -33,6 +34,7 @@ const MovieCard: React.FC<movieProps> = ({
   runtime,
   imdbID,
   video,
+  genres,
 }) => {
   const mounted = useMounted();
   const { modalRef, modalState, showModal, closeModal } = useModal();

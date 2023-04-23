@@ -91,7 +91,14 @@ const MovieModal: React.FC<modalProps> = ({
       ...data,
     });
 
-  const postOpinion = useMutation({
+  const deleteOpinion = () =>
+    axios.delete(`/api/opinions/delete`, {
+      params: {
+        movieId: imdbID,
+      },
+    });
+
+  const addOpinionMutation = useMutation({
     mutationFn: sendOpinion,
     onSuccess: () => {
       queryClient.invalidateQueries(["opinions", { movieID: imdbID }]);
@@ -99,19 +106,28 @@ const MovieModal: React.FC<modalProps> = ({
     },
   });
 
+  const deleteOpinionMutation = useMutation({
+    mutationFn: deleteOpinion,
+    onSuccess: () => {
+      queryClient.invalidateQueries(["opinions", { movieID: imdbID }]);
+    },
+  });
+
   const submitHandler = (e: React.FormEvent) => {
     e.preventDefault();
 
-    validate();
+    const isInputValid = validate();
 
-    if (!isValid || userRate < 1 || userRate > 10) return;
+    if (userRate < 1 || userRate > 10 || !isInputValid) return;
 
-    postOpinion.mutate({
+    addOpinionMutation.mutate({
       movieId: imdbID,
       rating: userRate,
       content: opinionRef.current!.value,
     });
   };
+
+  const deleteHandler = () => deleteOpinionMutation.mutate();
 
   return (
     <div ref={modalRef} className={`modal ${styles.movie_modal}`}>
@@ -121,7 +137,7 @@ const MovieModal: React.FC<modalProps> = ({
         </div>
       </div>
       <div className={styles.player}>
-        <Player youtubeID={video} genres={data?.data.genres.rows} />
+        <Player youtubeID={video} />
       </div>
       <div className={styles.header}>
         <a
@@ -209,8 +225,8 @@ const MovieModal: React.FC<modalProps> = ({
         <ul className={styles.opinions_list}>
           {commentsData?.pages
             .flatMap((data: any) => data.data.opinions)
-            .map((opinion: any) => (
-              <li key={opinion.movie_id}>
+            .map((opinion: any, index) => (
+              <li key={index}>
                 <span className={styles.opinion_date}>
                   {opinion.create_date
                     .split("T")[0]
@@ -228,6 +244,11 @@ const MovieModal: React.FC<modalProps> = ({
                   </span>
                 </div>
                 <p className={styles.opinion_content}>{opinion.description}</p>
+                {opinion.is_me && (
+                  <Button action={deleteHandler} outline>
+                    <Icon icon="trashFill" />
+                  </Button>
+                )}
               </li>
             ))}
           <li ref={observerRef}></li>

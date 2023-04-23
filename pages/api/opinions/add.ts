@@ -14,7 +14,38 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const { movieId, rating, content } = req.body;
 
-  console.log(movieId, rating, content, email);
+  let isExisting;
+
+  try {
+    isExisting = await client.query(`
+    SELECT id FROM opinions
+    WHERE movie_id = '${movieId}' AND creator = '${email}'
+    `);
+  } catch {
+    res.status(500).json({ message: "Could not add opinion." });
+  }
+
+  if (isExisting?.rows.length! > 0) {
+    try {
+      const res = await client.query(`
+      UPDATE opinions SET 
+
+      rating = '${rating}',
+      description = '${content}',
+      create_date = to_timestamp(${Date.now()} / 1000.0)
+
+      WHERE movie_id = '${movieId}' AND creator = '${email}'
+      `);
+    } catch {
+      res.status(500).json({ message: "Could not edit opinion." });
+    }
+
+    res.status(200).json({
+      message: "Opinion updated successfuly.",
+    });
+
+    return;
+  }
 
   try {
     const res = await client.query(`

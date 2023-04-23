@@ -39,6 +39,12 @@
     font-weight: 600;
   }
 
+  & > .invalid_message {
+    font-size: 1.6rem;
+    color: var(--primary-clr-400);
+    font-weight: 600;
+  }
+
   & > input,
   textarea {
     border-radius: 10px;

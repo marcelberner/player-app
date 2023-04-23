@@ -11,26 +11,22 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   const email = session.user?.email;
-
-  let friends;
+  const { friendEmail } = req.query;
 
   try {
-    friends = await client.query(`
-    SELECT users.id, request_from, request_to, username, email FROM friends 
+    const res = await client.query(`
+    DELETE FROM friends 
 
-    JOIN users ON users.email = friends.request_from 
-    AND users.email != '${email}' 
-    OR users.email = friends.request_to 
-    AND users.email != '${email}'
-
-    WHERE status = 'accepted' AND
+    WHERE 
+    (request_from = '${friendEmail}' OR request_to = '${friendEmail}')
+     AND
     (request_from = '${email}' OR request_to = '${email}')  
     `);
   } catch {
-    res.status(500).json({ message: "Could not add friend." });
+    res.status(500).json({ message: "Could not remove friend." });
   }
 
-  res.status(200).json({ users: friends?.rows });
+  res.status(200).json({ message: "Friend removed successfuly." });
 };
 
 export default Handler;
