@@ -39,6 +39,10 @@
   gap: 0.5rem;
   overflow-y: scroll;
 
+  @media (max-width: 640px) {
+    gap: 1rem;
+  }
+
   &::-webkit-scrollbar {
     width: 0px;
   }

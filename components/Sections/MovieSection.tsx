@@ -1,6 +1,4 @@
 import React from "react";
-import { useQuery } from "react-query";
-import axios from "axios";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Thumbs } from "swiper";
 
@@ -19,12 +17,6 @@ interface SectionProps {
 }
 
 const MovieSection: React.FC<SectionProps> = ({ genre, movies }) => {
-  const { data, isLoading } = useQuery({
-    queryKey: ["movies-home", { genre: genre }],
-    queryFn: () => axios.get(`/api/movies/genre/${genre}`),
-    refetchOnWindowFocus: false,
-  });
-
   return (
     <section className={styles.section}>
       <CategoryLabel>{genre}</CategoryLabel>
@@ -35,8 +27,8 @@ const MovieSection: React.FC<SectionProps> = ({ genre, movies }) => {
         className={styles.list}
         slidesPerView={"auto"}
       >
-        {movies.map((movie: any) => (
-          <SwiperSlide key={movie.id}>
+        {movies.map((movie: any, index) => (
+          <SwiperSlide key={index}>
             <MovieCard
               title={movie.title}
               year={movie.year}
@@ -45,9 +37,8 @@ const MovieSection: React.FC<SectionProps> = ({ genre, movies }) => {
               description={movie.description}
               language={movie.language}
               runtime={movie.runtime}
-              imdbID={movie.id}
+              imdbID={movie.movie_id}
               video={movie.video}
-              genres={movie.genres}
             />
           </SwiperSlide>
         ))}

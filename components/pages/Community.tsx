@@ -28,11 +28,6 @@ const Community = () => {
               Members
             </SquareButton>
           </Link>
-          {/* <Link href="/community/votes">
-            <SquareButton icon={<Icon icon="voteOutline" />}>
-              Weekly votes
-            </SquareButton>
-          </Link> */}
         </div>
       </div>
     </section>

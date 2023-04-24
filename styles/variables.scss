@@ -39,6 +39,10 @@
   --sidebar-hide: 7rem;
   --sidebar-current: 25rem;
 
+  @media (max-width: 640px) {
+    --sidebar-hide: 5.5rem;
+  }
+
   // PLAYER STYLES
   --plyr-color-main: var(--primary-clr-400);
 }

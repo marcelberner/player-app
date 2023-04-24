@@ -16,7 +16,7 @@ interface modalProps {
   isOnline: boolean;
   modalRef: any;
   email: string;
-  position: {
+  position?: {
     x: number;
     y: number;
   };
@@ -64,7 +64,7 @@ const UserModal: React.FC<modalProps> = ({
     <div
       ref={modalRef}
       className={`modal ${styles.modal}`}
-      style={{ top: position.y, left: position.x + 30 }}
+      style={position && { top: position.y, left: position.x + 30 }}
     >
       <div className={styles.header}>
         <div className={`${styles.data} ${!isOnline ? styles.online : ""}`}>
@@ -73,7 +73,7 @@ const UserModal: React.FC<modalProps> = ({
         </div>
       </div>
       <div className={styles.buttons}>
-        <Button action={showMessageHandler}>Send message</Button>
+        <Button action={showMessageHandler}>Message</Button>
         <Button action={removeFriendHandler} outline>
           Remove
         </Button>

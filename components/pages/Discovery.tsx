@@ -89,7 +89,10 @@ const Discovery = () => {
   return (
     <section className={styles.discovery}>
       <div className={`${styles.filters} ${isExpanded ? styles.expand : ""}`}>
-        <form onChange={() => queryClient.invalidateQueries("discovery")}>
+        <form
+          className={isExpanded ? styles.expand : ""}
+          onChange={() => queryClient.invalidateQueries("discovery")}
+        >
           <div
             className={`${styles.control_wrapper} ${
               isExpanded ? styles.expand : ""

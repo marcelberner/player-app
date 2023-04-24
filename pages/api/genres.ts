@@ -2,9 +2,8 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { client } from "../../lib/database";
 
 const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
-
   let genres;
-  
+
   try {
     genres = await client.query(`SELECT id, genre FROM genres `);
   } catch {

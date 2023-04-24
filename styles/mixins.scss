@@ -20,6 +20,10 @@ $desktop-large: 1900px;
   border-radius: 10px;
   padding: 1rem;
 
+  @media (max-width: 640px) {
+    padding: 0.5rem;
+  }
+
   &:hover {
     background-color: var(--bg-clr-200);
     color: var(--secondary-clr-400);
@@ -34,6 +38,10 @@ $desktop-large: 1900px;
   background-color: transparent;
   border: none;
   color: var(--secondary-clr-200);
+
+  @media (max-width: 640px) {
+    padding: 0.4rem !important;
+  }
 
   @include default-hover;
 }

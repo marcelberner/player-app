@@ -37,6 +37,11 @@ const FriendItem: React.FC<friendProps> = ({
   const sidebarState = useAppSelector((state) => state.sidebarData.isHidden);
 
   const showModalHandler = (event: React.MouseEvent) => {
+    if (window.innerWidth <= 640) {
+      showModal();
+      return;
+    }
+
     let positionX = sidebarState ? 230 : 50;
     let positionY = event.clientY - 20;
 

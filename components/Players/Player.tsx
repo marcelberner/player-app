@@ -4,19 +4,7 @@ import Plyr from "plyr";
 interface playerProps {
   youtubeID?: string;
   src?: string;
-  // genres: string[];
 }
-
-// const INTRO_LIST = {
-//   animations: ["gX0CmJa5Gdk", "kzYfRLMtP9c"],
-//   others: [
-//     "PvKiWRTSAzg",
-//     "DhNMHcRSNdo",
-//     "JgVcKKTF8Y4",
-//     "q4T4vdAV5Vk",
-//     "OT9HsNszYCI",
-//   ],
-// };
 
 const VideoPlayer: React.FC<playerProps> = ({ src, youtubeID }) => {
   const shoWControlsHandler = () => {
@@ -50,16 +38,6 @@ const VideoPlayer: React.FC<playerProps> = ({ src, youtubeID }) => {
     };
   }, []);
 
-  // const getIntro = () => {
-  //   if (genres.includes("Animation")) {
-  //     const num = Math.floor(Math.random() * INTRO_LIST.animations.length);
-  //     return INTRO_LIST.animations[num];
-  //   } else {
-  //     const num = Math.floor(Math.random() * INTRO_LIST.others.length);
-  //     return INTRO_LIST.animations[num];
-  //   }
-  // };
-
   return (
     <>
       {!src ? (
@@ -73,7 +51,6 @@ const VideoPlayer: React.FC<playerProps> = ({ src, youtubeID }) => {
               !youtubeID ? "q4T4vdAV5Vk" : youtubeID
             }?&modestbranding=1&playsinline=1&showsearch=0&rel=0&iv_load_policy=3&showinfo=0&rel=0&enablejsapi=1&autoplay=0`}
             allowFullScreen
-            // allowTransparency
           />
         </div>
       ) : (

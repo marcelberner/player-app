@@ -20,6 +20,11 @@
   gap: 2rem;
   box-shadow: var(--shadow-6);
 
+  @media (max-width: 640px) {
+    min-height: 100dvh;
+    border-radius: 0;
+  }
+
   & > * {
     padding: 0 2rem;
 
@@ -64,12 +69,12 @@
   margin: auto 0;
   gap: 1rem;
 
-  & > label{
+  & > label {
     font-size: 1.4rem;
     color: var(--primary-clr-400);
   }
 
-  & > h3{
+  & > h3 {
     font-size: 1.8rem;
     align-self: center;
     color: var(--primary-clr-400);

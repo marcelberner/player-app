@@ -5,7 +5,6 @@ import { getSession } from "next-auth/react";
 const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getSession({ req: req });
 
-  console.log("comment " + req.query.postId + req.body.comment);
 
   if (!session) {
     res.status(401).json({ message: "User is not authenticated" });

@@ -1,12 +1,10 @@
-// @import "../../../styles/mixins.scss";
-
 .button {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: transparent;
-  padding: .8rem;
+  padding: 0.8rem;
   font-size: 3rem;
   color: var(--secondary-clr-200);
   border: none;
@@ -17,20 +15,7 @@
     color: var(--secondary-clr-400);
   }
 
-  // &.marked::after {
-  //   content: "";
-  //   position: absolute;
-  //   right: 25%;
-  //   top: 20%;
-  //   // @include notification-mark;
-  //   background-color: var(--primary-clr-400);
-  // }
-
-  // &.user {
-  //   color: var(--primary-clr-400);
-
-  //   &:hover {
-  //     color: var(--primary-clr-200);
-  //   }
-  // }
+  @media (max-width: 640px) {
+    padding: 0.4rem;
+  }
 }

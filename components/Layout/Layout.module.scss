@@ -15,7 +15,7 @@ $sidebar-width: 25rem;
   }
 
   @media (max-width: 1024px) {
-    grid-template-columns: 7rem 1fr;
+    grid-template-columns: var(--sidebar-hide) 1fr;
   }
 }
 
@@ -57,6 +57,10 @@ $sidebar-width: 25rem;
   & > img {
     cursor: pointer;
   }
+
+  @media (max-width: 640px) {
+    padding: 0 1rem;
+  }
 }
 
 .header__nav {
@@ -84,6 +88,10 @@ $sidebar-width: 25rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
+
+  @media (max-width: 640px) {
+    padding: 0.5rem !important;
+  }
 
   &.active {
     padding: 2rem 0.5rem;
@@ -120,6 +128,9 @@ $sidebar-width: 25rem;
   &.static {
     overflow: hidden;
     padding: 0;
-    max-height: 100%;
+  }
+
+  @media (max-width: 640px) {
+    padding: 0.5rem;
   }
 }

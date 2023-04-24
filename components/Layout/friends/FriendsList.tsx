@@ -21,10 +21,6 @@ const FriendsList: React.FC<friendsProps> = ({ state }) => {
     refetchOnWindowFocus: false,
   });
 
-  // const filteredList = FRIENDS_LIST.sort(
-  //   (a, b) => (b.isOnline as any) - (a.isOnline as any)
-  // );
-
   return (
     <div className={styles.friendslist}>
       <h3 className={styles.label}>FRIENDS</h3>
