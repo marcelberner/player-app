@@ -1,6 +1,8 @@
 .card {
   position: relative;
   width: 20rem;
+  max-width: 60vw;
+  margin: 0 auto;
   aspect-ratio: 200/285;
   border-radius: 20px;
   box-shadow: var(--shadow-2);
@@ -17,13 +19,26 @@
     transform: scale(1.05);
   }
 
-  &:hover > .rate {
-    opacity: 1;
+  @media (width > 640px) {
+    &:hover > .rate {
+      opacity: 1;
+    }
+
+    &:hover > .description {
+      transform: translate(0, 0);
+      opacity: 1;
+    }
   }
 
-  &:hover > .description {
-    transform: translate(0, 0);
-    opacity: 1;
+  @media (max-width: 640px) {
+    & > .rate {
+      opacity: 1;
+    }
+
+    & > .description {
+      transform: translate(0, 0);
+      opacity: 1;
+    }
   }
 }
 

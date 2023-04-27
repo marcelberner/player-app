@@ -20,6 +20,10 @@
     grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
     gap: 1.5rem;
 
+    @media (max-width: 640px) {
+      gap: 5rem;
+    }
+
     & * {
       width: 100%;
     }
@@ -31,17 +35,30 @@
   align-items: center;
   padding: 1rem 0;
   border-bottom: 1px solid var(--bg-clr-200);
+  gap: 2rem;
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+  }
 
   & > h1 {
     font-size: 2.8rem;
     color: var(--secondary-clr-800);
     flex-grow: 1;
+
+    @media (max-width: 640px) {
+      align-self: flex-start;
+    }
   }
 }
 
 .display_buttons {
   display: flex;
   align-items: center;
+
+  @media (max-width: 640px) {
+    align-self: flex-end;
+  }
 
   & > button {
     color: var(--secondary-clr-800);

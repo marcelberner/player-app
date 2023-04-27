@@ -26,6 +26,9 @@ const Search = () => {
           params: { page: pageParam },
         }),
       refetchOnWindowFocus: false,
+      onSuccess: () => {
+        if (window.innerWidth <= 640) setDisplay(true);
+      },
     });
 
   const { observerRef } = useInfiniteScroll({
