@@ -26,6 +26,7 @@ const MovieSection: React.FC<SectionProps> = ({ genre, movies }) => {
         modules={[FreeMode, Thumbs]}
         className={styles.list}
         slidesPerView={"auto"}
+        spaceBetween={30}
       >
         {movies.map((movie: any, index) => (
           <SwiperSlide key={index}>

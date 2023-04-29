@@ -7,20 +7,12 @@ $gap: 3rem;
 }
 
 .list {
-  user-select: none;
   width: 100%;
-  overflow-x: scroll;
 
-  & > *:first-child {
-    display: flex;
-    gap: $gap;
-  }
-
-  & > div > div {
-    width: min-content !important;
-  }
-  
-  &::-webkit-scrollbar {
-    height: 0rem;
+  & > div {
+    width: fit-content;
+    & > div {
+      width: fit-content;
+    }
   }
 }
