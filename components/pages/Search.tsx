@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useInfiniteQuery } from "react-query";
 import useInfiniteScroll from "@/hooks/useInfiniteScroll.";
@@ -26,9 +26,6 @@ const Search = () => {
           params: { page: pageParam },
         }),
       refetchOnWindowFocus: false,
-      onSuccess: () => {
-        if (window.innerWidth <= 640) setDisplay(true);
-      },
     });
 
   const { observerRef } = useInfiniteScroll({
@@ -36,6 +33,10 @@ const Search = () => {
     isFetchingNextPage,
     fetchNextPage,
   });
+
+  useEffect(() => {
+    if (window.innerWidth <= 640) setDisplay(true);
+  }, []);
 
   return (
     <section className={styles.search_results}>

@@ -7,10 +7,10 @@
   border-radius: 20px;
   transition: 0.3s;
   cursor: pointer;
-  padding: 2rem;
-
+  
   @media (max-width: 640px) {
     grid-template-columns: 1fr;
+    padding: 2rem;
   }
 
   & > *:not(.img_container) {
