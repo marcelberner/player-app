@@ -1,10 +1,8 @@
-import { GetServerSideProps } from "next";
-import { useSession } from "next-auth/react";
+import { GetStaticProps } from "next";
 import { client } from "./../lib/database";
-import { useEffect } from "react";
-import { useRouter } from "next/router";
 
 import Head from "next/head";
+import usePageKick from "@/hooks/kick";
 
 import Layout from "@/components/Layout/Layout";
 
@@ -12,15 +10,9 @@ import FrontCard from "@/components/Cards/FrontCard";
 import MovieSection from "@/components/Sections/MovieSection";
 
 function Home({ movies }: any) {
-  const { status } = useSession();
-  const router = useRouter();
+  const status = usePageKick();
 
-  useEffect(() => {
-    if (status == "unauthenticated") router.replace("/login");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [status]);
-
-  if (status == "authenticated")
+  if (status == "authenticated") {
     return (
       <>
         <Head>
@@ -42,9 +34,10 @@ function Home({ movies }: any) {
         </Layout>
       </>
     );
+  }
 }
 
-export const getStaticProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
   const comedy = await client.query(`
   SELECT * FROM movies 
   JOIN movie_genre ON movies.id = movie_genre.movie_id 
