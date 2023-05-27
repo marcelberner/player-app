@@ -43,7 +43,7 @@ export const getStaticProps: GetStaticProps = async () => {
   JOIN movie_genre ON movies.id = movie_genre.movie_id 
   JOIN genres ON movie_genre.genre_id = genres.id 
   WHERE genres.genre = 'Comedy'
-  limit 40
+  limit 35
   `);
 
   const animations = await client.query(`
@@ -51,7 +51,7 @@ export const getStaticProps: GetStaticProps = async () => {
   JOIN movie_genre ON movies.id = movie_genre.movie_id 
   JOIN genres ON movie_genre.genre_id = genres.id 
   WHERE genres.genre = 'Animation'
-  limit 40
+  limit 35
   `);
 
   const fantasy = await client.query(`
@@ -59,23 +59,23 @@ export const getStaticProps: GetStaticProps = async () => {
   JOIN movie_genre ON movies.id = movie_genre.movie_id 
   JOIN genres ON movie_genre.genre_id = genres.id 
   WHERE genres.genre = 'Fantasy'
-  limit 40
+  limit 35
   `);
 
-  const war = await client.query(`
-  SELECT * FROM movies 
-  JOIN movie_genre ON movies.id = movie_genre.movie_id 
-  JOIN genres ON movie_genre.genre_id = genres.id 
-  WHERE genres.genre = 'War'
-  limit 40
-  `);
+  // const war = await client.query(`
+  // SELECT * FROM movies 
+  // JOIN movie_genre ON movies.id = movie_genre.movie_id 
+  // JOIN genres ON movie_genre.genre_id = genres.id 
+  // WHERE genres.genre = 'War'
+  // limit 35
+  // `);
 
   const horror = await client.query(`
   SELECT * FROM movies 
   JOIN movie_genre ON movies.id = movie_genre.movie_id 
   JOIN genres ON movie_genre.genre_id = genres.id 
   WHERE genres.genre = 'Horror'
-  limit 40
+  limit 35
   `);
 
   const thriller = await client.query(`
@@ -83,7 +83,7 @@ export const getStaticProps: GetStaticProps = async () => {
   JOIN movie_genre ON movies.id = movie_genre.movie_id 
   JOIN genres ON movie_genre.genre_id = genres.id 
   WHERE genres.genre = 'Thriller'
-  limit 40
+  limit 35
   `);
 
   const romance = await client.query(`
@@ -91,42 +91,42 @@ export const getStaticProps: GetStaticProps = async () => {
   JOIN movie_genre ON movies.id = movie_genre.movie_id 
   JOIN genres ON movie_genre.genre_id = genres.id 
   WHERE genres.genre = 'Romance'
-  limit 40
+  limit 35
   `);
 
-  const documentary = await client.query(`
-  SELECT * FROM movies 
-  JOIN movie_genre ON movies.id = movie_genre.movie_id 
-  JOIN genres ON movie_genre.genre_id = genres.id 
-  WHERE genres.genre = 'Documentary'
-  limit 40
-  `);
+  // const documentary = await client.query(`
+  // SELECT * FROM movies 
+  // JOIN movie_genre ON movies.id = movie_genre.movie_id 
+  // JOIN genres ON movie_genre.genre_id = genres.id 
+  // WHERE genres.genre = 'Documentary'
+  // limit 35
+  // `);
 
   const science_fiction = await client.query(`
   SELECT * FROM movies 
   JOIN movie_genre ON movies.id = movie_genre.movie_id 
   JOIN genres ON movie_genre.genre_id = genres.id 
   WHERE genres.genre = 'Science Fiction'
-  limit 40
+  limit 35
   `);
 
-  const history = await client.query(`
-  SELECT * FROM movies 
-  JOIN movie_genre ON movies.id = movie_genre.movie_id 
-  JOIN genres ON movie_genre.genre_id = genres.id 
-  WHERE genres.genre = 'History'
-  limit 40
-  `);
+  // const history = await client.query(`
+  // SELECT * FROM movies 
+  // JOIN movie_genre ON movies.id = movie_genre.movie_id 
+  // JOIN genres ON movie_genre.genre_id = genres.id 
+  // WHERE genres.genre = 'History'
+  // limit 35
+  // `);
 
   const movies = [
     {
       genre: "Comedy",
       movies: comedy.rows,
     },
-    {
-      genre: "Documentary",
-      movies: documentary.rows,
-    },
+    // {
+    //   genre: "Documentary",
+    //   movies: documentary.rows,
+    // },
     {
       genre: "Horror",
       movies: horror.rows,
@@ -143,10 +143,10 @@ export const getStaticProps: GetStaticProps = async () => {
       genre: "Fantasy",
       movies: fantasy.rows,
     },
-    {
-      genre: "War",
-      movies: war.rows,
-    },
+    // {
+    //   genre: "War",
+    //   movies: war.rows,
+    // },
     {
       genre: "Thriller",
       movies: thriller.rows,
@@ -155,10 +155,10 @@ export const getStaticProps: GetStaticProps = async () => {
       genre: "Science Fiction",
       movies: science_fiction.rows,
     },
-    {
-      genre: "History",
-      movies: history.rows,
-    },
+    // {
+    //   genre: "History",
+    //   movies: history.rows,
+    // },
   ];
 
   return {
