@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 
 import { useAppSelector } from "@/hooks/redux";
@@ -14,18 +14,11 @@ import Icon from "@/components/UI/Icon";
 interface friendProps {
   id: string;
   name: string;
-  isOnline: boolean;
   state: boolean;
   email: string;
 }
 
-const FriendItem: React.FC<friendProps> = ({
-  id,
-  name,
-  isOnline,
-  state,
-  email,
-}) => {
+const FriendItem: React.FC<friendProps> = ({ id, name, state, email }) => {
   const { modalRef, modalState, showModal, closeModal } = useModal();
   const mounted = useMounted();
 
@@ -33,8 +26,10 @@ const FriendItem: React.FC<friendProps> = ({
     x: number;
     y: number;
   }>();
+  const [status, setStatus] = useState<boolean>(false);
 
   const sidebarState = useAppSelector((state) => state.sidebarData.isHidden);
+  const socket = useAppSelector((state) => state.socket.socket);
 
   const showModalHandler = (event: React.MouseEvent) => {
     if (window.innerWidth <= 640) {
@@ -58,11 +53,24 @@ const FriendItem: React.FC<friendProps> = ({
     setCursorPosition(cursorPosition);
   };
 
+  useEffect(() => {
+    socket.on(
+      "get-users",
+      (usersList: { email: string; socketId: string }[]) => {
+        usersList.forEach((user) => {
+          if (user.email == email) setStatus(true);
+        });
+      }
+    );
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [socket]);
+
   return (
     <>
       <li
         onClick={showModalHandler}
-        className={`${styles.friend}  ${isOnline ? styles.online : ""} ${
+        className={`${styles.friend}  ${status ? styles.online : ""} ${
           state ? styles.mark : ""
         }`}
       >
@@ -78,7 +86,7 @@ const FriendItem: React.FC<friendProps> = ({
             name={name}
             email={email}
             position={cursorPosition!}
-            isOnline={isOnline}
+            isOnline={status}
             closeModal={closeModal}
           />,
           document.getElementById("modal")!

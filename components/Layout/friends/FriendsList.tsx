@@ -33,7 +33,6 @@ const FriendsList: React.FC<friendsProps> = ({ state }) => {
                 id={friend.id}
                 name={friend.username}
                 email={friend.email}
-                isOnline={true}
                 state={state}
               />
             ))}

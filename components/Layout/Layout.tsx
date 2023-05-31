@@ -5,11 +5,14 @@ import { useRouter } from "next/router";
 import { useQuery } from "react-query";
 import axios from "axios";
 import Link from "next/link";
+import { io } from "socket.io-client";
+import { useSession } from "next-auth/react";
 
 import { useAppSelector, useAppDispatch } from "@/hooks/redux";
 import { setSidebarState } from "@/store/sidebar";
 import useMounted from "@/hooks/useMounted";
 import { setUser } from "@/store/user";
+import { setSocket } from "@/store/socket";
 
 import Searchbar from "./Searchbar";
 import UserButtons from "./userButtons/UserButtons";
@@ -27,6 +30,7 @@ const STATIC_PAGES = ["/discovery", "/cinema"];
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [searchbarState, setSearchbarState] = useState<boolean>(false);
+  const session = useSession();
 
   const router = useRouter();
   const currentRoute = router.pathname;
@@ -78,6 +82,23 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       );
       dispatch(setSidebarState(false));
     } else dispatch(setSidebarState(true));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    const socketInitializer = async () => {
+      await axios.get("/api/socket");
+
+      const socket = io({
+        auth: {
+          email: session.data?.user?.email,
+        },
+      });
+
+      dispatch(setSocket(socket));
+    };
+
+    socketInitializer();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
