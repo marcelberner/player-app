@@ -59,10 +59,14 @@
 }
 
 .messages {
+  display: flex;
+  flex-direction: column;
   flex-grow: 1;
-  overflow-y: scroll;
+  overflow-y: overlay;
   background-color: var(--bg-clr-400-glass);
   backdrop-filter: blur(8px);
+  gap: 1rem;
+  padding: 1rem;
 
   &::-webkit-scrollbar {
     width: 0px;
@@ -70,6 +74,20 @@
 
   &:hover::-webkit-scrollbar {
     width: 10px;
+  }
+
+  & > li {
+    font-size: 1.4rem;
+    background-color: var(--bg-clr-400);
+    width: fit-content;
+    padding: 1rem;
+    border-radius: 5px 20px 20px 20px;
+
+    &.own {
+      border-radius: 20px 5px 20px 20px;
+      background-color: var(--primary-clr-400);
+      align-self: flex-end;
+    }
   }
 }
 

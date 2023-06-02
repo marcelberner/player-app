@@ -37,7 +37,7 @@ const UserModal: React.FC<modalProps> = ({
   const queryClient = useQueryClient();
 
   const showMessageHandler = () => {
-    dispatch(setUser({ id, name, isOnline }));
+    dispatch(setUser({ email, isOnline, name }));
     closeModal();
   };
 

@@ -38,6 +38,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const mounted = useMounted();
 
   const sidebarState = useAppSelector((state) => state.sidebarData.isHidden);
+  const isMessageVisible = useAppSelector((state) => state.messageData.user);
   const dispatch = useAppDispatch();
 
   const { data } = useQuery({
@@ -154,7 +155,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       >
         {children}
       </main>
-      <MessageModal />
+      {isMessageVisible && <MessageModal />}
     </div>
   );
 };

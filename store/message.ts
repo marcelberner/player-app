@@ -1,25 +1,25 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface messageType {
-  userId: string;
-  message: string;
-  date: string;
-  time: string;
+  message_from: string;
+  message_to: string;
+  message_content: string;
+  create_date: any;
 }
 
 interface userType {
-  id: string;
   name: string;
   isOnline: boolean;
+  email: string;
 }
 
 interface messagesDataType {
-  toUser: userType | null;
+  user: userType | null;
   messages: messageType[] | [];
 }
 
 const initialState: messagesDataType = {
-  toUser: null,
+  user: null,
   messages: [],
 };
 
@@ -28,19 +28,23 @@ const messageDataSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, action: PayloadAction<userType>) => {
-      state.toUser = action.payload;
+      state.user = action.payload;
+    },
+    setMessages: (state, action: PayloadAction<[messageType]>) => {
+      state.messages = action.payload;
     },
     addMessage: (state, action: PayloadAction<messageType>) => {
-      const messages = [...state.messages, action.payload];
+      const messages = [...state.messages!, action.payload];
       state.messages = messages;
     },
     clear: (state) => {
-      state.toUser = null;
+      state.user = null;
       state.messages = [];
     },
   },
 });
 
-export const { setUser, addMessage, clear } = messageDataSlice.actions;
+export const { setUser, addMessage, clear, setMessages } =
+  messageDataSlice.actions;
 
 export default messageDataSlice.reducer;

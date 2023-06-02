@@ -1,16 +1,22 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "@/hooks/redux";
 import { createPortal } from "react-dom";
+import axios from "axios";
 
-import { clear } from "@/store/message";
+import { clear, addMessage, setMessages } from "@/store/message";
 
 import styles from "./MessageModal.module.scss";
 
 import Icon from "../UI/Icon";
 
 const MessageModal = () => {
-  const user = useAppSelector((state) => state.messageData.toUser);
-  const isMessageVisible = useAppSelector((state) => state.messageData.toUser);
+  const user = useAppSelector((state) => state.messageData.user);
+  const messages = useAppSelector((state) => state.messageData.messages);
+  const socket = useAppSelector((state) => state.socket.socket);
+  const userEmail = useAppSelector((state) => state.userData.email);
+
+  const messageRef = useRef<HTMLInputElement>(null);
+  const windowRef = useRef<HTMLUListElement>(null);
 
   const dispatch = useAppDispatch();
 
@@ -18,30 +24,99 @@ const MessageModal = () => {
     dispatch(clear());
   };
 
-  return (
-    isMessageVisible &&
-    createPortal(
-      <div className={`modal ${styles.message_modal}`}>
-        <div className={styles.header}>
-          <span
-            className={`${styles.name} ${user?.isOnline ? styles.online : ""}`}
+  const sendMessageHandler = (e: React.FormEvent) => {
+    e.preventDefault();
+    const messageValue = messageRef.current?.value!;
+
+    if (messageValue == "") return;
+
+    socket.emit("message-send", {
+      from: userEmail,
+      to: user?.email,
+      message: messageValue,
+    });
+
+    axios.post("/api/messages/add", {
+      friendEmail: user?.email,
+      message: messageValue,
+    });
+
+    dispatch(
+      addMessage({
+        message_from: userEmail!,
+        message_content: messageValue,
+        create_date: Date.now(),
+        message_to: user?.email!,
+      })
+    );
+    messageRef.current!.value = "";
+  };
+
+  useEffect(() => {
+    socket.on(
+      "message-get",
+      ({ from, message }: { from: string; message: string }) => {
+        dispatch(
+          addMessage({
+            message_from: from,
+            message_content: message,
+            create_date: Date.now(),
+            message_to: userEmail!,
+          })
+        );
+      }
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    const importMessages = async () => {
+      const messages = await axios.get("/api/messages/get", {
+        params: {
+          friendEmail: user?.email,
+        },
+      });
+      dispatch(setMessages(messages.data.messages));
+    };
+
+    importMessages();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    windowRef.current!.scrollTo(0, windowRef.current!.scrollHeight);
+  }, [messages]);
+
+  return createPortal(
+    <div className={`modal ${styles.message_modal}`}>
+      <div className={styles.header}>
+        <span
+          className={`${styles.name} ${user?.isOnline ? styles.online : ""}`}
+        >
+          {user?.name}
+        </span>
+        <button onClick={closeModalHandler} className={styles.close_button}>
+          <Icon icon="closeOutline" />
+        </button>
+      </div>
+      <ul ref={windowRef} className={styles.messages}>
+        {messages.map((message, index) => (
+          <li
+            key={index}
+            className={`${message.message_from == userEmail ? styles.own : ""}`}
           >
-            {user?.name}
-          </span>
-          <button onClick={closeModalHandler} className={styles.close_button}>
-            <Icon icon="closeOutline" />
-          </button>
-        </div>
-        <ul className={styles.messages}></ul>
-        <form className={styles.text_area}>
-          <input type={"text"} placeholder="Type message..." />
-          <button type="submit">
-            <Icon icon="paperPlane" />
-          </button>
-        </form>
-      </div>,
-      document.getElementById("modal")!
-    )
+            {message.message_content}
+          </li>
+        ))}
+      </ul>
+      <form className={styles.text_area} onSubmit={sendMessageHandler}>
+        <input ref={messageRef} type={"text"} placeholder="Type message..." />
+        <button type="submit">
+          <Icon icon="paperPlane" />
+        </button>
+      </form>
+    </div>,
+    document.getElementById("modal")!
   );
 };
 

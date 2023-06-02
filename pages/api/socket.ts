@@ -34,6 +34,14 @@ const Handler = async (req: NextApiRequest, res: NextApiResponseWithSocket) => {
 
       io.emit("get-users", usersList);
 
+      socket.on("message-send", ({ from, to, message }) => {
+        const targetUser = usersList.find((user) => user.email === to);
+
+        if (targetUser) {
+          io.to(targetUser.socketId).emit("message-get", { from, message });
+        }
+      });
+
       socket.on("disconnect", () => {
         usersList = usersList.filter((user) => user.socketId !== socket.id);
         io.emit("get-users", usersList);
