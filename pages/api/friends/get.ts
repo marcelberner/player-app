@@ -14,6 +14,7 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   let friends;
 
+  
   try {
     friends = await client.query(`
     SELECT users.id, request_from, request_to, username, email FROM friends 
