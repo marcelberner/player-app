@@ -1,17 +1,17 @@
-import React from "react";
-import { useMutation, useQueryClient } from "react-query";
-import axios from "axios";
+import React from "react"
+import { useMutation, useQueryClient } from "react-query"
+import axios from "axios"
 
-import Icon from "../UI/Icon";
-import PinnedButton from "../Buttons/PinnedButton";
+import Icon from "../UI/Icon"
+import PinnedButton from "../Buttons/PinnedButton"
 
-import styles from "./NotificationModal.module.scss";
+import styles from "./NotificationModal.module.scss"
 
 interface modalProps {
-  header: string;
-  emptyText: string;
-  modalRef: any;
-  data?: any[any];
+  header: string
+  emptyText: string
+  modalRef: any
+  data?: any[any]
 }
 
 const NotificationModal: React.FC<modalProps> = ({
@@ -20,29 +20,29 @@ const NotificationModal: React.FC<modalProps> = ({
   modalRef,
   data,
 }) => {
-  const queryClient = useQueryClient();
+  const queryClient = useQueryClient()
 
   const updateStatusRequest = (data: { email: string; status: string }) => {
     return axios.put(`/api/friends/update-status`, {
       email: data.email,
       status: data.status,
-    });
-  };
+    })
+  }
 
   const updateMutation = useMutation({
     mutationFn: updateStatusRequest,
     onSuccess: () => {
-      queryClient.invalidateQueries("friends");
-      queryClient.invalidateQueries("friend-requests");
+      queryClient.invalidateQueries("friends")
+      queryClient.invalidateQueries("friend-requests")
     },
-  });
+  })
 
   const updateFriendStatusHandler = (email: string, status: string) => {
     updateMutation.mutate({
       email,
       status,
-    });
-  };
+    })
+  }
 
   return (
     <div ref={modalRef} className={`modal ${styles.modal}`}>
@@ -78,7 +78,7 @@ const NotificationModal: React.FC<modalProps> = ({
         )}
       </ul>
     </div>
-  );
-};
+  )
+}
 
-export default NotificationModal;
+export default NotificationModal

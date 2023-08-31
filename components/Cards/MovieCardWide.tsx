@@ -1,26 +1,26 @@
-import React from "react";
-import { createPortal } from "react-dom";
-import Image from "next/dist/client/image";
+import React from "react"
+import { createPortal } from "react-dom"
+import Image from "next/dist/client/image"
 
-import useMounted from "@/hooks/useMounted";
-import useModal from "@/hooks/useModal";
+import useMounted from "@/hooks/useMounted"
+import useModal from "@/hooks/useModal"
 
-import styles from "./MovieCardWide.module.scss";
+import styles from "./MovieCardWide.module.scss"
 
-import MovieModal from "../modals/MovieModal";
-import Icon from "../UI/Icon";
-import PosterPlaceholder from "../UI/placeholders/PosterPlaceholder";
+import MovieModal from "../modals/MovieModal"
+import Icon from "../UI/Icon"
+import PosterPlaceholder from "../UI/placeholders/PosterPlaceholder"
 
 interface movieProps {
-  title: string;
-  year: number;
-  rating: number;
-  poster: string;
-  language?: string;
-  description?: string;
-  runtime?: number;
-  video: string;
-  imdbID: string;
+  title: string
+  year: number
+  rating: number
+  poster: string
+  language?: string
+  description?: string
+  runtime?: number
+  video: string
+  imdbID: string
 }
 
 const MovieCardWide: React.FC<movieProps> = ({
@@ -34,8 +34,8 @@ const MovieCardWide: React.FC<movieProps> = ({
   imdbID,
   video,
 }) => {
-  const mounted = useMounted();
-  const { modalRef, modalState, showModal, closeModal } = useModal();
+  const mounted = useMounted()
+  const { modalRef, modalState, showModal, closeModal } = useModal()
   return (
     <>
       <div onClick={showModal} className={styles.card}>
@@ -75,7 +75,7 @@ const MovieCardWide: React.FC<movieProps> = ({
           document.getElementById("modal")!
         )}
     </>
-  );
-};
+  )
+}
 
-export default MovieCardWide;
+export default MovieCardWide

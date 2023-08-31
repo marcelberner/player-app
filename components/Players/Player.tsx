@@ -1,16 +1,16 @@
-import React, { useEffect } from "react";
-import Plyr from "plyr";
+import React, { useEffect } from "react"
+import Plyr from "plyr"
 
 interface playerProps {
-  youtubeID?: string;
-  src?: string;
+  youtubeID?: string
+  src?: string
 }
 
 const VideoPlayer: React.FC<playerProps> = ({ src, youtubeID }) => {
   const shoWControlsHandler = () => {
-    (document.querySelector(".plyr__controls") as any)!.style.visibility =
-      "visible";
-  };
+    ;(document.querySelector(".plyr__controls") as any)!.style.visibility =
+      "visible"
+  }
 
   useEffect(() => {
     const player = new Plyr("#my-video", {
@@ -24,19 +24,19 @@ const VideoPlayer: React.FC<playerProps> = ({ src, youtubeID }) => {
         "fullscreen",
       ],
       ratio: "16:9",
-    });
+    })
 
-    player.once("play", shoWControlsHandler);
-    player.once("play", () => player.fullscreen.enter());
+    player.once("play", shoWControlsHandler)
+    player.once("play", () => player.fullscreen.enter())
 
     return () => {
       if (player) {
-        player.off("play", shoWControlsHandler);
-        player.off("play", () => player.fullscreen.enter());
-        player.destroy();
+        player.off("play", shoWControlsHandler)
+        player.off("play", () => player.fullscreen.enter())
+        player.destroy()
       }
-    };
-  }, []);
+    }
+  }, [])
 
   return (
     <>
@@ -61,7 +61,7 @@ const VideoPlayer: React.FC<playerProps> = ({ src, youtubeID }) => {
         </div>
       )}
     </>
-  );
-};
+  )
+}
 
-export default VideoPlayer;
+export default VideoPlayer

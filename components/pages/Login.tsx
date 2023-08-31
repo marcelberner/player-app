@@ -1,78 +1,78 @@
-import React, { useRef, useState } from "react";
-import Image from "next/image";
-import Link from "next/dist/client/link";
-import axios from "axios";
-import { signIn } from "next-auth/react";
-import { useRouter } from "next/router";
+import React, { useRef, useState } from "react"
+import Image from "next/image"
+import Link from "next/dist/client/link"
+import axios from "axios"
+import { signIn } from "next-auth/react"
+import { useRouter } from "next/router"
 
-import useValidate from "@/hooks/useValidate";
+import useValidate from "@/hooks/useValidate"
 
-import styles from "./Login.module.scss";
+import styles from "./Login.module.scss"
 
-import Button from "../Buttons/Button";
+import Button from "../Buttons/Button"
 
 interface loginProps {
-  signup?: boolean;
+  signup?: boolean
 }
 
 const Login: React.FC<loginProps> = ({ signup }) => {
-  const passwordRef = useRef<HTMLInputElement>(null);
-  const cfnPasswordRef = useRef<HTMLInputElement>(null);
-  const usernameRef = useRef<HTMLInputElement>(null);
-  const emailRef = useRef<HTMLInputElement>(null);
-  const checkboxRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null)
+  const cfnPasswordRef = useRef<HTMLInputElement>(null)
+  const usernameRef = useRef<HTMLInputElement>(null)
+  const emailRef = useRef<HTMLInputElement>(null)
+  const checkboxRef = useRef<HTMLInputElement>(null)
 
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<null | string>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<null | string>(null)
 
-  const router = useRouter();
+  const router = useRouter()
 
   const [isPasswordValid, validatePassword, clearPassword] = useValidate({
     inputRef: passwordRef,
     isEmpty: true,
     isPassword: true,
-  });
+  })
   const [isCfnPasswordValid, validateCfnPassword, clearCfnPassword] =
     useValidate({
       inputRef: cfnPasswordRef,
       isEmpty: true,
       isEqualTo: passwordRef,
-    });
+    })
 
   const [isUsernameValid, validateUsername, clearUsername] = useValidate({
     inputRef: usernameRef,
     isEmpty: true,
     isUsername: true,
-  });
+  })
   const [isEmailValid, validateEmail, clearEmail] = useValidate({
     inputRef: emailRef,
     isEmpty: true,
     isEmail: true,
-  });
+  })
 
   const submitHandler = async (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    const validEmail = validateEmail();
-    const validPassword = validatePassword();
-    let validCfnPassword = true;
-    const validUsername = validateUsername();
+    const validEmail = validateEmail()
+    const validPassword = validatePassword()
+    let validCfnPassword = true
+    const validUsername = validateUsername()
 
     if (signup) {
-      validCfnPassword = validateCfnPassword();
+      validCfnPassword = validateCfnPassword()
     }
 
     if (!(validEmail && validPassword && validCfnPassword && validUsername)) {
-      return;
+      return
     }
 
-    const currentUsername = usernameRef.current?.value;
-    const currentEmail = emailRef.current?.value;
-    const currentPassword = passwordRef.current?.value;
-    const currentCfnPassword = cfnPasswordRef.current?.value;
+    const currentUsername = usernameRef.current?.value
+    const currentEmail = emailRef.current?.value
+    const currentPassword = passwordRef.current?.value
+    const currentCfnPassword = cfnPasswordRef.current?.value
 
-    setIsLoading(true);
-    setError(null);
+    setIsLoading(true)
+    setError(null)
 
     if (signup) {
       const result = await axios.post("/api/auth/signup", {
@@ -82,31 +82,31 @@ const Login: React.FC<loginProps> = ({ signup }) => {
           password: currentPassword,
           cfnPassword: currentCfnPassword,
         },
-      });
+      })
 
-      if (!result!.data.ok) setError(result!.data.error);
+      if (!result!.data.ok) setError(result!.data.error)
 
       const login = await signIn("credentials", {
         redirect: false,
         email: currentEmail,
         password: currentPassword,
-      });
+      })
 
-      setIsLoading(false);
-      router.replace("/");
+      setIsLoading(false)
+      router.replace("/")
     } else {
       const result = await signIn("credentials", {
         redirect: false,
         email: currentEmail,
         password: currentPassword,
-      });
+      })
 
-      if (!result!.ok) setError(result!.error!);
+      if (!result!.ok) setError(result!.error!)
 
-      setIsLoading(false);
-      router.replace("/");
+      setIsLoading(false)
+      router.replace("/")
     }
-  };
+  }
 
   return (
     <section className={styles.login_section}>
@@ -199,7 +199,7 @@ const Login: React.FC<loginProps> = ({ signup }) => {
         draggable={false}
       />
     </section>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

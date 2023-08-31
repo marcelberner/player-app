@@ -1,18 +1,18 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import { client } from "./../../../../lib/database";
-import { getSession } from "next-auth/react";
+import { NextApiRequest, NextApiResponse } from "next"
+import { client } from "./../../../../lib/database"
+import { getSession } from "next-auth/react"
 
 const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const session = await getSession({ req: req });
+  const session = await getSession({ req: req })
 
   if (!session) {
-    res.status(401).json({ message: "User is not authenticated" });
-    return;
+    res.status(401).json({ message: "User is not authenticated" })
+    return
   }
 
-  const postId = req.query.postId;
+  const postId = req.query.postId
 
-  let post;
+  let post
 
   try {
     post = await client.query(`
@@ -42,16 +42,16 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
     ) 
     AS comments
     ON comments.discussion = post.id
-    `);
+    `)
   } catch {
-    res.status(500).json({ message: "Could not get discussions." });
-    return;
+    res.status(500).json({ message: "Could not get discussions." })
+    return
   }
 
   if (post.rows.length == 0)
-    res.status(400).json({ message: "Could not find post." });
+    res.status(400).json({ message: "Could not find post." })
 
-  res.status(200).json({ post: [...post.rows] });
-};
+  res.status(200).json({ post: [...post.rows] })
+}
 
-export default Handler;
+export default Handler

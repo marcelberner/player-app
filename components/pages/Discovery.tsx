@@ -1,44 +1,44 @@
-import React, { useRef, useState } from "react";
-import axios from "axios";
-import { useQuery, useInfiniteQuery, useQueryClient } from "react-query";
-import useInfiniteScroll from "@/hooks/useInfiniteScroll.";
-import qs from "qs";
+import React, { useRef, useState } from "react"
+import axios from "axios"
+import { useQuery, useInfiniteQuery, useQueryClient } from "react-query"
+import useInfiniteScroll from "@/hooks/useInfiniteScroll."
+import qs from "qs"
 
-import MovieCard from "../Cards/MovieCard";
-import CategoryLabel from "../Labels/CategoryLabel";
-import PageLoader from "../UI/PageLoader";
-import IconButton from "../Buttons/IconButton";
-import Icon from "../UI/Icon";
+import MovieCard from "../Cards/MovieCard"
+import CategoryLabel from "../Labels/CategoryLabel"
+import PageLoader from "../UI/PageLoader"
+import IconButton from "../Buttons/IconButton"
+import Icon from "../UI/Icon"
 
-import styles from "./Discovery.module.scss";
+import styles from "./Discovery.module.scss"
 
 const Discovery = () => {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const yearStartRef = useRef<HTMLInputElement>(null);
-  const yearEndRef = useRef<HTMLInputElement>(null);
-  const listRef = useRef<HTMLUListElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null)
+  const yearStartRef = useRef<HTMLInputElement>(null)
+  const yearEndRef = useRef<HTMLInputElement>(null)
+  const listRef = useRef<HTMLUListElement>(null)
 
-  const [isExpanded, setIsExpanded] = useState<boolean>(false);
+  const [isExpanded, setIsExpanded] = useState<boolean>(false)
 
-  const queryClient = useQueryClient();
+  const queryClient = useQueryClient()
 
   const { data, isLoading: isLoadingGenres } = useQuery({
     queryKey: "genres",
     queryFn: () => axios.get("/api/genres"),
     refetchOnWindowFocus: false,
-  });
+  })
 
   const getGenres = () => {
     const options = Array.prototype.slice.call(
       document.querySelectorAll(`.genre_option:checked`)
-    );
+    )
 
     const genres: string[] = options.map(
       (option: any) => `'${option.dataset.genre}'`
-    );
+    )
 
-    return genres;
-  };
+    return genres
+  }
 
   const {
     data: movieData,
@@ -50,10 +50,10 @@ const Discovery = () => {
     queryKey: ["discovery"],
     getNextPageParam: (prevData: any) => prevData.data.next,
     queryFn: ({ pageParam = 1 }) => {
-      const keyword = inputRef.current!.value;
-      const yearStart = yearStartRef.current!.value;
-      const yearEnd = yearEndRef.current!.value;
-      const genres = getGenres();
+      const keyword = inputRef.current!.value
+      const yearStart = yearStartRef.current!.value
+      const yearEnd = yearEndRef.current!.value
+      const genres = getGenres()
 
       return axios.get(`/api/movies`, {
         params: {
@@ -64,27 +64,27 @@ const Discovery = () => {
           yearEnd: yearEnd,
         },
         paramsSerializer: {
-          serialize: (params) => {
-            return qs.stringify(params, { arrayFormat: "repeat" });
+          serialize: params => {
+            return qs.stringify(params, { arrayFormat: "repeat" })
           },
         },
-      });
+      })
     },
     refetchOnWindowFocus: false,
-  });
+  })
 
   const { observerRef } = useInfiniteScroll({
     hasNextPage,
     isFetchingNextPage,
     fetchNextPage,
-  });
+  })
 
   const filterExpandHandler = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsExpanded((prev) => !prev);
-  };
+    e.preventDefault()
+    setIsExpanded(prev => !prev)
+  }
 
-  if (isLoadingGenres) return <PageLoader />;
+  if (isLoadingGenres) return <PageLoader />
 
   return (
     <section className={styles.discovery}>
@@ -168,7 +168,7 @@ const Discovery = () => {
         <li ref={observerRef}></li>
       </ul>
     </section>
-  );
-};
+  )
+}
 
-export default Discovery;
+export default Discovery

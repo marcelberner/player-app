@@ -1,39 +1,39 @@
-import React, { useRef } from "react";
-import axios from "axios";
-import { useInfiniteQuery, useQueryClient } from "react-query";
+import React, { useRef } from "react"
+import axios from "axios"
+import { useInfiniteQuery, useQueryClient } from "react-query"
 
-import NavLabel from "../Labels/NavLabel";
-import Icon from "../UI/Icon";
-import PinnedButton from "../Buttons/PinnedButton";
-import Button from "../Buttons/Button";
-import PageLoader from "../UI/PageLoader";
+import NavLabel from "../Labels/NavLabel"
+import Icon from "../UI/Icon"
+import PinnedButton from "../Buttons/PinnedButton"
+import Button from "../Buttons/Button"
+import PageLoader from "../UI/PageLoader"
 
-import styles from "./Members.module.scss";
+import styles from "./Members.module.scss"
 
 const Members = () => {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const queryClient = useQueryClient();
+  const inputRef = useRef<HTMLInputElement>(null)
+  const queryClient = useQueryClient()
 
   const addFriendHandler = async (userEmail: string) => {
     const res = await axios.post("/api/friends/request", {
       requestToEmail: userEmail,
-    });
+    })
 
-    queryClient.invalidateQueries(["members"]);
-  };
+    queryClient.invalidateQueries(["members"])
+  }
 
   const { data, hasNextPage, isLoading, fetchNextPage } = useInfiniteQuery({
     queryKey: "members",
     getNextPageParam: (prevData: any) => prevData.data.next,
     queryFn: ({ pageParam = 1 }) => {
-      const username = inputRef.current!.value;
+      const username = inputRef.current!.value
 
       return axios.get(`/api/search/users`, {
         params: { page: pageParam, username: username },
-      });
+      })
     },
     refetchOnWindowFocus: false,
-  });
+  })
 
   return (
     <section className={styles.members}>
@@ -82,7 +82,7 @@ const Members = () => {
       )}
       {hasNextPage && <Button action={() => fetchNextPage()}>Show more</Button>}
     </section>
-  );
-};
+  )
+}
 
-export default Members;
+export default Members

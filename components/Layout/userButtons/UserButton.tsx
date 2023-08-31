@@ -1,25 +1,25 @@
-import React from "react";
+import React from "react"
 
-import useModal from "@/hooks/useModal";
+import useModal from "@/hooks/useModal"
 
-import NotificationModal from "@/components/modals/NotificationModal";
-import LogoutModal from "@/components/modals/LogoutModal";
-import IconButton from "@/components/Buttons/IconButton";
+import NotificationModal from "@/components/modals/NotificationModal"
+import LogoutModal from "@/components/modals/LogoutModal"
+import IconButton from "@/components/Buttons/IconButton"
 
-import styles from "./UserButton.module.scss";
+import styles from "./UserButton.module.scss"
 
 interface buttonProps {
-  children: JSX.Element;
-  id?: string;
-  data?: any[];
+  children: JSX.Element
+  id?: string
+  data?: any[]
   modal?: {
-    header: string;
-    emptyText: string;
-  };
+    header: string
+    emptyText: string
+  }
 }
 
 const UserButton: React.FC<buttonProps> = ({ children, id, modal, data }) => {
-  const { modalRef, modalState, showModal } = useModal();
+  const { modalRef, modalState, showModal } = useModal()
 
   return (
     <div
@@ -42,7 +42,7 @@ const UserButton: React.FC<buttonProps> = ({ children, id, modal, data }) => {
           />
         ))}
     </div>
-  );
-};
+  )
+}
 
-export default UserButton;
+export default UserButton

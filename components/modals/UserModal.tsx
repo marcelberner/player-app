@@ -1,26 +1,26 @@
-import React from "react";
-import axios from "axios";
-import { useMutation, useQueryClient } from "react-query";
+import React from "react"
+import axios from "axios"
+import { useMutation, useQueryClient } from "react-query"
 
-import { useAppDispatch } from "@/hooks/redux";
-import { setUser } from "@/store/message";
+import { useAppDispatch } from "@/hooks/redux"
+import { setUser } from "@/store/message"
 
-import styles from "./UserModal.module.scss";
+import styles from "./UserModal.module.scss"
 
-import Button from "../Buttons/Button";
-import Icon from "../UI/Icon";
+import Button from "../Buttons/Button"
+import Icon from "../UI/Icon"
 
 interface modalProps {
-  id: string;
-  name: string;
-  isOnline: boolean;
-  modalRef: any;
-  email: string;
+  id: string
+  name: string
+  isOnline: boolean
+  modalRef: any
+  email: string
   position?: {
-    x: number;
-    y: number;
-  };
-  closeModal: (event?: any) => void;
+    x: number
+    y: number
+  }
+  closeModal: (event?: any) => void
 }
 
 const UserModal: React.FC<modalProps> = ({
@@ -32,33 +32,33 @@ const UserModal: React.FC<modalProps> = ({
   email,
   closeModal,
 }) => {
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
 
-  const queryClient = useQueryClient();
+  const queryClient = useQueryClient()
 
   const showMessageHandler = () => {
-    dispatch(setUser({ email, isOnline, name }));
-    closeModal();
-  };
+    dispatch(setUser({ email, isOnline, name }))
+    closeModal()
+  }
 
   const removeFriend = (data: any) =>
     axios.delete(`/api/friends/remove`, {
       params: { friendEmail: data.friendEmail },
-    });
+    })
 
   const friendRemoveMutation = useMutation({
     mutationFn: removeFriend,
     onSuccess: () => {
-      queryClient.invalidateQueries("friends");
+      queryClient.invalidateQueries("friends")
     },
-  });
+  })
 
   const removeFriendHandler = () => {
-    closeModal();
+    closeModal()
     friendRemoveMutation.mutate({
       friendEmail: email,
-    });
-  };
+    })
+  }
 
   return (
     <div
@@ -79,7 +79,7 @@ const UserModal: React.FC<modalProps> = ({
         </Button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default UserModal;
+export default UserModal

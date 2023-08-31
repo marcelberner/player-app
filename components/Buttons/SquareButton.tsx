@@ -1,10 +1,10 @@
-import React from "react";
+import React from "react"
 
-import styles from "./SquareButton.module.scss";
+import styles from "./SquareButton.module.scss"
 
 interface buttonProps {
-  children: JSX.Element | string;
-  icon: JSX.Element;
+  children: JSX.Element | string
+  icon: JSX.Element
 }
 
 const SquareButton: React.FC<buttonProps> = ({ icon, children }) => {
@@ -13,7 +13,7 @@ const SquareButton: React.FC<buttonProps> = ({ icon, children }) => {
       {icon}
       <span>{children}</span>
     </button>
-  );
-};
+  )
+}
 
-export default SquareButton;
+export default SquareButton

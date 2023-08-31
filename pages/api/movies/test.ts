@@ -1,12 +1,12 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import { client } from "../../../lib/database";
+import { NextApiRequest, NextApiResponse } from "next"
+import { client } from "../../../lib/database"
 
-const LIMIT = 20;
+const LIMIT = 20
 
 const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const page = parseInt(req.query.page as any);
+  const page = parseInt(req.query.page as any)
 
-  let movies: any;
+  let movies: any
 
   try {
     movies = await client.query(`
@@ -51,19 +51,19 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
       'Comedy'
     )
     GROUP BY genres.genre
-    `);
+    `)
   } catch {
-    res.status(500).json({ message: "Couldn't get movies by genre." });
+    res.status(500).json({ message: "Couldn't get movies by genre." })
   }
 
-  const rows = movies.rows.slice(0, LIMIT);
-  const hasNextPage = movies.rows.length > LIMIT;
+  const rows = movies.rows.slice(0, LIMIT)
+  const hasNextPage = movies.rows.length > LIMIT
 
   res.status(200).json({
     movies: rows,
     next: hasNextPage ? page + 1 : undefined,
     prev: page > 1 ? page - 1 : undefined,
-  });
-};
+  })
+}
 
-export default Handler;
+export default Handler

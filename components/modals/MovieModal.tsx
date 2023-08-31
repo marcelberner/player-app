@@ -1,35 +1,35 @@
-import React, { useState, useRef } from "react";
-import styles from "./MovieModal.module.scss";
+import React, { useState, useRef } from "react"
+import styles from "./MovieModal.module.scss"
 import {
   useQuery,
   useInfiniteQuery,
   useMutation,
   useQueryClient,
-} from "react-query";
-import axios from "axios";
-import Image from "next/dist/client/image";
+} from "react-query"
+import axios from "axios"
+import Image from "next/dist/client/image"
 
-import useInfiniteScroll from "@/hooks/useInfiniteScroll.";
-import useValidate from "@/hooks/useValidate";
+import useInfiniteScroll from "@/hooks/useInfiniteScroll."
+import useValidate from "@/hooks/useValidate"
 
-import Player from "../Players/Player";
-import CategoryLabel from "../Labels/CategoryLabel";
-import Button from "../Buttons/Button";
-import Icon from "../UI/Icon";
-import PosterPlaceholder from "../UI/placeholders/PosterPlaceholder";
+import Player from "../Players/Player"
+import CategoryLabel from "../Labels/CategoryLabel"
+import Button from "../Buttons/Button"
+import Icon from "../UI/Icon"
+import PosterPlaceholder from "../UI/placeholders/PosterPlaceholder"
 
 interface modalProps {
-  title: string;
-  year: number;
-  rating: number;
-  poster: string;
-  language?: string;
-  description?: string;
-  runtime?: number;
-  modalRef: any;
-  video: string;
-  imdbID: string;
-  closeModal?: () => void;
+  title: string
+  year: number
+  rating: number
+  poster: string
+  language?: string
+  description?: string
+  runtime?: number
+  modalRef: any
+  video: string
+  imdbID: string
+  closeModal?: () => void
 }
 
 const MovieModal: React.FC<modalProps> = ({
@@ -45,22 +45,22 @@ const MovieModal: React.FC<modalProps> = ({
   imdbID,
   closeModal,
 }) => {
-  const [userRate, setUserRate] = useState(0);
-  const [focusUserRate, setfocusUserRate] = useState(0);
+  const [userRate, setUserRate] = useState(0)
+  const [focusUserRate, setfocusUserRate] = useState(0)
 
-  const opinionRef = useRef<HTMLTextAreaElement>(null);
+  const opinionRef = useRef<HTMLTextAreaElement>(null)
 
-  const queryClient = useQueryClient();
+  const queryClient = useQueryClient()
   const [isValid, validate] = useValidate({
     inputRef: opinionRef,
     isEmpty: true,
-  });
+  })
 
   const { data, isLoading } = useQuery({
     queryKey: ["movie-genres", { movieID: imdbID }],
     queryFn: () => axios.get(`/api/movies/${imdbID}/genres`),
     refetchOnWindowFocus: false,
-  });
+  })
 
   const {
     data: commentsData,
@@ -78,56 +78,56 @@ const MovieModal: React.FC<modalProps> = ({
         },
       }),
     refetchOnWindowFocus: false,
-  });
+  })
 
   const { observerRef } = useInfiniteScroll({
     hasNextPage,
     isFetchingNextPage,
     fetchNextPage,
-  });
+  })
 
   const sendOpinion = (data: any) =>
     axios.post("/api/opinions/add", {
       ...data,
-    });
+    })
 
   const deleteOpinion = () =>
     axios.delete(`/api/opinions/delete`, {
       params: {
         movieId: imdbID,
       },
-    });
+    })
 
   const addOpinionMutation = useMutation({
     mutationFn: sendOpinion,
     onSuccess: () => {
-      queryClient.invalidateQueries(["opinions", { movieID: imdbID }]);
-      opinionRef.current!.value = "";
+      queryClient.invalidateQueries(["opinions", { movieID: imdbID }])
+      opinionRef.current!.value = ""
     },
-  });
+  })
 
   const deleteOpinionMutation = useMutation({
     mutationFn: deleteOpinion,
     onSuccess: () => {
-      queryClient.invalidateQueries(["opinions", { movieID: imdbID }]);
+      queryClient.invalidateQueries(["opinions", { movieID: imdbID }])
     },
-  });
+  })
 
   const submitHandler = (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    const isInputValid = validate();
+    const isInputValid = validate()
 
-    if (userRate < 1 || userRate > 10 || !isInputValid) return;
+    if (userRate < 1 || userRate > 10 || !isInputValid) return
 
     addOpinionMutation.mutate({
       movieId: imdbID,
       rating: userRate,
       content: opinionRef.current!.value,
-    });
-  };
+    })
+  }
 
-  const deleteHandler = () => deleteOpinionMutation.mutate();
+  const deleteHandler = () => deleteOpinionMutation.mutate()
 
   return (
     <div ref={modalRef} className={`modal ${styles.movie_modal}`}>
@@ -255,7 +255,7 @@ const MovieModal: React.FC<modalProps> = ({
         </ul>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default MovieModal;
+export default MovieModal

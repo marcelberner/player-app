@@ -1,14 +1,14 @@
-import React from "react";
-import axios from "axios";
-import { useQuery } from "react-query";
+import React from "react"
+import axios from "axios"
+import { useQuery } from "react-query"
 
-import styles from "./UserButtons.module.scss";
+import styles from "./UserButtons.module.scss"
 
-import UserButton from "./UserButton";
-import Icon from "@/components/UI/Icon";
+import UserButton from "./UserButton"
+import Icon from "@/components/UI/Icon"
 
 interface buttonsProps {
-  searchbarState: boolean;
+  searchbarState: boolean
 }
 
 const UserButtons: React.FC<buttonsProps> = ({ searchbarState }) => {
@@ -16,7 +16,7 @@ const UserButtons: React.FC<buttonsProps> = ({ searchbarState }) => {
     queryKey: "friend-requests",
     queryFn: () => axios.get("/api/friends/receive"),
     refetchOnWindowFocus: false,
-  });
+  })
 
   return !searchbarState ? (
     <div className={styles.buttons}>
@@ -46,7 +46,7 @@ const UserButtons: React.FC<buttonsProps> = ({ searchbarState }) => {
         <Icon icon="userAvatar" />
       </UserButton>
     </div>
-  ) : null;
-};
+  ) : null
+}
 
-export default UserButtons;
+export default UserButtons

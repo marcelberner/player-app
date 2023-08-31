@@ -1,20 +1,20 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import { client } from "./../../../../lib/database";
-import { getSession } from "next-auth/react";
+import { NextApiRequest, NextApiResponse } from "next"
+import { client } from "./../../../../lib/database"
+import { getSession } from "next-auth/react"
 
-const LIMIT = 12;
+const LIMIT = 12
 
 const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const session = await getSession({ req: req });
+  const session = await getSession({ req: req })
 
   if (!session) {
-    res.status(401).json({ message: "User is not authenticated" });
-    return;
+    res.status(401).json({ message: "User is not authenticated" })
+    return
   }
 
-  const page = parseInt(req.query.page as any);
+  const page = parseInt(req.query.page as any)
 
-  let discussions;
+  let discussions
 
   try {
     discussions = await client.query(`
@@ -40,20 +40,20 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
     ORDER BY discussions.create_date DESC
     LIMIT ${LIMIT + 1}
     OFFSET ${(page - 1) * LIMIT}
-    `);
+    `)
   } catch {
-    res.status(500).json({ message: "Could not get discussions." });
-    return;
+    res.status(500).json({ message: "Could not get discussions." })
+    return
   }
 
-  const rows = [...discussions.rows].slice(0, LIMIT);
-  const hasNextPage = discussions.rows.length > LIMIT;
+  const rows = [...discussions.rows].slice(0, LIMIT)
+  const hasNextPage = discussions.rows.length > LIMIT
 
   res.status(200).json({
     discussions: rows,
     next: hasNextPage ? page + 1 : undefined,
     prev: page > 1 ? page - 1 : undefined,
-  });
-};
+  })
+}
 
-export default Handler;
+export default Handler

@@ -1,13 +1,13 @@
-import React from "react";
+import React from "react"
 
-import usePageKick from "@/hooks/kick";
+import usePageKick from "@/hooks/kick"
 
-import PostComponent from "@/components/pages/Post";
-import Layout from "@/components/Layout/Layout";
-import Head from "next/head";
+import PostComponent from "@/components/pages/Post"
+import Layout from "@/components/Layout/Layout"
+import Head from "next/head"
 
 const Post = () => {
-  const status = usePageKick();
+  const status = usePageKick()
 
   if (status == "authenticated") {
     return (
@@ -23,8 +23,8 @@ const Post = () => {
           <PostComponent />
         </Layout>
       </>
-    );
+    )
   }
-};
+}
 
-export default Post;
+export default Post

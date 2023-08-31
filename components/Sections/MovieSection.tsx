@@ -1,19 +1,19 @@
-import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { FreeMode, Thumbs } from "swiper";
+import React from "react"
+import { Swiper, SwiperSlide } from "swiper/react"
+import { FreeMode, Thumbs } from "swiper"
 
-import styles from "./MovieSection.module.scss";
+import styles from "./MovieSection.module.scss"
 
-import CategoryLabel from "../Labels/CategoryLabel";
-import MovieCard from "../Cards/MovieCard";
+import CategoryLabel from "../Labels/CategoryLabel"
+import MovieCard from "../Cards/MovieCard"
 
-import "swiper/css";
-import "swiper/css/free-mode";
-import "swiper/css/thumbs";
+import "swiper/css"
+import "swiper/css/free-mode"
+import "swiper/css/thumbs"
 
 interface SectionProps {
-  genre: string;
-  movies: any[];
+  genre: string
+  movies: any[]
 }
 
 const MovieSection: React.FC<SectionProps> = ({ genre, movies }) => {
@@ -45,7 +45,7 @@ const MovieSection: React.FC<SectionProps> = ({ genre, movies }) => {
         ))}
       </Swiper>
     </section>
-  );
-};
+  )
+}
 
-export default MovieSection;
+export default MovieSection

@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
-import Image from "next/image";
-import { createPortal } from "react-dom";
+import React, { useState, useEffect } from "react"
+import Image from "next/image"
+import { createPortal } from "react-dom"
 
-import useModal from "@/hooks/useModal";
-import useMounted from "@/hooks/useMounted";
+import useModal from "@/hooks/useModal"
+import useMounted from "@/hooks/useMounted"
 
-import styles from "./FrontCard.module.scss";
+import styles from "./FrontCard.module.scss"
 
-import Button from "../Buttons/Button";
-import MovieModal from "../modals/MovieModal";
-import Icon from "../UI/Icon";
+import Button from "../Buttons/Button"
+import MovieModal from "../modals/MovieModal"
+import Icon from "../UI/Icon"
 
 const SLIDES = [
   {
@@ -60,38 +60,38 @@ const SLIDES = [
       "In his second year of fighting crime, Batman uncovers corruption in Gotham City that connects to his own family while facing a serial killer known as the Riddler.",
     video: "mqqft2x_Aa4",
   },
-];
+]
 
 const FrontCard = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(0)
 
-  const { modalRef, modalState, showModal, closeModal } = useModal();
-  const mounted = useMounted();
+  const { modalRef, modalState, showModal, closeModal } = useModal()
+  const mounted = useMounted()
 
   const slideBackwardHandler = () => {
-    setCurrentSlide((prev) => {
-      if (prev == 0) return SLIDES.length - 1;
-      else return (prev -= 1);
-    });
-  };
+    setCurrentSlide(prev => {
+      if (prev == 0) return SLIDES.length - 1
+      else return (prev -= 1)
+    })
+  }
 
   const slideForwardHandler = () => {
-    setCurrentSlide((prev) => {
-      if (prev == SLIDES.length - 1) return 0;
-      else return (prev += 1);
-    });
-  };
+    setCurrentSlide(prev => {
+      if (prev == SLIDES.length - 1) return 0
+      else return (prev += 1)
+    })
+  }
 
   useEffect(() => {
-    let sliderInterval: ReturnType<typeof setTimeout>;
+    let sliderInterval: ReturnType<typeof setTimeout>
 
     if (!modalState) {
-      sliderInterval = setInterval(() => slideForwardHandler(), 10000);
+      sliderInterval = setInterval(() => slideForwardHandler(), 10000)
     }
 
-    return () => clearInterval(sliderInterval);
+    return () => clearInterval(sliderInterval)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentSlide, SLIDES.length, modalState]);
+  }, [currentSlide, SLIDES.length, modalState])
 
   return (
     <>
@@ -167,7 +167,7 @@ const FrontCard = () => {
           document.getElementById("modal")!
         )}
     </>
-  );
-};
+  )
+}
 
-export default FrontCard;
+export default FrontCard

@@ -1,15 +1,15 @@
-import React from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
+import React from "react"
+import Link from "next/link"
+import { useRouter } from "next/router"
 
-import styles from "./NavItem.module.scss";
+import styles from "./NavItem.module.scss"
 
 interface navProps {
-  link: string;
-  icon: JSX.Element;
-  iconActive: JSX.Element;
-  text: string;
-  state: boolean;
+  link: string
+  icon: JSX.Element
+  iconActive: JSX.Element
+  text: string
+  state: boolean
 }
 
 const NavItem: React.FC<navProps> = ({
@@ -19,9 +19,9 @@ const NavItem: React.FC<navProps> = ({
   state,
   iconActive,
 }) => {
-  const router = useRouter();
-  const currentRoute = router.pathname.split("/")[1];
-  const currentLink = link.split("/")[1];
+  const router = useRouter()
+  const currentRoute = router.pathname.split("/")[1]
+  const currentLink = link.split("/")[1]
 
   return (
     <li>
@@ -35,7 +35,7 @@ const NavItem: React.FC<navProps> = ({
         {state && <span>{text}</span>}
       </Link>
     </li>
-  );
-};
+  )
+}
 
-export default NavItem;
+export default NavItem

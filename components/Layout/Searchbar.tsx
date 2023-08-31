@@ -1,78 +1,78 @@
-import React, { useState, useEffect, useRef } from "react";
-import styles from "./Searchbar.module.scss";
-import { useRouter } from "next/dist/client/router";
-import axios from "axios";
+import React, { useState, useEffect, useRef } from "react"
+import styles from "./Searchbar.module.scss"
+import { useRouter } from "next/dist/client/router"
+import axios from "axios"
 
-import Icon from "../UI/Icon";
-import IconButton from "@/components/Buttons/IconButton";
+import Icon from "../UI/Icon"
+import IconButton from "@/components/Buttons/IconButton"
 
 interface searchbarProps {
-  searchbarState: boolean;
-  toggleSearchbar: () => void;
+  searchbarState: boolean
+  toggleSearchbar: () => void
 }
 
 const Searchbar: React.FC<searchbarProps> = ({
   searchbarState,
   toggleSearchbar,
 }) => {
-  const [title, setTitle] = useState<string>("");
-  const [results, setResults] = useState<{ title: string }[] | null>(null);
-  const router = useRouter();
+  const [title, setTitle] = useState<string>("")
+  const [results, setResults] = useState<{ title: string }[] | null>(null)
+  const router = useRouter()
 
-  const formRef = useRef<HTMLFormElement>(null);
+  const formRef = useRef<HTMLFormElement>(null)
 
   const searchTitleHandler = (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    if (title.length == 0) return;
+    if (title.length == 0) return
 
-    router.push(`/search/${title}`);
-    setResults(null);
-  };
+    router.push(`/search/${title}`)
+    setResults(null)
+  }
 
   const updateTitleHandler = (e: React.FormEvent<HTMLInputElement>) => {
-    const currentValue = e.currentTarget.value;
+    const currentValue = e.currentTarget.value
 
-    setTitle(currentValue);
-  };
+    setTitle(currentValue)
+  }
 
   const clearResultsHandler = (e: React.MouseEvent) => {
     if (!formRef.current!.contains(e.target as any)) {
-      setResults(null);
-      removeEventListener("click", clearResultsHandler as any);
+      setResults(null)
+      removeEventListener("click", clearResultsHandler as any)
     }
-  };
+  }
 
   const disappearHandler = (e: React.MouseEvent) => {
     if (!formRef.current!.contains(e.target as any)) {
-      toggleSearchbar();
-      removeEventListener("click", disappearHandler as any);
+      toggleSearchbar()
+      removeEventListener("click", disappearHandler as any)
     }
-  };
+  }
 
   useEffect(() => {
-    if (!searchbarState) return;
-    addEventListener("click", disappearHandler as any);
+    if (!searchbarState) return
+    addEventListener("click", disappearHandler as any)
 
-    return () => removeEventListener("click", disappearHandler as any);
+    return () => removeEventListener("click", disappearHandler as any)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchbarState]);
+  }, [searchbarState])
 
   useEffect(() => {
     if (title.length == 0) {
-      setResults(null);
-      return;
+      setResults(null)
+      return
     }
 
-    addEventListener("click", clearResultsHandler as any);
+    addEventListener("click", clearResultsHandler as any)
 
     axios
       .get(`/api/search/movies/${title}`)
-      .then((response) => setResults(response.data.results.rows));
+      .then(response => setResults(response.data.results.rows))
 
-    return () => removeEventListener("click", clearResultsHandler as any);
+    return () => removeEventListener("click", clearResultsHandler as any)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [title]);
+  }, [title])
 
   return (
     <form
@@ -108,7 +108,7 @@ const Searchbar: React.FC<searchbarProps> = ({
         <Icon icon="searchLoupe" />
       </IconButton>
     </form>
-  );
-};
+  )
+}
 
-export default Searchbar;
+export default Searchbar

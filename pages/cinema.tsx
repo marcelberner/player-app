@@ -1,13 +1,13 @@
-import React from "react";
+import React from "react"
 
-import usePageKick from "@/hooks/kick";
+import usePageKick from "@/hooks/kick"
 
-import Layout from "@/components/Layout/Layout";
-import Cinema from "@/components/pages/Cinema";
-import Head from "next/head";
+import Layout from "@/components/Layout/Layout"
+import Cinema from "@/components/pages/Cinema"
+import Head from "next/head"
 
 const LiveCinema = () => {
-  const status = usePageKick();
+  const status = usePageKick()
 
   if (status == "authenticated") {
     return (
@@ -23,8 +23,8 @@ const LiveCinema = () => {
           <Cinema />
         </Layout>
       </>
-    );
+    )
   }
-};
+}
 
-export default LiveCinema;
+export default LiveCinema

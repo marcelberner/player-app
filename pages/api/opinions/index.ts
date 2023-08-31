@@ -1,23 +1,23 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import { client } from "./../../../lib/database";
-import { getSession } from "next-auth/react";
+import { NextApiRequest, NextApiResponse } from "next"
+import { client } from "./../../../lib/database"
+import { getSession } from "next-auth/react"
 
-const LIMIT = 10;
+const LIMIT = 10
 
 const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const session = await getSession({ req: req });
+  const session = await getSession({ req: req })
 
   if (!session) {
-    res.status(401).json({ message: "User is not authenticated" });
-    return;
+    res.status(401).json({ message: "User is not authenticated" })
+    return
   }
 
-  const email = session.user?.email;
+  const email = session.user?.email
 
-  const { movieId } = req.query;
-  const page = parseInt(req.query.page as any);
+  const { movieId } = req.query
+  const page = parseInt(req.query.page as any)
 
-  let opinions: any;
+  let opinions: any
 
   try {
     opinions = await client.query(`
@@ -29,19 +29,19 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
     ORDER BY create_date DESC
     LIMIT ${LIMIT + 1}
     OFFSET ${(page - 1) * LIMIT}
-    `);
+    `)
   } catch {
-    res.status(500).json({ message: "Could not get opinions." });
+    res.status(500).json({ message: "Could not get opinions." })
   }
 
-  const rows = opinions.rows.slice(0, LIMIT);
-  const hasNextPage = opinions.rows.length > LIMIT;
+  const rows = opinions.rows.slice(0, LIMIT)
+  const hasNextPage = opinions.rows.length > LIMIT
 
   res.status(200).json({
     opinions: rows,
     next: hasNextPage ? page + 1 : undefined,
     prev: page > 1 ? page - 1 : undefined,
-  });
-};
+  })
+}
 
-export default Handler;
+export default Handler

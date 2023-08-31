@@ -1,13 +1,13 @@
-import React from "react";
+import React from "react"
 
-import usePageKick from "@/hooks/kick";
+import usePageKick from "@/hooks/kick"
 
-import Layout from "@/components/Layout/Layout";
-import CommunityComponent from "@/components/pages/Community";
-import Head from "next/head";
+import Layout from "@/components/Layout/Layout"
+import CommunityComponent from "@/components/pages/Community"
+import Head from "next/head"
 
 const Community = () => {
-  const status = usePageKick();
+  const status = usePageKick()
 
   if (status == "authenticated") {
     return (
@@ -23,8 +23,8 @@ const Community = () => {
           <CommunityComponent />
         </Layout>
       </>
-    );
+    )
   }
-};
+}
 
-export default Community;
+export default Community

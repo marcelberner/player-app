@@ -1,8 +1,8 @@
-import React from "react";
-import styles from "./Loader.module.scss";
+import React from "react"
+import styles from "./Loader.module.scss"
 
 const Loader = () => {
-  return <span className={styles.loader} />;
-};
+  return <span className={styles.loader} />
+}
 
-export default Loader;
+export default Loader

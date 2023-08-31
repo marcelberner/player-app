@@ -1,16 +1,16 @@
-import React from "react";
+import React from "react"
 
-import styles from "./Cinema.module.scss";
+import styles from "./Cinema.module.scss"
 
-import Chat from "../chat/Chat";
-import Player from "../Players/Player";
-import Icon from "../UI/Icon";
+import Chat from "../chat/Chat"
+import Player from "../Players/Player"
+import Icon from "../UI/Icon"
 
 const Cinema = () => {
   return (
     <section className={styles.cinema}>
       <div className={styles.content}>
-        <Player src="/"/>
+        <Player src="/" />
         <div className={styles.container}>
           <h1 className={styles.title}>
             The Lord of the Rings: The Fellowship of the Ring
@@ -42,7 +42,7 @@ const Cinema = () => {
       </div>
       <Chat />
     </section>
-  );
-};
+  )
+}
 
-export default Cinema;
+export default Cinema

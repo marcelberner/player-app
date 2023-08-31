@@ -1,18 +1,18 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import { client } from "../../../lib/database";
+import { NextApiRequest, NextApiResponse } from "next"
+import { client } from "../../../lib/database"
 
-const LIMIT = 20;
+const LIMIT = 20
 
 const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { keyword, genres, yearStart, yearEnd } = req.query;
-  const page = parseInt(req.query.page as any);
+  const { keyword, genres, yearStart, yearEnd } = req.query
+  const page = parseInt(req.query.page as any)
 
-  let movies: any;
-  let genreString;
+  let movies: any
+  let genreString
 
   if (!!genres) {
-    if (typeof genres === "string") genreString = genres;
-    else genreString = (genres as string[]).join(", ");
+    if (typeof genres === "string") genreString = genres
+    else genreString = (genres as string[]).join(", ")
   }
 
   try {
@@ -35,19 +35,19 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
     ) 
     LIMIT ${LIMIT + 1}
     OFFSET ${(page - 1) * LIMIT}
-    `);
+    `)
   } catch {
-    res.status(500).json({ message: "Couldn't get movies by genre." });
+    res.status(500).json({ message: "Couldn't get movies by genre." })
   }
 
-  const rows = movies.rows.slice(0, LIMIT);
-  const hasNextPage = movies.rows.length > LIMIT;
+  const rows = movies.rows.slice(0, LIMIT)
+  const hasNextPage = movies.rows.length > LIMIT
 
   res.status(200).json({
     movies: rows,
     next: hasNextPage ? page + 1 : undefined,
     prev: page > 1 ? page - 1 : undefined,
-  });
-};
+  })
+}
 
-export default Handler;
+export default Handler

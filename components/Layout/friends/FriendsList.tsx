@@ -1,25 +1,25 @@
-import React from "react";
-import axios from "axios";
-import { useQuery } from "react-query";
-import { useAppSelector } from "@/hooks/redux";
-import Link from "next/link";
+import React from "react"
+import axios from "axios"
+import { useQuery } from "react-query"
+import { useAppSelector } from "@/hooks/redux"
+import Link from "next/link"
 
-import styles from "./FriendsList.module.scss";
+import styles from "./FriendsList.module.scss"
 
-import FriendItem from "./FriendItem";
+import FriendItem from "./FriendItem"
 
 interface friendsProps {
-  state: boolean;
+  state: boolean
 }
 
 const FriendsList: React.FC<friendsProps> = ({ state }) => {
-  const sidebarState = useAppSelector((state) => state.sidebarData.isHidden);
+  const sidebarState = useAppSelector(state => state.sidebarData.isHidden)
 
   const { data, isLoading } = useQuery({
     queryKey: "friends",
     queryFn: () => axios.get("/api/friends/get"),
     refetchOnWindowFocus: false,
-  });
+  })
 
   return (
     <div className={styles.friendslist}>
@@ -49,7 +49,7 @@ const FriendsList: React.FC<friendsProps> = ({ state }) => {
           </div>
         ))}
     </div>
-  );
-};
+  )
+}
 
-export default FriendsList;
+export default FriendsList

@@ -1,23 +1,23 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import { client } from "../../../../lib/database";
-import { getSession } from "next-auth/react";
+import { NextApiRequest, NextApiResponse } from "next"
+import { client } from "../../../../lib/database"
+import { getSession } from "next-auth/react"
 
-const LIMIT = 15;
+const LIMIT = 15
 
 const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const session = await getSession({ req: req });
+  const session = await getSession({ req: req })
 
   if (!session) {
-    res.status(401).json({ message: "User is not authenticated" });
-    return;
+    res.status(401).json({ message: "User is not authenticated" })
+    return
   }
 
-  const email = session.user?.email;
+  const email = session.user?.email
 
-  const page = parseInt(req.query.page as any);
-  const username = req.query.username as any;
+  const page = parseInt(req.query.page as any)
+  const username = req.query.username as any
 
-  let users: any;
+  let users: any
 
   try {
     users = await client.query(`
@@ -38,19 +38,19 @@ const Handler = async (req: NextApiRequest, res: NextApiResponse) => {
     ORDER BY is_requested.status = 'pending' DESC
     LIMIT ${LIMIT + 1}
     OFFSET ${(page - 1) * LIMIT}
-    `);
+    `)
   } catch {
-    res.status(500).json({ message: "Couldn't get users." });
+    res.status(500).json({ message: "Couldn't get users." })
   }
 
-  const rows = users.rows.slice(0, LIMIT);
-  const hasNextPage = users.rows.length > LIMIT;
+  const rows = users.rows.slice(0, LIMIT)
+  const hasNextPage = users.rows.length > LIMIT
 
   res.status(200).json({
     users: rows,
     next: hasNextPage ? page + 1 : undefined,
     prev: page > 1 ? page - 1 : undefined,
-  });
-};
+  })
+}
 
-export default Handler;
+export default Handler

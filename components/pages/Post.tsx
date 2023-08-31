@@ -1,51 +1,51 @@
-import React, { useRef } from "react";
-import { useQuery, useMutation, useQueryClient } from "react-query";
-import axios from "axios";
-import { useRouter } from "next/router";
+import React, { useRef } from "react"
+import { useQuery, useMutation, useQueryClient } from "react-query"
+import axios from "axios"
+import { useRouter } from "next/router"
 
-import Icon from "../UI/Icon";
-import Button from "../Buttons/Button";
-import NavLabel from "../Labels/NavLabel";
-import PageLoader from "../UI/PageLoader";
+import Icon from "../UI/Icon"
+import Button from "../Buttons/Button"
+import NavLabel from "../Labels/NavLabel"
+import PageLoader from "../UI/PageLoader"
 
-import styles from "./Post.module.scss";
+import styles from "./Post.module.scss"
 
 const Post = () => {
-  const router = useRouter();
-  const commentRef = useRef<HTMLInputElement>();
+  const router = useRouter()
+  const commentRef = useRef<HTMLInputElement>()
 
-  const queryClient = useQueryClient();
+  const queryClient = useQueryClient()
 
   const { data, isLoading } = useQuery({
     queryKey: ["post", { id: router.query.postId }],
     queryFn: () => axios.get(`/api/discussions/get/${router.query.postId}`),
     refetchOnWindowFocus: false,
-  });
+  })
 
   const sendComment = (data: { content: string }) => {
     return axios.post(`/api/discussions/comment/${router.query.postId}`, {
       comment: data.content,
-    });
-  };
+    })
+  }
 
   const commentMutation = useMutation({
     mutationFn: sendComment,
     onSuccess: () => {
-      queryClient.invalidateQueries(["post", { id: router.query.postId }]);
+      queryClient.invalidateQueries(["post", { id: router.query.postId }])
     },
-  });
+  })
 
   const shareCommentHandler = (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
 
     commentMutation.mutate({
       content: commentRef.current!.value,
-    });
+    })
 
-    commentRef.current!.value = "";
-  };
+    commentRef.current!.value = ""
+  }
 
-  if (isLoading) return <PageLoader />;
+  if (isLoading) return <PageLoader />
 
   return (
     <section className={styles.post}>
@@ -90,7 +90,7 @@ const Post = () => {
                             <span>{comment.comment_creator}</span>
                             <p>{comment.comment_description}</p>
                           </li>
-                        );
+                        )
                     })}
                   </ul>
                 </>
@@ -116,7 +116,7 @@ const Post = () => {
         )}
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Post;
+export default Post

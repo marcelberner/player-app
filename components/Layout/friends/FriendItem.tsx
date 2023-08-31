@@ -1,22 +1,22 @@
-import React, { useState } from "react";
-import { createPortal } from "react-dom";
+import React, { useState } from "react"
+import { createPortal } from "react-dom"
 
-import { useAppSelector } from "@/hooks/redux";
+import { useAppSelector } from "@/hooks/redux"
 
-import useModal from "@/hooks/useModal";
-import useMounted from "@/hooks/useMounted";
+import useModal from "@/hooks/useModal"
+import useMounted from "@/hooks/useMounted"
 
-import styles from "./FriendItem.module.scss";
+import styles from "./FriendItem.module.scss"
 
-import UserModal from "@/components/modals/UserModal";
-import Icon from "@/components/UI/Icon";
+import UserModal from "@/components/modals/UserModal"
+import Icon from "@/components/UI/Icon"
 
 interface friendProps {
-  id: string;
-  name: string;
-  isOnline: boolean;
-  state: boolean;
-  email: string;
+  id: string
+  name: string
+  isOnline: boolean
+  state: boolean
+  email: string
 }
 
 const FriendItem: React.FC<friendProps> = ({
@@ -26,37 +26,37 @@ const FriendItem: React.FC<friendProps> = ({
   state,
   email,
 }) => {
-  const { modalRef, modalState, showModal, closeModal } = useModal();
-  const mounted = useMounted();
+  const { modalRef, modalState, showModal, closeModal } = useModal()
+  const mounted = useMounted()
 
   const [cursorPosition, setCursorPosition] = useState<{
-    x: number;
-    y: number;
-  }>();
+    x: number
+    y: number
+  }>()
 
-  const sidebarState = useAppSelector((state) => state.sidebarData.isHidden);
+  const sidebarState = useAppSelector(state => state.sidebarData.isHidden)
 
   const showModalHandler = (event: React.MouseEvent) => {
     if (window.innerWidth <= 640) {
-      showModal();
-      return;
+      showModal()
+      return
     }
 
-    let positionX = sidebarState ? 230 : 50;
-    let positionY = event.clientY - 20;
+    let positionX = sidebarState ? 230 : 50
+    let positionY = event.clientY - 20
 
     if (positionY + 180 > window.innerHeight) {
-      positionY = window.innerHeight - 190;
+      positionY = window.innerHeight - 190
     }
 
     const cursorPosition = {
       x: positionX,
       y: positionY,
-    };
+    }
 
-    showModal();
-    setCursorPosition(cursorPosition);
-  };
+    showModal()
+    setCursorPosition(cursorPosition)
+  }
 
   return (
     <>
@@ -84,7 +84,7 @@ const FriendItem: React.FC<friendProps> = ({
           document.getElementById("modal")!
         )}
     </>
-  );
-};
+  )
+}
 
-export default FriendItem;
+export default FriendItem

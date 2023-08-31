@@ -1,7 +1,7 @@
-import React from "react";
-import { FiUsers, FiSearch } from "react-icons/fi";
-import { BsPlay, BsFillPersonCheckFill } from "react-icons/bs";
-import { MdTableRows, MdOutlineHowToVote } from "react-icons/md";
+import React from "react"
+import { FiUsers, FiSearch } from "react-icons/fi"
+import { BsPlay, BsFillPersonCheckFill } from "react-icons/bs"
+import { MdTableRows, MdOutlineHowToVote } from "react-icons/md"
 import {
   AiOutlineCompass,
   AiFillCompass,
@@ -10,8 +10,8 @@ import {
   AiOutlineClockCircle,
   AiOutlineArrowLeft,
   AiFillPicture,
-} from "react-icons/ai";
-import { RxPaperPlane } from "react-icons/rx";
+} from "react-icons/ai"
+import { RxPaperPlane } from "react-icons/rx"
 import {
   BiArrowFromLeft,
   BiBell,
@@ -19,14 +19,14 @@ import {
   BiMessageAltDetail,
   BiPencil,
   BiMailSend,
-} from "react-icons/bi";
+} from "react-icons/bi"
 import {
   FaUserCircle,
   FaPlayCircle,
   FaPauseCircle,
   FaUserPlus,
   FaTrashAlt,
-} from "react-icons/fa";
+} from "react-icons/fa"
 import {
   HiOutlineHome,
   HiHome,
@@ -35,18 +35,18 @@ import {
   HiOutlineGlobeAlt,
   HiVolumeUp,
   HiVolumeOff,
-} from "react-icons/hi";
+} from "react-icons/hi"
 import {
   RiLiveLine,
   RiLiveFill,
   RiFullscreenFill,
   RiFullscreenExitLine,
   RiLayoutGridFill,
-} from "react-icons/ri";
-import { TbMessageCircle2, TbGift } from "react-icons/tb";
-import { IoPlay, IoPause } from "react-icons/io5";
-import { IoMdStarOutline, IoMdStar } from "react-icons/io";
-import { GoSettings } from "react-icons/go";
+} from "react-icons/ri"
+import { TbMessageCircle2, TbGift } from "react-icons/tb"
+import { IoPlay, IoPause } from "react-icons/io5"
+import { IoMdStarOutline, IoMdStar } from "react-icons/io"
+import { GoSettings } from "react-icons/go"
 
 interface iconProps {
   icon:
@@ -93,7 +93,7 @@ interface iconProps {
     | "sendStatus"
     | "filterOutline"
     | "trashFill"
-    | "voteOutline";
+    | "voteOutline"
 }
 
 const ICONS = {
@@ -141,10 +141,10 @@ const ICONS = {
   sendStatus: <BiMailSend />,
   trashFill: <FaTrashAlt />,
   filterOutline: <GoSettings />,
-};
+}
 
 const Icon: React.FC<iconProps> = ({ icon }) => {
-  return ICONS[icon];
-};
+  return ICONS[icon]
+}
 
-export default Icon;
+export default Icon

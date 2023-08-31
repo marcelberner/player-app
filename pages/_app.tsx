@@ -1,15 +1,15 @@
-import "@/styles/globals.scss";
-import "@/styles/variables.scss";
-import type { AppProps } from "next/app";
+import "@/styles/globals.scss"
+import "@/styles/variables.scss"
+import type { AppProps } from "next/app"
 
-import { Provider as StoreProvider } from "react-redux";
-import { SessionProvider } from "next-auth/react";
-import store from "../store/index";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { Provider as StoreProvider } from "react-redux"
+import { SessionProvider } from "next-auth/react"
+import store from "../store/index"
+import { QueryClient, QueryClientProvider } from "react-query"
 
-import Head from "next/head";
+import Head from "next/head"
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient()
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -26,5 +26,5 @@ export default function App({ Component, pageProps }: AppProps) {
         </SessionProvider>
       </StoreProvider>
     </>
-  );
+  )
 }

@@ -1,13 +1,13 @@
-import React from "react";
+import React from "react"
 
-import styles from "./CategoryLabel.module.scss";
+import styles from "./CategoryLabel.module.scss"
 
 interface LabelProps {
-  children: string;
+  children: string
 }
 
 const CategoryLabel: React.FC<LabelProps> = ({ children }) => {
-  return <h2 className={styles.label}>{children}</h2>;
-};
+  return <h2 className={styles.label}>{children}</h2>
+}
 
-export default CategoryLabel;
+export default CategoryLabel

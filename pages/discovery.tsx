@@ -1,14 +1,14 @@
-import React from "react";
+import React from "react"
 
-import Layout from "@/components/Layout/Layout";
-import Head from "next/head";
+import Layout from "@/components/Layout/Layout"
+import Head from "next/head"
 
-import usePageKick from "@/hooks/kick";
+import usePageKick from "@/hooks/kick"
 
-import DiscoveryComponent from "@/components/pages/Discovery";
+import DiscoveryComponent from "@/components/pages/Discovery"
 
 const Discovery = () => {
-  const status = usePageKick();
+  const status = usePageKick()
 
   if (status == "authenticated") {
     return (
@@ -24,8 +24,8 @@ const Discovery = () => {
           <DiscoveryComponent />
         </Layout>
       </>
-    );
+    )
   }
-};
+}
 
-export default Discovery;
+export default Discovery

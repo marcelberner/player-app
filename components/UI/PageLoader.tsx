@@ -1,6 +1,6 @@
-import React from "react";
+import React from "react"
 
-import styles from "./PageLoader.module.scss";
+import styles from "./PageLoader.module.scss"
 
 const PageLoader = () => {
   return (
@@ -8,7 +8,7 @@ const PageLoader = () => {
       <div></div>
       <div></div>
     </div>
-  );
-};
+  )
+}
 
-export default PageLoader;
+export default PageLoader

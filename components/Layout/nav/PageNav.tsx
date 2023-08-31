@@ -1,12 +1,12 @@
-import React from "react";
+import React from "react"
 
-import styles from "./PageNav.module.scss";
+import styles from "./PageNav.module.scss"
 
-import NavItem from "./NavItem";
-import Icon from "@/components/UI/Icon";
+import NavItem from "./NavItem"
+import Icon from "@/components/UI/Icon"
 
 interface navProps {
-  state: boolean;
+  state: boolean
 }
 
 const NAV_ITEMS = [
@@ -34,7 +34,7 @@ const NAV_ITEMS = [
     iconActive: <Icon icon="liveFill" />,
     text: "Live cinema",
   },
-];
+]
 
 const PageNav: React.FC<navProps> = ({ state }) => {
   return (
@@ -53,7 +53,7 @@ const PageNav: React.FC<navProps> = ({ state }) => {
         ))}
       </ul>
     </nav>
-  );
-};
+  )
+}
 
-export default PageNav;
+export default PageNav

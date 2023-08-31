@@ -1,29 +1,29 @@
-import React, { useRef, useState } from "react";
-import styles from "./Chat.module.scss";
+import React, { useRef, useState } from "react"
+import styles from "./Chat.module.scss"
 
-import { useAppSelector } from "@/hooks/redux";
+import { useAppSelector } from "@/hooks/redux"
 
-import Icon from "../UI/Icon";
+import Icon from "../UI/Icon"
 
 const Chat = () => {
-  const username = useAppSelector((state) => state.userData.username)!;
+  const username = useAppSelector(state => state.userData.username)!
   const [messages, setMessages] = useState<
     {
-      username: string;
-      message: string;
+      username: string
+      message: string
     }[]
-  >([]);
+  >([])
 
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const sendMessageHandler = (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    const currentValue = inputRef.current?.value!;
-    setMessages((prev) => [...prev, { username, message: currentValue }]);
+    const currentValue = inputRef.current?.value!
+    setMessages(prev => [...prev, { username, message: currentValue }])
 
-    inputRef.current!.value = "";
-  };
+    inputRef.current!.value = ""
+  }
 
   return (
     <div className={styles.chat}>
@@ -42,7 +42,7 @@ const Chat = () => {
         </button>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default Chat;
+export default Chat

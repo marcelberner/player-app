@@ -1,8 +1,8 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit"
 
-import messageDataReducer from "./message";
-import sidebarDataReducer from "./sidebar";
-import userDataReducer from "./user";
+import messageDataReducer from "./message"
+import sidebarDataReducer from "./sidebar"
+import userDataReducer from "./user"
 
 const store = configureStore({
   reducer: {
@@ -10,9 +10,9 @@ const store = configureStore({
     sidebarData: sidebarDataReducer,
     userData: userDataReducer,
   },
-});
+})
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
 
-export default store;
+export default store

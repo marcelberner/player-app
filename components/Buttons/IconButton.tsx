@@ -1,11 +1,11 @@
-import React from "react";
+import React from "react"
 
-import styles from "./IconButton.module.scss";
+import styles from "./IconButton.module.scss"
 
 interface buttonProps {
-  children: JSX.Element;
-  action: (params?: any) => void;
-  id?: string;
+  children: JSX.Element
+  action: (params?: any) => void
+  id?: string
 }
 
 const IconButton: React.FC<buttonProps> = ({ children, action, id }) => {
@@ -13,7 +13,7 @@ const IconButton: React.FC<buttonProps> = ({ children, action, id }) => {
     <button id={id} className={styles.button} onClick={action}>
       {children}
     </button>
-  );
-};
+  )
+}
 
-export default IconButton;
+export default IconButton

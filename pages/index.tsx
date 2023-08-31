@@ -1,16 +1,16 @@
-import { GetStaticProps } from "next";
-import { client } from "./../lib/database";
+import { GetStaticProps } from "next"
+import { client } from "./../lib/database"
 
-import Head from "next/head";
-import usePageKick from "@/hooks/kick";
+import Head from "next/head"
+import usePageKick from "@/hooks/kick"
 
-import Layout from "@/components/Layout/Layout";
+import Layout from "@/components/Layout/Layout"
 
-import FrontCard from "@/components/Cards/FrontCard";
-import MovieSection from "@/components/Sections/MovieSection";
+import FrontCard from "@/components/Cards/FrontCard"
+import MovieSection from "@/components/Sections/MovieSection"
 
 function Home({ movies }: any) {
-  const status = usePageKick();
+  const status = usePageKick()
 
   if (status == "authenticated") {
     return (
@@ -33,7 +33,7 @@ function Home({ movies }: any) {
           ))}
         </Layout>
       </>
-    );
+    )
   }
 }
 
@@ -44,7 +44,7 @@ export const getStaticProps: GetStaticProps = async () => {
   JOIN genres ON movie_genre.genre_id = genres.id 
   WHERE genres.genre = 'Comedy'
   limit 40
-  `);
+  `)
 
   const animations = await client.query(`
   SELECT * FROM movies 
@@ -52,7 +52,7 @@ export const getStaticProps: GetStaticProps = async () => {
   JOIN genres ON movie_genre.genre_id = genres.id 
   WHERE genres.genre = 'Animation'
   limit 40
-  `);
+  `)
 
   const fantasy = await client.query(`
   SELECT * FROM movies 
@@ -60,7 +60,7 @@ export const getStaticProps: GetStaticProps = async () => {
   JOIN genres ON movie_genre.genre_id = genres.id 
   WHERE genres.genre = 'Fantasy'
   limit 40
-  `);
+  `)
 
   const war = await client.query(`
   SELECT * FROM movies 
@@ -68,7 +68,7 @@ export const getStaticProps: GetStaticProps = async () => {
   JOIN genres ON movie_genre.genre_id = genres.id 
   WHERE genres.genre = 'War'
   limit 40
-  `);
+  `)
 
   const horror = await client.query(`
   SELECT * FROM movies 
@@ -76,7 +76,7 @@ export const getStaticProps: GetStaticProps = async () => {
   JOIN genres ON movie_genre.genre_id = genres.id 
   WHERE genres.genre = 'Horror'
   limit 40
-  `);
+  `)
 
   const thriller = await client.query(`
   SELECT * FROM movies 
@@ -84,7 +84,7 @@ export const getStaticProps: GetStaticProps = async () => {
   JOIN genres ON movie_genre.genre_id = genres.id 
   WHERE genres.genre = 'Thriller'
   limit 40
-  `);
+  `)
 
   const romance = await client.query(`
   SELECT * FROM movies 
@@ -92,7 +92,7 @@ export const getStaticProps: GetStaticProps = async () => {
   JOIN genres ON movie_genre.genre_id = genres.id 
   WHERE genres.genre = 'Romance'
   limit 40
-  `);
+  `)
 
   const documentary = await client.query(`
   SELECT * FROM movies 
@@ -100,7 +100,7 @@ export const getStaticProps: GetStaticProps = async () => {
   JOIN genres ON movie_genre.genre_id = genres.id 
   WHERE genres.genre = 'Documentary'
   limit 40
-  `);
+  `)
 
   const science_fiction = await client.query(`
   SELECT * FROM movies 
@@ -108,7 +108,7 @@ export const getStaticProps: GetStaticProps = async () => {
   JOIN genres ON movie_genre.genre_id = genres.id 
   WHERE genres.genre = 'Science Fiction'
   limit 40
-  `);
+  `)
 
   const history = await client.query(`
   SELECT * FROM movies 
@@ -116,7 +116,7 @@ export const getStaticProps: GetStaticProps = async () => {
   JOIN genres ON movie_genre.genre_id = genres.id 
   WHERE genres.genre = 'History'
   limit 40
-  `);
+  `)
 
   const movies = [
     {
@@ -159,13 +159,13 @@ export const getStaticProps: GetStaticProps = async () => {
       genre: "History",
       movies: history.rows,
     },
-  ];
+  ]
 
   return {
     props: {
       movies: movies,
     },
-  };
-};
+  }
+}
 
-export default Home;
+export default Home

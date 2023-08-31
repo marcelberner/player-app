@@ -1,61 +1,61 @@
-import React, { useEffect, useState } from "react";
-import { createPortal } from "react-dom";
-import { useQuery, useQueryClient } from "react-query";
-import axios from "axios";
-import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react"
+import { createPortal } from "react-dom"
+import { useQuery, useQueryClient } from "react-query"
+import axios from "axios"
+import { useRouter } from "next/router"
 
-import useModal from "@/hooks/useModal";
-import useMounted from "@/hooks/useMounted";
+import useModal from "@/hooks/useModal"
+import useMounted from "@/hooks/useMounted"
 
-import PinnedButton from "../Buttons/PinnedButton";
-import DiscussionsModal from "../modals/DiscussionsModal";
-import Icon from "../UI/Icon";
-import Button from "../Buttons/Button";
-import NavLabel from "../Labels/NavLabel";
-import PageLoader from "../UI/PageLoader";
+import PinnedButton from "../Buttons/PinnedButton"
+import DiscussionsModal from "../modals/DiscussionsModal"
+import Icon from "../UI/Icon"
+import Button from "../Buttons/Button"
+import NavLabel from "../Labels/NavLabel"
+import PageLoader from "../UI/PageLoader"
 
-import styles from "./Discussions.module.scss";
+import styles from "./Discussions.module.scss"
 
 interface postProps {
-  id: string;
-  subject: string;
-  description: string;
-  username: string;
-  create_date: string;
-  num_comments: number;
+  id: string
+  subject: string
+  description: string
+  username: string
+  create_date: string
+  num_comments: number
 }
 
 const Discussions = () => {
-  const { modalRef, showModal, modalState, closeModal } = useModal();
+  const { modalRef, showModal, modalState, closeModal } = useModal()
 
-  const router = useRouter();
-  const pageQuery = router.query.page ? parseInt(router.query.page as any) : 1;
+  const router = useRouter()
+  const pageQuery = router.query.page ? parseInt(router.query.page as any) : 1
 
-  const [page, setPage] = useState(pageQuery);
-  const mounted = useMounted();
+  const [page, setPage] = useState(pageQuery)
+  const mounted = useMounted()
 
   const { data, isLoading } = useQuery({
     queryKey: ["discussions", { page: page }],
     queryFn: () => {
       return axios.get("/api/discussions/get", {
         params: { page: page },
-      });
+      })
     },
     refetchOnWindowFocus: false,
-  });
+  })
 
   const navigateHandler = (path: string) => {
-    router.push(`/community/discussions/${path}`);
-  };
+    router.push(`/community/discussions/${path}`)
+  }
 
-  const queryClient = useQueryClient();
+  const queryClient = useQueryClient()
 
   useEffect(() => {
-    queryClient.invalidateQueries(["discussions", { page: page }]);
+    queryClient.invalidateQueries(["discussions", { page: page }])
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page]);
+  }, [page])
 
-  if (isLoading) return <PageLoader />;
+  if (isLoading) return <PageLoader />
 
   return (
     <>
@@ -71,7 +71,7 @@ const Discussions = () => {
                 .split("T")[0]
                 .split("-")
                 .reverse()
-                .join(".");
+                .join(".")
 
               return (
                 <li
@@ -90,7 +90,7 @@ const Discussions = () => {
                   </span>
                   <span className={styles.date}>{date}</span>
                 </li>
-              );
+              )
             })
           ) : (
             <div className={styles.no_content}>
@@ -105,8 +105,8 @@ const Discussions = () => {
             <Button
               outline
               action={() => {
-                router.push(`/community/discussions?page=${page - 1}`);
-                setPage((prev) => prev - 1);
+                router.push(`/community/discussions?page=${page - 1}`)
+                setPage(prev => prev - 1)
               }}
             >
               <Icon icon="arrow" />
@@ -117,8 +117,8 @@ const Discussions = () => {
             <Button
               outline
               action={() => {
-                router.push(`/community/discussions?page=${page + 1}`);
-                setPage((prev) => prev + 1);
+                router.push(`/community/discussions?page=${page + 1}`)
+                setPage(prev => prev + 1)
               }}
             >
               <Icon icon="arrow" />
@@ -136,7 +136,7 @@ const Discussions = () => {
           document.getElementById("modal")!
         )}
     </>
-  );
-};
+  )
+}
 
-export default Discussions;
+export default Discussions

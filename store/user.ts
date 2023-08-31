@@ -1,14 +1,14 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 interface sidebarDataType {
-  username: string | null;
-  email: string | null;
+  username: string | null
+  email: string | null
 }
 
 const initialState: sidebarDataType = {
   username: null,
   email: null,
-};
+}
 
 const userDataSlice = createSlice({
   name: "userData",
@@ -18,16 +18,16 @@ const userDataSlice = createSlice({
       state,
       action: PayloadAction<{ username: string; email: string }>
     ) => {
-      state.username = action.payload.username;
-      state.email = action.payload.email;
+      state.username = action.payload.username
+      state.email = action.payload.email
     },
-    clearUser: (state) => {
-      state.username = null;
-      state.email = null;
+    clearUser: state => {
+      state.username = null
+      state.email = null
     },
   },
-});
+})
 
-export const { setUser } = userDataSlice.actions;
+export const { setUser } = userDataSlice.actions
 
-export default userDataSlice.reducer;
+export default userDataSlice.reducer

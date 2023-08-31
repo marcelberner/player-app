@@ -1,13 +1,13 @@
-import React from "react";
-import Layout from "@/components/Layout/Layout";
+import React from "react"
+import Layout from "@/components/Layout/Layout"
 
-import usePageKick from "@/hooks/kick";
+import usePageKick from "@/hooks/kick"
 
-import DiscussionsComponent from "@/components/pages/Discussions";
-import Head from "next/head";
+import DiscussionsComponent from "@/components/pages/Discussions"
+import Head from "next/head"
 
 const Discuss = () => {
-  const status = usePageKick();
+  const status = usePageKick()
 
   if (status == "authenticated") {
     return (
@@ -23,8 +23,8 @@ const Discuss = () => {
           <DiscussionsComponent />
         </Layout>
       </>
-    );
+    )
   }
-};
+}
 
-export default Discuss;
+export default Discuss

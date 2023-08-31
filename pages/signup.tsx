@@ -1,9 +1,9 @@
-import React from "react";
-import { GetServerSideProps } from "next";
-import { getSession } from "next-auth/react";
+import React from "react"
+import { GetServerSideProps } from "next"
+import { getSession } from "next-auth/react"
 
-import Head from "next/head";
-import LoginSection from "@/components/pages/Login";
+import Head from "next/head"
+import LoginSection from "@/components/pages/Login"
 
 const Login = () => {
   return (
@@ -17,11 +17,11 @@ const Login = () => {
       </Head>
       <LoginSection signup />;
     </>
-  );
-};
+  )
+}
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const session = await getSession({ req: context.req });
+export const getServerSideProps: GetServerSideProps = async context => {
+  const session = await getSession({ req: context.req })
 
   if (session)
     return {
@@ -29,13 +29,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         destination: "/",
         permanent: false,
       },
-    };
+    }
 
   return {
     props: {
       session: session,
     },
-  };
-};
+  }
+}
 
-export default Login;
+export default Login

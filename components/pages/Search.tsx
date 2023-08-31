@@ -1,21 +1,21 @@
-import React, { useState, useEffect } from "react";
-import { useRouter } from "next/router";
-import { useInfiniteQuery } from "react-query";
-import useInfiniteScroll from "@/hooks/useInfiniteScroll.";
-import axios from "axios";
+import React, { useState, useEffect } from "react"
+import { useRouter } from "next/router"
+import { useInfiniteQuery } from "react-query"
+import useInfiniteScroll from "@/hooks/useInfiniteScroll."
+import axios from "axios"
 
-import MovieCard from "../Cards/MovieCard";
-import MovieCardWide from "../Cards/MovieCardWide";
-import IconButton from "../Buttons/IconButton";
-import Icon from "../UI/Icon";
-import PageLoader from "../UI/PageLoader";
+import MovieCard from "../Cards/MovieCard"
+import MovieCardWide from "../Cards/MovieCardWide"
+import IconButton from "../Buttons/IconButton"
+import Icon from "../UI/Icon"
+import PageLoader from "../UI/PageLoader"
 
-import styles from "./Search.module.scss";
+import styles from "./Search.module.scss"
 
 const Search = () => {
-  const router = useRouter();
+  const router = useRouter()
 
-  const [display, setDisplay] = useState(false);
+  const [display, setDisplay] = useState(false)
 
   const { data, hasNextPage, isLoading, isFetchingNextPage, fetchNextPage } =
     useInfiniteQuery({
@@ -26,17 +26,17 @@ const Search = () => {
           params: { page: pageParam },
         }),
       refetchOnWindowFocus: false,
-    });
+    })
 
   const { observerRef } = useInfiniteScroll({
     hasNextPage,
     isFetchingNextPage,
     fetchNextPage,
-  });
+  })
 
   useEffect(() => {
-    if (window.innerWidth <= 640) setDisplay(true);
-  }, []);
+    if (window.innerWidth <= 640) setDisplay(true)
+  }, [])
 
   return (
     <section className={styles.search_results}>
@@ -54,14 +54,14 @@ const Search = () => {
         >
           <IconButton
             action={() => {
-              setDisplay(true);
+              setDisplay(true)
             }}
           >
             <Icon icon="displayGrid" />
           </IconButton>
           <IconButton
             action={() => {
-              setDisplay(false);
+              setDisplay(false)
             }}
           >
             <Icon icon="displayRow" />
@@ -109,7 +109,7 @@ const Search = () => {
       )}
       <div ref={observerRef}></div>
     </section>
-  );
-};
+  )
+}
 
-export default Search;
+export default Search
