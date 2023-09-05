@@ -1,6 +1,9 @@
 .infinite {
+  position: relative;
+  flex-grow: 1;
   gap: 2rem;
   padding-bottom: 1px;
+  overflow: overlay;
 
   @media (max-width: 640px) {
     gap: 5rem;

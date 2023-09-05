@@ -1,0 +1,28 @@
+.text {
+  border-radius: 10px;
+  border: 2px solid var(--bg-clr-200);
+  background-color: var(--bg-clr-400);
+  color: var(--secondary-clr-200);
+  outline: none;
+  transition: 0.1s;
+  flex-grow: 1;
+  height: 5rem;
+  font-size: 1.6rem;
+  padding: 1rem;
+
+  &::placeholder {
+    color: var(--secondary-clr-800);
+  }
+
+  &:hover {
+    background-color: var(--bg-clr-200);
+  }
+
+  &:focus {
+    background-color: var(--bg-clr-200);
+  }
+
+  &.outline:focus {
+    border: 2px solid var(--primary-clr-400);
+  }
+}

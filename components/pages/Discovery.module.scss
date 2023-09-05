@@ -1,15 +1,17 @@
 .discovery {
-  display: flex;
+  display: grid;
+  grid-template-columns: 35% 1fr;
+  grid-template-rows: 1fr;
   height: 100%;
   gap: 2rem;
 
   @media (max-width: 1024px) {
-    flex-direction: column;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
   }
 }
 
 .filters {
-  width: 35%;
   background-color: var(--bg-clr-800);
   padding: 2rem;
   border-right: 2px solid var(--bg-clr-400);
@@ -66,56 +68,9 @@
     padding: 0.5rem 2rem;
 
     &.expand {
-      min-height: 100% !important;
+      height: auto;
       overflow: scroll;
     }
-  }
-}
-
-.input {
-  border-radius: 10px;
-  border: 2px solid var(--bg-clr-200);
-  background-color: var(--bg-clr-400);
-  color: var(--secondary-clr-200);
-  outline: none;
-  transition: 0.1s;
-  flex-grow: 1;
-  height: 5rem;
-  font-size: 1.6rem;
-  padding: 1rem;
-
-  &::placeholder {
-    color: var(--secondary-clr-800);
-  }
-
-  &:hover {
-    background-color: var(--bg-clr-200);
-  }
-
-  &:focus {
-    border: 2px solid var(--primary-clr-400);
-    background-color: var(--bg-clr-200);
-  }
-}
-
-.list {
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-  grid-template-rows: auto;
-  padding-bottom: 1px;
-
-  overflow-y: scroll;
-  flex-grow: 1;
-  gap: 1.5rem;
-
-  @media (max-width: 1024px) {
-    height: 1%;
-    gap: 3rem;
-  }
-
-  & * {
-    width: 100%;
   }
 }
 
@@ -124,38 +79,8 @@
   flex-wrap: wrap;
   gap: 1.5rem;
 
-  & > .input {
+  & > input {
     flex-grow: 0;
     width: 10rem;
-  }
-
-  & > div {
-    position: relative;
-    display: flex;
-    align-items: center;
-
-    & > input {
-      visibility: hidden;
-      position: absolute;
-
-      &:checked + label {
-        background-color: var(--primary-clr-400);
-        border-color: var(--primary-clr-400);
-      }
-    }
-
-    & > label {
-      font-size: 1.8rem;
-      cursor: pointer;
-      border: 2px solid var(--primary-clr-400);
-      border-radius: 20px;
-      padding: 0.5rem 1.5rem;
-      transition: 0.2s;
-
-      &:hover {
-        background-color: var(--primary-clr-200);
-        border: 2px solid var(--primary-clr-200);
-      }
-    }
   }
 }

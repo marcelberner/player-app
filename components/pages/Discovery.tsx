@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react"
 import axios from "axios"
 import { useQuery, useInfiniteQuery, useQueryClient } from "react-query"
-import useInfiniteScroll from "@/hooks/useInfiniteScroll."
 import qs from "qs"
 
 import MovieCard from "../Cards/MovieCard"
@@ -9,6 +8,9 @@ import CategoryLabel from "../Labels/CategoryLabel"
 import PageLoader from "../UI/PageLoader"
 import IconButton from "../Buttons/IconButton"
 import Icon from "../UI/Icon"
+import InfiniteList from "../Lists/InfiniteList"
+import Option from "../Inputs/Option"
+import Text from "../Inputs/Text"
 
 import styles from "./Discovery.module.scss"
 
@@ -16,9 +18,9 @@ const Discovery = () => {
   const inputRef = useRef<HTMLInputElement>(null)
   const yearStartRef = useRef<HTMLInputElement>(null)
   const yearEndRef = useRef<HTMLInputElement>(null)
-  const listRef = useRef<HTMLUListElement>(null)
 
   const [isExpanded, setIsExpanded] = useState<boolean>(false)
+  const [filteredGenres, setFilteredGenres] = useState<string[]>([])
 
   const queryClient = useQueryClient()
 
@@ -28,16 +30,15 @@ const Discovery = () => {
     refetchOnWindowFocus: false,
   })
 
-  const getGenres = () => {
-    const options = Array.prototype.slice.call(
-      document.querySelectorAll(`.genre_option:checked`)
-    )
+  const genreFilterHandler = (genre: string) => {
+    const isIncludingGenre = filteredGenres.includes(`'${genre}'`)
 
-    const genres: string[] = options.map(
-      (option: any) => `'${option.dataset.genre}'`
-    )
-
-    return genres
+    if (isIncludingGenre) {
+      const newArray = filteredGenres.filter(genre => genre !== genre)
+      setFilteredGenres(newArray)
+    } else {
+      setFilteredGenres(prev => [...prev, `'${genre}'`])
+    }
   }
 
   const {
@@ -47,19 +48,18 @@ const Discovery = () => {
     isFetchingNextPage,
     fetchNextPage,
   } = useInfiniteQuery({
-    queryKey: ["discovery"],
+    queryKey: ["discovery", { filters: filteredGenres }],
     getNextPageParam: (prevData: any) => prevData.data.next,
-    queryFn: ({ pageParam = 1 }) => {
+    queryFn: ({ pageParam = 1, queryKey }) => {
       const keyword = inputRef.current!.value
       const yearStart = yearStartRef.current!.value
       const yearEnd = yearEndRef.current!.value
-      const genres = getGenres()
 
       return axios.get(`/api/movies`, {
         params: {
           page: pageParam,
           keyword: keyword,
-          genres: genres,
+          genres: filteredGenres,
           yearStart: yearStart,
           yearEnd: yearEnd,
         },
@@ -71,12 +71,6 @@ const Discovery = () => {
       })
     },
     refetchOnWindowFocus: false,
-  })
-
-  const { observerRef } = useInfiniteScroll({
-    hasNextPage,
-    isFetchingNextPage,
-    fetchNextPage,
   })
 
   const filterExpandHandler = (e: React.FormEvent) => {
@@ -98,12 +92,7 @@ const Discovery = () => {
               isExpanded ? styles.expand : ""
             }`}
           >
-            <input
-              ref={inputRef}
-              type="text"
-              className={styles.input}
-              placeholder="Keyword..."
-            />
+            <Text inputRef={inputRef} placeholder="Keyword..." />
             <IconButton action={filterExpandHandler}>
               <Icon icon={isExpanded ? "closeOutline" : "filterOutline"} />
             </IconButton>
@@ -111,38 +100,23 @@ const Discovery = () => {
           <CategoryLabel>Genres</CategoryLabel>
           <div className={styles.options}>
             {data!.data.genres.map((genre: any) => (
-              <div key={genre.id}>
-                <input
-                  type="checkbox"
-                  className={"genre_option"}
-                  id={genre.id}
-                  data-genre={genre.genre}
-                  key={genre.id}
-                />
-                <label htmlFor={genre.id}>{genre.genre}</label>
-              </div>
+              <Option key={genre.id} id={genre.id} action={genreFilterHandler}>
+                {genre.genre}
+              </Option>
             ))}
           </div>
           <CategoryLabel>Year</CategoryLabel>
           <div className={styles.options}>
-            <input
-              ref={yearStartRef}
-              type="text"
-              className={styles.input}
-              placeholder="From"
-            />
-            <input
-              ref={yearEndRef}
-              type="text"
-              className={styles.input}
-              placeholder="To"
-            />
+            <Text inputRef={yearStartRef} placeholder="From" />
+            <Text inputRef={yearEndRef} placeholder="To" />
           </div>
         </form>
       </div>
-      <ul
-        ref={listRef}
-        className={`${styles.list} ${isLoading ? styles.loading : ""}`}
+      <InfiniteList
+        display="grid"
+        hasNextPage={hasNextPage!}
+        isFetchingNextPage={isFetchingNextPage}
+        fetchNextPage={fetchNextPage}
       >
         {isLoading ? (
           <PageLoader />
@@ -165,8 +139,7 @@ const Discovery = () => {
               </li>
             ))
         )}
-        <li ref={observerRef}></li>
-      </ul>
+      </InfiniteList>
     </section>
   )
 }

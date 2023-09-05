@@ -1,0 +1,29 @@
+.option {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  & > input {
+    visibility: hidden;
+    position: absolute;
+
+    &:checked + label {
+      background-color: var(--primary-clr-400);
+      border-color: var(--primary-clr-400);
+    }
+  }
+
+  & > label {
+    font-size: 1.8rem;
+    cursor: pointer;
+    border: 2px solid var(--primary-clr-400);
+    border-radius: 20px;
+    padding: 0.5rem 1.5rem;
+    transition: 0.2s;
+
+    &:hover {
+      background-color: var(--primary-clr-200);
+      border: 2px solid var(--primary-clr-200);
+    }
+  }
+}
