@@ -1,0 +1,23 @@
+.infinite {
+  gap: 2rem;
+  padding-bottom: 1px;
+
+  @media (max-width: 640px) {
+    gap: 5rem;
+  }
+
+  &.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    gap: 1.5rem;
+
+    & * {
+      width: 100%;
+    }
+  }
+
+  &.row {
+    display: flex;
+    flex-direction: column;
+  }
+}

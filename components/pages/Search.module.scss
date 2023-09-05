@@ -5,29 +5,6 @@
   width: 100%;
   max-width: 120rem;
   align-self: center;
-
-  & > ul {
-    gap: 2rem;
-  }
-
-  & > ul.row {
-    display: flex;
-    flex-direction: column;
-  }
-
-  & > ul.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-    gap: 1.5rem;
-
-    @media (max-width: 640px) {
-      gap: 5rem;
-    }
-
-    & * {
-      width: 100%;
-    }
-  }
 }
 
 .header {
