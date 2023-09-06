@@ -45,26 +45,20 @@ const Search = () => {
             : `Search results for „${router.query.query}”`}
         </h1>
         <div
-          className={`${styles.display_buttons} ${
-            display === "grid" ? styles.grid : styles.row
-          }`}
+          className={`
+          ${styles.display_buttons} 
+          ${display === "grid" ? styles.grid : styles.row}
+        `}
         >
-          <IconButton
-            action={() => {
-              setDisplay("grid")
-            }}
-          >
+          <IconButton action={() => setDisplay("grid")}>
             <Icon icon="displayGrid" />
           </IconButton>
-          <IconButton
-            action={() => {
-              setDisplay("row")
-            }}
-          >
+          <IconButton action={() => setDisplay("row")}>
             <Icon icon="displayRow" />
           </IconButton>
         </div>
       </div>
+
       <InfiniteList
         display={display}
         hasNextPage={hasNextPage!}

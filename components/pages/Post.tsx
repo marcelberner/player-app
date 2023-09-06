@@ -2,17 +2,20 @@ import React, { useRef } from "react"
 import { useQuery, useMutation, useQueryClient } from "react-query"
 import axios from "axios"
 import { useRouter } from "next/router"
+import { getDate } from "@/lib/dateConverter"
 
 import Icon from "../UI/Icon"
 import Button from "../Buttons/Button"
 import NavLabel from "../Labels/NavLabel"
 import PageLoader from "../UI/PageLoader"
+import Text from "../Inputs/Text"
+import ContentInfo from "../Info/ContentInfo"
 
 import styles from "./Post.module.scss"
 
 const Post = () => {
   const router = useRouter()
-  const commentRef = useRef<HTMLInputElement>()
+  const commentRef = useRef<HTMLInputElement>(null)
 
   const queryClient = useQueryClient()
 
@@ -53,67 +56,41 @@ const Post = () => {
         <Icon icon="communityFill" />
       </NavLabel>
       <div className={styles.post_content}>
-        {data?.data.post.length > 0 && (
-          <>
-            <div className={styles.header}>
-              <span className={styles.post_date}>
-                {data?.data.post[0].create_date
-                  .split("T")[0]
-                  .split("-")
-                  .reverse()
-                  .join(".")}
-              </span>
-              <h1>{data?.data.post[0].subject}</h1>
-              <p>{data?.data.post[0].description}</p>
-              <div className={styles.author_bar}>
-                <span>Created by</span>
-                <Icon icon="userAvatar" />
-                <span>{data?.data.post[0].username}</span>
-              </div>
-            </div>
-            <div className={styles.comments}>
-              {data?.data.post[0].comment_description ? (
-                <>
-                  <h2>Comments :</h2>
-                  <ul className={styles.comments_list}>
-                    {data?.data.post.map((comment: any, index: number) => {
-                      if (comment.comment_description)
-                        return (
-                          <li key={index}>
-                            <span>
-                              {comment.comment_date
-                                .split("T")[0]
-                                .split("-")
-                                .reverse()
-                                .join(".")}
-                            </span>
-                            <span>{comment.comment_creator}</span>
-                            <p>{comment.comment_description}</p>
-                          </li>
-                        )
-                    })}
-                  </ul>
-                </>
-              ) : (
-                <h2 className={styles.not_found}>No comments yet</h2>
-              )}
-              <form
-                onSubmit={shareCommentHandler}
-                className={styles.comment_form}
-              >
-                <Icon icon="userAvatar" />
-                <input
-                  ref={commentRef as any}
-                  type="text"
-                  placeholder="Write your comment..."
-                />
-                <Button>
-                  <Icon icon="paperPlane" />
-                </Button>
-              </form>
-            </div>
-          </>
-        )}
+        <div className={styles.header}>
+          <span className={styles.post_date}>
+            {getDate(data?.data.post[0].create_date)}
+          </span>
+          <h1>{data?.data.post[0].subject}</h1>
+          <p>{data?.data.post[0].description}</p>
+          <div className={styles.author_bar}>
+            <span>Created by</span>
+            <Icon icon="userAvatar" />
+            <span>{data?.data.post[0].username}</span>
+          </div>
+        </div>
+        <div className={styles.comments}>
+          <h2>Comments :</h2>
+          {data?.data.post[0].comment_description ? (
+            <ul className={styles.comments_list}>
+              {data?.data.post.map((comment: any, index: number) => (
+                <li key={index}>
+                  <span>{getDate(comment.comment_date)}</span>
+                  <span>{comment.comment_creator}</span>
+                  <p>{comment.comment_description}</p>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <ContentInfo>No comments yet</ContentInfo>
+          )}
+          <form onSubmit={shareCommentHandler} className={styles.comment_form}>
+            <Icon icon="userAvatar" />
+            <Text inputRef={commentRef} placeholder="Write your comment..." />
+            <Button>
+              <Icon icon="paperPlane" />
+            </Button>
+          </form>
+        </div>
       </div>
     </section>
   )
