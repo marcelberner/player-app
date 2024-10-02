@@ -193,9 +193,10 @@ const Login: React.FC<loginProps> = ({ signup }) => {
       <Image
         src="/login-bg.webp"
         alt=""
-        width={1920}
-        height={1080}
-        style={{ height: "100%", objectFit: "cover", filter: "brightness(.3)" }}
+        width={0}
+        height={0}
+        sizes="100vw"
+        style={{ width: "100%", objectFit: "cover", filter: "brightness(.3)" }}
         draggable={false}
       />
     </section>

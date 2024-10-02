@@ -8,7 +8,7 @@ interface playerProps {
 
 const VideoPlayer: React.FC<playerProps> = ({ src, youtubeID }) => {
   const shoWControlsHandler = () => {
-    ;(document.querySelector(".plyr__controls") as any)!.style.visibility =
+    (document.querySelector(".plyr__controls") as any)!.style.visibility =
       "visible"
   }
 

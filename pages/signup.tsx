@@ -15,7 +15,7 @@ const Login = () => {
           content="Watch your favorite movies and series on PlayerApp wherever you want. Download, discover and join our community."
         />
       </Head>
-      <LoginSection signup />;
+      <LoginSection signup />
     </>
   )
 }
